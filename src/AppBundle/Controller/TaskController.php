@@ -5,28 +5,41 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Task;
 use AppBundle\Form\TaskType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class TaskController
  * @package AppBundle\Controller
  */
-class TaskController extends Controller
+class TaskController extends AbstractController
 {
     /**
-     * @Route("/tasks", name="task_list", methods={"GET"})
+     * @Route(
+     *     path="/tasks",
+     *     name="task_list",
+     *     methods={"GET"}
+     *     )
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function listAction()
     {
-        return $this->render('task/list.html.twig', ['tasks' => $this->getDoctrine()->getRepository('AppBundle:Task')->findAll()]);
+        return $this->render('task/list.html.twig', [
+            'tasks' => $this->getDoctrine()->getRepository('AppBundle:Task')->findAll()
+        ]);
     }
 
     /**
-     * @Route("/tasks/create", name="task_create", methods={"GET"})
+     * @Route(
+     *     path="/tasks/create",
+     *     name="task_create",
+     *     methods={"GET","POST"}
+     *     )
+     *
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function createAction(Request $request)
     {
@@ -46,11 +59,17 @@ class TaskController extends Controller
             return $this->redirectToRoute('task_list');
         }
 
-        return $this->render('task/create.html.twig', ['form' => $form->createView()]);
+        return $this->render('task/create.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
-     * @Route("/tasks/{id}/edit", name="task_edit", methods={"GET"})
+     * @Route(
+     *     path="/tasks/{id}/edit",
+     *     name="task_edit", methods={"GET"}
+     *     )
+     *
      * @param Task $task
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -76,7 +95,12 @@ class TaskController extends Controller
     }
 
     /**
-     * @Route("/tasks/{id}/toggle", name="task_toggle", methods={"GET"})
+     * @Route(
+     *     path="/tasks/{id}/toggle",
+     *     name="task_toggle",
+     *     methods={"GET"}
+     *     )
+     *
      * @param Task $task
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -91,7 +115,12 @@ class TaskController extends Controller
     }
 
     /**
-     * @Route("/tasks/{id}/delete", name="task_delete", methods={"GET"})
+     * @Route(
+     *     path="/tasks/{id}/delete",
+     *     name="task_delete",
+     *     methods={"GET"}
+     *     )
+     *
      * @param Task $task
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

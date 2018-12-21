@@ -5,17 +5,21 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class UserController
  * @package AppBundle\Controller
  */
-class UserController extends Controller
+class UserController extends AbstractController
 {
     /**
-     * @Route("/users", name="user_list", methods={"GET"})
+     * @Route(
+     *     path="/users",
+     *     name="user_list",
+     *     methods={"GET"}
+     *     )
      */
     public function listAction()
     {
@@ -23,7 +27,12 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/users/create", name="user_create", methods={"GET"})
+     * @Route(
+     *     path="/users/create",
+     *     name="user_create",
+     *     methods={"GET","POST"}
+     *     )
+     *
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -34,7 +43,7 @@ class UserController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
@@ -51,7 +60,12 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/users/{id}/edit", name="user_edit", methods={"GET"})
+     * @Route(
+     *     path="/users/{id}/edit",
+     *     name="user_edit",
+     *     methods={"GET"}
+     *     )
+     *
      * @param User $user
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -62,7 +76,7 @@ class UserController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
 
