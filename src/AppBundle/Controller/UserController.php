@@ -15,11 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 class UserController extends AbstractController
 {
     /**
-     * @Route(
-     *     path="/users",
-     *     name="user_list",
-     *     methods={"GET"}
-     *     )
+     * @Route(path="/users", name="user_list", methods={"GET"})
      */
     public function listAction()
     {
@@ -27,11 +23,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route(
-     *     path="/users/create",
-     *     name="user_create",
-     *     methods={"GET","POST"}
-     *     )
+     * @Route(path="/users/create", name="user_create", methods={"GET","POST"})
      *
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -60,12 +52,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route(
-     *     path="/users/{id}/edit",
-     *     name="user_edit",
-     *     methods={"GET"}
-     *     )
-     *
+     * @Route(path="/users/{id}/edit", name="user_edit", methods={"GET"})
      * @param User $user
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response

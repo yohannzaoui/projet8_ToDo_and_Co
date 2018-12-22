@@ -15,12 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 class TaskController extends AbstractController
 {
     /**
-     * @Route(
-     *     path="/tasks",
-     *     name="task_list",
-     *     methods={"GET"}
-     *     )
-     *
+     * @Route(path="/tasks", name="task_list", methods={"GET"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function listAction()
@@ -31,12 +26,7 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route(
-     *     path="/tasks/create",
-     *     name="task_create",
-     *     methods={"GET","POST"}
-     *     )
-     *
+     * @Route(path="/tasks/create", name="task_create", methods={"GET","POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
@@ -65,11 +55,7 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route(
-     *     path="/tasks/{id}/edit",
-     *     name="task_edit", methods={"GET"}
-     *     )
-     *
+     * @Route(path="/tasks/{id}/edit", name="task_edit", methods={"GET"})
      * @param Task $task
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -95,12 +81,7 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route(
-     *     path="/tasks/{id}/toggle",
-     *     name="task_toggle",
-     *     methods={"GET"}
-     *     )
-     *
+     * @Route(path="/tasks/{id}/toggle", name="task_toggle", methods={"GET"})
      * @param Task $task
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -115,12 +96,7 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route(
-     *     path="/tasks/{id}/delete",
-     *     name="task_delete",
-     *     methods={"GET"}
-     *     )
-     *
+     * @Route(path="/tasks/{id}/delete", name="task_delete", methods={"GET"})
      * @param Task $task
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

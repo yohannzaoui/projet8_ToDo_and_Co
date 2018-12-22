@@ -4,7 +4,6 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class SecurityController
@@ -15,13 +14,7 @@ class SecurityController extends AbstractController
 
 
     /**
-     * @Route(
-     *     path="/login",
-     *     name="login",
-     *     methods={"GET"}
-     *     )
-     *
-     * @return Response
+     * @Route(path="/login", name="login", methods={"GET"})
      */
     public function loginAction()
     {
@@ -36,11 +29,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route(
-     *     path="/login_check",
-     *     name="login_check",
-     *     methods={"POST"}
-     *     )
+     * @Route(path="/login_check", name="login_check", methods={"POST"})
      */
     public function loginCheck()
     {
@@ -48,11 +37,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route(
-     *     path="/logout",
-     *     name="logout",
-     *     methods={"GET"}
-     *     )
+     * @Route(path="/logout", name="logout", methods={"GET"})
      */
     public function logoutCheck()
     {

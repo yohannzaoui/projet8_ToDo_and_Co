@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
         <p><a href="{{ path('task_list') }}" class="btn btn-primary">Retour à la liste des tâches</a></p>
     <div class="row justify-content-lg-center">
         {{ form_start(form, {'action' : path('task_create')}) }}
@@ -11,6 +10,5 @@
         {{ form_end(form) }}
 
 
-    </div>
     </div>
 {% endblock %}
