@@ -40,6 +40,24 @@ class User implements UserInterface
     private $email;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="user", orphanRemoval=true)
+     */
+    private $task;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles = [];
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->roles = ['ROLE_USER'];
+    }
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -108,7 +126,15 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return $this->roles;
+    }
+
+    /**
+     * @param mixed $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 
     /**
@@ -117,4 +143,22 @@ class User implements UserInterface
     public function eraseCredentials()
     {
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTask()
+    {
+        return $this->task;
+    }
+
+    /**
+     * @param mixed $task
+     */
+    public function setTask(Task $task)
+    {
+        $this->task = $task;
+    }
+
+
 }

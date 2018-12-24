@@ -41,6 +41,11 @@ class Task
     private $isDone;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="task")
+     */
+    private $user;
+
+    /**
      * Task constructor.
      * @throws \Exception
      */
@@ -121,4 +126,23 @@ class Task
     {
         $this->isDone = $flag;
     }
+
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+    }
+
+
 }

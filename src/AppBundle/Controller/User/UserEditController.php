@@ -21,7 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserEditController extends AbstractController
 {
     /**
-     * @Route(path="/users/{id}/edit", name="user_edit", methods={"GET"})
+     * @Route(path="/users/{id}/edit", name="user_edit", methods={"GET","POST"})
      * @param User $user
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
