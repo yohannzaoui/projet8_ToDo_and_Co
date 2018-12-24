@@ -3,17 +3,17 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * Class DefaultController
  * @package AppBundle\Controller
  */
-class DefaultController extends Controller
+class DefaultController extends AbstractController
 {
+
     /**
-     * @Route("/", name="homepage", methods={"GET"})
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route(path="/", name="homepage", methods={"GET"})
      */
     public function indexAction()
     {
