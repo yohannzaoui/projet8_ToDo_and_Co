@@ -9,7 +9,7 @@
 namespace AppBundle\Controller\User;
 
 use AppBundle\Entity\User;
-use AppBundle\Form\UserType;
+use AppBundle\Form\UserEditType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,13 +28,13 @@ class UserEditController extends AbstractController
      */
     public function editAction(User $user, Request $request)
     {
-        $form = $this->createForm(UserType::class, $user)
+        $form = $this->createForm(UserEditType::class, $user)
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $password = $this->get('security.password_encoder')
-                ->encodePassword($user, $user->getPassword());
+                    ->encodePassword($user, $user->getPassword());
 
             $user->setPassword($password);
 

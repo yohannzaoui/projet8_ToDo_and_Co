@@ -4,11 +4,12 @@
 {% block header_img %}{% endblock %}
 
 {% block body %}
-    <div class="row">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-12 col-sm-auto">
         {{ form_start(form, {'action' : path('user_edit', {'id' : user.id})}) }}
         {{ form_widget(form) }}
-
         <button type="submit" class="btn btn-success pull-right">Modifier</button>
         {{ form_end(form) }}
+        </div>
     </div>
 {% endblock %}

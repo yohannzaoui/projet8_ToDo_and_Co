@@ -28,7 +28,7 @@ class User implements UserInterface
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64, nullable=false)
      */
     private $password;
 
@@ -40,21 +40,28 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="user", orphanRemoval=true)
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="user", orphanRemoval=false,cascade={"remove"})
      */
     private $task;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Roles")
+     * @ORM\JoinColumn(name="roles_id", referencedColumnName="id")
      */
-    private $roles = [];
+    private $roles;
 
     /**
      * User constructor.
+     * @throws \Exception
      */
     public function __construct()
     {
-        $this->roles = ['ROLE_USER'];
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -122,17 +129,20 @@ class User implements UserInterface
     }
 
     /**
-     * @return array
+     * @return mixed
      */
     public function getRoles()
     {
-        return $this->roles;
+        if ($this->roles) {
+            return $this->roles->getRoles();
+        }
+
     }
 
     /**
      * @param mixed $roles
      */
-    public function setRoles($roles)
+    public function setRoles(Roles $roles)
     {
         $this->roles = $roles;
     }
@@ -160,5 +170,20 @@ class User implements UserInterface
         $this->task = $task;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
 
 }
