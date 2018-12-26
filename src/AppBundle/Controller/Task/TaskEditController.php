@@ -22,7 +22,7 @@ use AppBundle\Form\TaskType;
 class TaskEditController extends AbstractController
 {
     /**
-     * @Route(path="/tasks/{id}/edit", name="task_edit", methods={"GET"})
+     * @Route(path="/tasks/{id}/edit", name="task_edit", methods={"GET","POST"})
      * @param Task $task
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response

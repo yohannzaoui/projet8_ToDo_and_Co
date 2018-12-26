@@ -11,10 +11,10 @@
         <title>To Do List app</title>
 
         <!-- Bootstrap Core CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="{{ asset('css/shop-homepage.css') }}" rel="stylesheet">
+
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,36 +24,10 @@
         <![endif]-->
     </head>
 
-    <body>
-        <nav class="navbar navbar-light navbar-fixed-top" style="background-color: #e3f2fd;" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <img src="{{ asset('img/logo_OC.jpg') }}" alt="OpenClassrooms" />
-                    <a class="navbar-brand" href="/"><strong>To Do List app</strong></a>
-                    {% if app.user %}
-                    <a class="navbar-brand" href="{{ path('task_list') }}">Bonjour {{ app.user.username }}</a>
-                    {% endif %}
-                </div>
-            </div>
-        </nav>
+    <body style="margin-top: 70px">
+        {% include 'navbar.html.twig' %}
 
         <!-- Page Content -->
-        <div class="container mt-2 mb-2">
-            <div class="row">
-                {% if not app.user %}
-                <a href="{{ path('user_create') }}" class="btn btn-primary">Créer un utilisateur</a>
-                {% endif %}
-
-                {% if app.user %}
-                <a href="{{ path('logout') }}" class="pull-right btn btn-danger">Se déconnecter</a>
-                {% endif %}
-
-                {% if not app.user and 'login' != app.request.attributes.get('_route') %}
-                <a href="{{ path('login') }}" class="btn btn-success">Se connecter</a>
-                {% endif %}
-            </div>
-        </div>
-
             <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -70,7 +44,6 @@
                     {% endfor %}
 
                     {% block header_title %}{% endblock %}
-                    {% block header_img %}<img class="slide-image" src="{{ asset('img/todolist_homepage.jpg') }}" alt="todo list">{% endblock %}
                 </div>
             </div>
             </div>
@@ -78,18 +51,16 @@
             <br />
 
             <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
                         {% block body %}{% endblock %}
-                    </div>
-                </div>
+
             </div>
         <!-- /.container -->
 
-        <div class="container">
+        <div class="container mt-5">
             <footer>
                 <div class="row">
                     <div class="col-lg-12">
+                        <hr>
                         <p class="pull-right">Copyright &copy; OpenClassrooms</p>
                     </div>
                 </div>

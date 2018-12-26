@@ -28,7 +28,7 @@ class User implements UserInterface
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64, nullable=false)
      */
     private $password;
 
@@ -38,6 +38,31 @@ class User implements UserInterface
      * @Assert\Email(message="Le format de l'adresse n'est pas correcte.")
      */
     private $email;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="user", orphanRemoval=false,cascade={"remove"})
+     */
+    private $task;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Roles")
+     * @ORM\JoinColumn(name="roles_id", referencedColumnName="id")
+     */
+    private $roles;
+
+    /**
+     * User constructor.
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     /**
      * @return mixed
@@ -104,11 +129,22 @@ class User implements UserInterface
     }
 
     /**
-     * @return array
+     * @return mixed
      */
     public function getRoles()
     {
-        return array('ROLE_USER');
+        if ($this->roles) {
+            return $this->roles->getRoles();
+        }
+
+    }
+
+    /**
+     * @param mixed $roles
+     */
+    public function setRoles(Roles $roles)
+    {
+        $this->roles = $roles;
     }
 
     /**
@@ -117,4 +153,37 @@ class User implements UserInterface
     public function eraseCredentials()
     {
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTask()
+    {
+        return $this->task;
+    }
+
+    /**
+     * @param mixed $task
+     */
+    public function setTask(Task $task)
+    {
+        $this->task = $task;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
 }

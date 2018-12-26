@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+        <a href="/"><img src="{{ asset('img/logo_OC.jpg') }}" alt="OpenClassrooms" /></a>
+    <a class="navbar-brand" href="/"><strong>To Do List App</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                {% if app.user %}
+                <a class="nav-link" href="{{ path('task_list') }}">Bonjour {{ app.user.username }}</a>
+                {% endif %}
+            </li>
+            <li>
+                {% if is_granted('ROLE_ADMIN') %}
+                <a class="nav-link" href="{{ path('user_list') }}">Gérer les utilisateurs</a>
+                {% endif %}
+            </li>
+            <li>
+                    {% if not app.user %}
+                        <a style="color: red" class="nav-link" href="{{ path('user_create') }}">Créer un utilisateur</a>
+                    {% endif %}
+            </li>
+            <li>
+
+                    {% if app.user %}
+                        <a style="color: red" class="nav-link" href="{{ path('logout') }}">Se déconnecter</a>
+                    {% endif %}
+            </li>
+            <li>
+                    {% if not app.user and 'login' != app.request.attributes.get('_route') %}
+                        <a style="color: green" class="nav-link" href="{{ path('login') }}">Se connecter</a>
+                    {% endif %}
+            </li>
+        </ul>
+    </div>
+    </div>
+</nav>

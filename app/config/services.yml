@@ -3,7 +3,3 @@ services:
          autowire: true
          autoconfigure: true
          public: true
-
-     #AppBundle\:
-      #   resource: '../../src/AppBundle/*'
-       #  exclude: '../src/AppBundle/{DependencyInjection,Entity,Migrations,Tests}'
