@@ -10,29 +10,28 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 {% if app.user %}
-                <a class="nav-link" href="{{ path('task_list') }}">Bonjour {{ app.user.username }}</a>
+                    <a class="nav-link" href="{{ path('task_list') }}">Bonjour {{ app.user.username }}</a>
                 {% endif %}
             </li>
             <li>
                 {% if is_granted('ROLE_ADMIN') %}
-                <a class="nav-link" href="{{ path('user_list') }}">Gérer les utilisateurs</a>
+                    <a class="nav-link" href="{{ path('user_list') }}">Gérer les utilisateurs</a>
                 {% endif %}
             </li>
             <li>
-                    {% if not app.user %}
-                        <a style="color: red" class="nav-link" href="{{ path('user_create') }}">Créer un utilisateur</a>
-                    {% endif %}
+                {% if not app.user %}
+                    <a style="color: red" class="nav-link" href="{{ path('user_create') }}">Créer un utilisateur</a>
+                {% endif %}
             </li>
             <li>
-
-                    {% if app.user %}
-                        <a style="color: red" class="nav-link" href="{{ path('logout') }}">Se déconnecter</a>
-                    {% endif %}
+                {% if app.user %}
+                    <a style="color: red" class="nav-link" href="{{ path('logout') }}">Se déconnecter</a>
+                {% endif %}
             </li>
             <li>
-                    {% if not app.user and 'login' != app.request.attributes.get('_route') %}
-                        <a style="color: green" class="nav-link" href="{{ path('login') }}">Se connecter</a>
-                    {% endif %}
+                {% if not app.user and 'login' != app.request.attributes.get('_route') %}
+                    <a style="color: green" class="nav-link" href="{{ path('login') }}">Se connecter</a>
+                {% endif %}
             </li>
         </ul>
     </div>

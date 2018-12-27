@@ -2,36 +2,37 @@
 /**
  * Created by PhpStorm.
  * User: Yohann Zaoui
- * Date: 24/12/2018
- * Time: 12:12
+ * Date: 26/12/2018
+ * Time: 18:39
  */
 
 namespace AppBundle\Controller\Task;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class TaskListController
- * @package AppBundle\Controller
+ * Class TaskListIsDoneController
+ * @package AppBundle\Controller\Task
  */
-class TaskListController extends AbstractController
+class TaskListIsDoneController extends AbstractController
 {
     /**
-     * @Route(path="/tasks", name="task_list", methods={"GET"})
+     * @Route(path="/tasks-Is-Done", name="tasks_is_done", methods={"GET"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction()
+    public function taskIsDone()
     {
         $user = $this->getUser();
 
         $tasks = $this->getDoctrine()->getRepository('AppBundle:Task')->findBy([
             'user' => $user,
-            'isDone' => false
+            'isDone' => true
         ]);
 
-        return $this->render('task/list.html.twig', [
+        return $this->render('task/is_done.html.twig', [
             'tasks' => $tasks
         ]);
     }
+
 }

@@ -41,7 +41,7 @@ class Task
     private $isDone;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="task", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="task")
      */
     private $user;
 
@@ -143,6 +143,5 @@ class Task
     {
         $this->user = $user;
     }
-
 
 }

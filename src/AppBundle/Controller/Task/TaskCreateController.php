@@ -29,6 +29,7 @@ class TaskCreateController extends AbstractController
     public function createAction(Request $request)
     {
         $task = new Task();
+
         $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($request);
@@ -48,5 +49,6 @@ class TaskCreateController extends AbstractController
         return $this->render('task/create.html.twig', [
             'form' => $form->createView()
         ]);
+
     }
 }

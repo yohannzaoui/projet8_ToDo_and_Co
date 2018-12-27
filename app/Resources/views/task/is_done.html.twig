@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h3>Liste des tâches terminées</h3>
+    <p><a href="{{ path('task_list') }}" class="btn btn-info">Retour à la liste des tâches</a>
+        <a href="{{ path('task_create') }}" class="btn btn-primary">Créer une tâche</a></p>
+    <hr>
+    <div class="row">
+        {% for task in tasks %}
+            {% if app.user == task.user %}
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <div style="background: #FFF490" class="thumbnail">
+                        <div class="caption">
+                            <h4 class="pull-right">
+                                {% if task.isDone %}<span class="glyphicon glyphicon-ok"></span>{% else %}<span class="glyphicon glyphicon-remove"></span>{% endif %}
+                            </h4>
+                            <h4 style="text-align: center"><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
+                            <p>{{ task.content }}</p>
+                            <p><small>Ajoutée le: {{ task.createdAt | date("d/m/Y") }}</small></p>
+                        </div>
+                        <div>
+                            <form action="{{ path('task_toggle', {'id' : task.id }) }}">
+                                <p><button class="btn btn-success btn-sm pull-right">Marquer non terminée</button></p>
+                            </form>
+                            <form action="{{ path('task_delete', {'id' : task.id }) }}">
+                                <p><button class="btn btn-primary btn-sm pull-right">Supprimer</button></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
