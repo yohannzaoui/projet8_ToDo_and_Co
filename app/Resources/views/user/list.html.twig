@@ -2,7 +2,14 @@
 
 {% block body %}
     <h1>Liste des utilisateurs</h1>
+    <p class="mb-2"><a href="{{ path('user_create')}}" class="btn btn-primary">Créer un utilisateur <i class="fas fa-user-plus"></i></a></p>
     <div class="col-lg-12 col-md-12 col-sm-auto">
+        {% for flash_message in app.session.flashBag.get('success') %}
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>{{ flash_message }}</strong>
+            </div>
+        {% endfor %}
     {% if users|length == 0 %}
         <div class="alert alert-warning" role="alert">
             Il n'y a pas encore d'utilisateur enregistré. <a href="{{ path('user_create') }}" class="btn btn-warning pull-right">Créer un utilisateur</a>
@@ -27,7 +34,8 @@
                         <td>{{ user.email }}</td>
                         <td>{{ user.createdAt | date("d/m/Y")}}</td>
                         <td>
-                            <a href="{{ path('user_edit', {'id' : user.id}) }}" class="btn btn-success btn-sm">Modifier</a>
+                            <a href="{{ path('user_edit', {'id' : user.id}) }}" class="btn btn-success btn-sm"><i class="fas fa-edit fa-2x"></i></a>
+                            <a href="{{ path('user_delete', {'id' : user.id}) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash fa-2x"></i></a>
                         </td>
                     </tr>
                 {% endfor %}

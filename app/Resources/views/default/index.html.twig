@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="row justify-content-center mb-3">
+    <div class="row justify-content-center">
         <h4>Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !</h4>
         <div class="col-lg-12">
-            <p style="text-align: center"><img class="img-fluid" src="{{ asset('img/todolist_homepage.jpg') }}" alt="Responsive image"></p>
+            <p style="text-align: center"><img class="slide-image" src="{{ asset('img/todolist_homepage.jpg') }}" alt="Responsive image"></p>
         </div>
         </div>
-    <div class="row">
-        <div class="col-lg-4 col-md-12 col-sm-auto">
-        <a href="{{ path('task_create') }}" class="btn btn-success">Créer une nouvelle tâche</a>
+    <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+        <a href="{{ path('task_create') }}" class="btn btn-success">Créer une nouvelle tâche <i class="fas fa-pencil-alt"></i></a>
         </div>
-        <div class="col-lg-4 col-md-12 col-sm-auto">
-        <a href="{{ path('task_list') }}" class="btn btn-info">Consulter la liste des tâches à faire</a>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+        <a href="{{ path('task_list') }}" class="btn btn-info">Consulter la liste des tâches à faire <i class="fas fa-list-ul"></i></a>
         </div>
-        <div class="col-lg-4 col-md-12 col-sm-auto">
-        <a href="{{ path('tasks_is_done') }}" class="btn btn-warning">Consulter la liste des tâches terminées</a>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+        <a href="{{ path('tasks_is_done') }}" class="btn btn-warning">Consulter la liste des tâches terminées <i class="fas fa-check-double"></i></a>
         </div>
     </div>
 {% endblock %}

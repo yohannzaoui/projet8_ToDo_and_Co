@@ -29,7 +29,7 @@ class TaskDeleteController extends AbstractController
         $em->remove($task);
         $em->flush();
 
-        $this->addFlash('success', 'La tâche a bien été supprimée.');
+        $this->addFlash('success', "L'utilisateur a bien été supprimée.");
 
         return $this->redirectToRoute('task_list');
     }
