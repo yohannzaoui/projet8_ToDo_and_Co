@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Liste des utilisateurs</h1>
+    <h1>Liste des utilisateurs <i class="fas fa-users"></i></h1>
     <p class="mb-2"><a href="{{ path('user_create')}}" class="btn btn-primary">Créer un utilisateur <i class="fas fa-user-plus"></i></a></p>
     <div class="col-lg-12 col-md-12 col-sm-auto">
         {% for flash_message in app.session.flashBag.get('success') %}

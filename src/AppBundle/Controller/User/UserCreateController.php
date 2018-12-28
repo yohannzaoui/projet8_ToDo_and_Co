@@ -24,6 +24,7 @@ class UserCreateController extends AbstractController
      * @Route(path="/users/create", name="user_create", methods={"GET","POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function createAction(Request $request)
     {

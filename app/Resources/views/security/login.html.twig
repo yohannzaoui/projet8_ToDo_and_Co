@@ -2,11 +2,9 @@
 
 {% block body %}
     <h3>Se connecter <i class="fas fa-sign-in-alt"></i></h3>
-
         <div class="row justify-content-md-center">
+            <p style="text-align: center"><img class="slide-image" src="{{ asset('img/todolist_content.jpg') }}" alt="Responsive image"></p>
             <div class="col-lg-4 col-md-12 col-sm-auto">
-
-
                 <form action="{{ path('login_check') }}" method="post">
                     <fieldset>
                         <div class="form-group">
