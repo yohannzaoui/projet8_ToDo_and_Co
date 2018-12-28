@@ -23,10 +23,8 @@ class TaskListController extends AbstractController
      */
     public function listAction()
     {
-        $user = $this->getUser();
-
         $tasks = $this->getDoctrine()->getRepository('AppBundle:Task')->findBy([
-            'user' => $user,
+            'user' => $this->getUser(),
             'isDone' => false
         ]);
 

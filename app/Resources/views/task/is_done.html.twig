@@ -11,8 +11,11 @@
                 <div class="col-sm-4 col-lg-4 col-md-4">
                     <div class="post-it">
                             <h4 style="text-align: center"><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
+                        <hr>
                             <p>{{ task.content }}</p>
-                            <p><small>Ajoutée le: {{ task.createdAt | date("d/m/Y") }}</small></p>
+                        <hr>
+                            <p><small>Ajoutée le: {{ task.createdAt | date("d/m/Y") }} à {{ task.createdAt | date("H:i") }}</small></p>
+                            <p><small>Terminée le: {{ task.dateIsDone | date("d/m/Y") }} à {{ task.dateIsDone | date("H:i") }}</small></p>
                         <div>
                             <div class="container mt-2">
                                 <div class="row justify-content-center">

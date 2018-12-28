@@ -2,20 +2,22 @@
 
 {% block body %}
     <div class="row justify-content-center">
-        <h4>Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !</h4>
 
-            <p style="text-align: center"><img class="slide-image" src="{{ asset('img/todolist_homepage.jpg') }}" alt="Responsive image"></p>
+        <h4 style="text-align: center">Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !</h4>
+
+        <p><img class="img-fluid" src="{{ asset('img/todolist_homepage.jpg') }}" alt="Responsive image"></p>
+
+        <div class="col-lg-4 col-md-auto col-sm-auto">
+            <a href="{{ path('task_create') }}" class="btn btn-success">Créer une nouvelle tâche <i class="fas fa-pencil-alt"></i></a>
         </div>
 
-    <div class="row justify-content-lg-around">
-        <div class="col-lg-4 col-md-4 col-sm-4">
-        <a href="{{ path('task_create') }}" class="btn btn-success">Créer une nouvelle tâche <i class="fas fa-pencil-alt"></i></a>
+        <div class="col-lg-4 col-md-auto col-sm-auto">
+            <a href="{{ path('task_list') }}" class="btn btn-info">Consulter la liste des tâches à faire <i class="fas fa-list-ul"></i></a>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
-        <a href="{{ path('task_list') }}" class="btn btn-info">Consulter la liste des tâches à faire <i class="fas fa-list-ul"></i></a>
+
+        <div class="col-lg-4 col-md-auto col-sm-auto">
+            <a href="{{ path('tasks_is_done') }}" class="btn btn-warning">Consulter la liste des tâches terminées <i class="fas fa-check-double"></i></a>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
-        <a href="{{ path('tasks_is_done') }}" class="btn btn-warning">Consulter la liste des tâches terminées <i class="fas fa-check-double"></i></a>
-        </div>
+
     </div>
 {% endblock %}

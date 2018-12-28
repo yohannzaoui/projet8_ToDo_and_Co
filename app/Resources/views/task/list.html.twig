@@ -11,8 +11,11 @@
         <div class="col-sm-4 col-lg-4 col-md-4 mb-3">
             <div class="post-it">
                     <h4 style="text-align: center"><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
+                <hr>
                     <p>{{ task.content }}</p>
-                    <p><small>Ajoutée le: {{ task.createdAt | date("d/m/Y") }}</small></p>
+                <hr>
+                    <p><small>Ajoutée le: {{ task.createdAt | date("d/m/Y") }} à {{ task.createdAt | date("H:i") }}</small></p>
+
                 <div class="container mt-2">
                     <div class="row justify-content-center">
                     <form action="{{ path('task_toggle', {'id' : task.id }) }}">

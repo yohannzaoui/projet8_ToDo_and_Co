@@ -23,10 +23,13 @@ class TaskToggleController extends AbstractController
      * @Route(path="/tasks/{id}/toggle", name="task_toggle", methods={"GET"})
      * @param Task $task
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
      */
     public function toggleTaskAction(Task $task)
     {
         $task->toggle(!$task->isDone());
+
+        $task->setDateIsDone(new \DateTime());
 
         $this->getDoctrine()->getManager()->flush();
 

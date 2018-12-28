@@ -41,6 +41,11 @@ class Task
     private $isDone;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateIsDone;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="task")
      */
     private $user;
@@ -125,6 +130,22 @@ class Task
     public function toggle($flag)
     {
         $this->isDone = $flag;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateIsDone()
+    {
+        return $this->dateIsDone;
+    }
+
+    /**
+     * @param mixed $dateIsDone
+     */
+    public function setDateIsDone($dateIsDone)
+    {
+        $this->dateIsDone = $dateIsDone;
     }
 
 

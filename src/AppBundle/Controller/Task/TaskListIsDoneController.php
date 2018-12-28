@@ -23,10 +23,8 @@ class TaskListIsDoneController extends AbstractController
      */
     public function taskIsDone()
     {
-        $user = $this->getUser();
-
         $tasks = $this->getDoctrine()->getRepository('AppBundle:Task')->findBy([
-            'user' => $user,
+            'user' => $this->getUser(),
             'isDone' => true
         ]);
 
