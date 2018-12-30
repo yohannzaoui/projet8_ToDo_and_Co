@@ -23,7 +23,7 @@ class TaskDeleteController extends AbstractController
      * @param Task $task
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteTaskAction(Task $task)
+    public function deleteTask(Task $task)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($task);

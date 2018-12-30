@@ -25,7 +25,7 @@ class TaskToggleController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Exception
      */
-    public function toggleTaskAction(Task $task)
+    public function toggleTask(Task $task)
     {
         $task->toggle(!$task->isDone());
 

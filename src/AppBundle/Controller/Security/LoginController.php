@@ -17,7 +17,7 @@ class LoginController extends AbstractController
      * @Route(path="/login", name="login", methods={"GET"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function loginAction()
+    public function login()
     {
         $authenticationUtils = $this->get('security.authentication_utils');
         $error = $authenticationUtils->getLastAuthenticationError();

@@ -20,6 +20,7 @@ class Task
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime()
      */
     private $createdAt;
 
@@ -42,6 +43,7 @@ class Task
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime()
      */
     private $dateIsDone;
 
