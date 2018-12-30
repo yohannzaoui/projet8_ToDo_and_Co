@@ -29,6 +29,12 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=64, nullable=false)
+     * @Assert\Length(
+     *     min="8",
+     *     max="64",
+     *     minMessage="Votre mot de passe doit contenir 8 caracteres minimum",
+     *     maxMessage="Votre mot de passe doit contenir 64 caracteres maximum"
+     * )
      */
     private $password;
 
@@ -45,7 +51,7 @@ class User implements UserInterface
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="user", orphanRemoval=false,cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="user", orphanRemoval=false)
      */
     private $task;
 

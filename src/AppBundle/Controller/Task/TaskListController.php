@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller\Task;
 
+use AppBundle\Entity\Task;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -21,11 +22,14 @@ class TaskListController extends AbstractController
      * @Route(path="/tasks", name="task_list", methods={"GET"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction()
+    public function tasksList()
     {
-        $user = $this->getUser();
-
-        $tasks = $this->getDoctrine()->getRepository('AppBundle:Task')->findBy(['user' => $user]);
+        $tasks = $this->getDoctrine()
+            ->getRepository(Task::class)
+            ->findBy([
+                'user' => $this->getUser(),
+                'isDone' => false
+        ]);
 
         return $this->render('task/list.html.twig', [
             'tasks' => $tasks

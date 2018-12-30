@@ -6,17 +6,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * Class SecurityController
+ * Class LoginController
  * @package AppBundle\Controller
  */
-class SecurityController extends AbstractController
+class LoginController extends AbstractController
 {
 
 
     /**
      * @Route(path="/login", name="login", methods={"GET"})
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function loginAction()
+    public function login()
     {
         $authenticationUtils = $this->get('security.authentication_utils');
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -26,21 +27,5 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername,
             'error'         => $error,
         ]);
-    }
-
-    /**
-     * @Route(path="/login_check", name="login_check", methods={"POST"})
-     */
-    public function loginCheck()
-    {
-        // This code is never executed.
-    }
-
-    /**
-     * @Route(path="/logout", name="logout", methods={"GET"})
-     */
-    public function logoutCheck()
-    {
-        // This code is never executed.
     }
 }

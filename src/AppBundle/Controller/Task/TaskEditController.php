@@ -22,18 +22,18 @@ use AppBundle\Form\TaskType;
 class TaskEditController extends AbstractController
 {
     /**
-     * @Route(path="/tasks/{id}/edit", name="task_edit", methods={"GET","POST"})
+     * @Route(path="/tasks/edit/{id}", name="task_edit", methods={"GET","POST"})
      * @param Task $task
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Task $task, Request $request)
+    public function editTask(Task $task, Request $request)
     {
-        $form = $this->createForm(TaskType::class, $task);
-
-        $form->handleRequest($request);
+        $form = $this->createForm(TaskType::class, $task)
+            ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'La tâche a bien été modifiée.');

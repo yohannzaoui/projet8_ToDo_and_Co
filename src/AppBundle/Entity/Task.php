@@ -20,6 +20,7 @@ class Task
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime()
      */
     private $createdAt;
 
@@ -41,7 +42,13 @@ class Task
     private $isDone;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="task", cascade={"remove"})
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime()
+     */
+    private $dateIsDone;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="task")
      */
     private $user;
 
@@ -127,6 +134,22 @@ class Task
         $this->isDone = $flag;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getDateIsDone()
+    {
+        return $this->dateIsDone;
+    }
+
+    /**
+     * @param mixed $dateIsDone
+     */
+    public function setDateIsDone($dateIsDone)
+    {
+        $this->dateIsDone = $dateIsDone;
+    }
+
 
     /**
      * @return mixed
@@ -143,6 +166,5 @@ class Task
     {
         $this->user = $user;
     }
-
 
 }

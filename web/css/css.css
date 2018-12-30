@@ -1,10 +1,15 @@
-/*!
- * Start Bootstrap - Shop Homepage (http://startbootstrap.com/)
- * Copyright 2013-2016 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
- */
+body {
+    margin-top: 50px
+}
 
+.post-it {
+    background: #FFF490;
+    box-shadow: 5px 5px 5px silver
+}
 
+.separator {
+    color: #FFF490
+}
 
 .slide-image {
     width: 100%;
@@ -17,11 +22,6 @@
 .carousel-control,
 .item {
     border-radius: 4px;
-}
-
-.caption {
-    height: 130px;
-    overflow: hidden;
 }
 
 .caption h4 {
@@ -45,8 +45,4 @@
 .thumbnail .caption-full {
     padding: 9px;
     color: #333;
-}
-
-footer {
-    margin: 50px 0;
 }

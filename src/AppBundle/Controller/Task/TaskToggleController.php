@@ -23,13 +23,25 @@ class TaskToggleController extends AbstractController
      * @Route(path="/tasks/{id}/toggle", name="task_toggle", methods={"GET"})
      * @param Task $task
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
      */
-    public function toggleTaskAction(Task $task)
+    public function toggleTask(Task $task)
     {
         $task->toggle(!$task->isDone());
+
+        $task->setDateIsDone(new \DateTime());
+
         $this->getDoctrine()->getManager()->flush();
 
-        $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
+        if ($task->isDone() == false) {
+
+            $this->addFlash('success', sprintf('La tâche %s a bien été marquée : à faire.', $task->getTitle()));
+        }
+
+        if ($task->isDone() == true) {
+
+            $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme terminée.', $task->getTitle()));
+        }
 
         return $this->redirectToRoute('task_list');
     }

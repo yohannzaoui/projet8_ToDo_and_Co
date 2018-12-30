@@ -14,8 +14,9 @@ class DefaultController extends AbstractController
 
     /**
      * @Route(path="/", name="homepage", methods={"GET"})
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function home()
     {
         return $this->render('default/index.html.twig');
     }
