@@ -29,7 +29,6 @@ class UserPasswordController extends AbstractController
      */
     public function userPassword(User $user, Request $request)
     {
-
         $form = $this->createForm(UserPasswordType::class, $user)
             ->handleRequest($request);
 
