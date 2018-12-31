@@ -26,7 +26,7 @@ class TaskCreateController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function createAction(Request $request)
+    public function createTask(Request $request)
     {
         $task = new Task();
 

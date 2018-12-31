@@ -26,7 +26,7 @@ class UserCreateController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function createAction(Request $request)
+    public function createUser(Request $request)
     {
         $user = new User();
 
