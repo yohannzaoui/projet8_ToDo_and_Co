@@ -3,6 +3,7 @@ language: php
 
 jobs:
   include:
+    - php: '5.9'
     - php: '7.2'
     - php: '7.2'
 
