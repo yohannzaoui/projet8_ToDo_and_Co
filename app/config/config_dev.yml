@@ -6,6 +6,7 @@ framework:
         resource: "%kernel.root_dir%/config/routing_dev.yml"
         strict_requirements: true
     profiler: { only_exceptions: false }
+    translator: { fallbacks: ["%locale%"] }
 
 web_profiler:
     toolbar: true
@@ -17,10 +18,10 @@ monolog:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
-            channels: [!event]
+            channels:
         console:
             type:   console
-            channels: [!event, !doctrine]
+            channels:
         # uncomment to get logging in your browser
         # you may have to allow bigger header sizes in your Web server configuration
         #firephp:
