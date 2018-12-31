@@ -6,3 +6,5 @@ ToDoList
 [![Maintainability](https://api.codeclimate.com/v1/badges/96bff9fc7d6cd02562bb/maintainability)](https://codeclimate.com/github/yohannzaoui/projet8_ToDo_and_Co/maintainability)
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/96bff9fc7d6cd02562bb/test_coverage)](https://codeclimate.com/github/yohannzaoui/projet8_ToDo_and_Co/test_coverage)
+
+[![Build Status](https://travis-ci.org/yohannzaoui/projet8_ToDo_and_Co.svg?branch=master)](https://travis-ci.org/yohannzaoui/projet8_ToDo_and_Co)
