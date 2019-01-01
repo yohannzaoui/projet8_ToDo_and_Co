@@ -11,3 +11,10 @@ framework:
 web_profiler:
     toolbar: false
     intercept_redirects: false
+
+security:
+    firewalls:
+        # replace 'main' by the name of your own firewall
+        main:
+            anonymous: ~
+
