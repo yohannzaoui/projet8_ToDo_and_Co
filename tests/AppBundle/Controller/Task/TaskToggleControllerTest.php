@@ -24,7 +24,7 @@ class TaskToggleControllerTest extends WebTestCase
 
     public function testRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/tasks/5/toggle');
+        $this->client->request('GET', '/tasks/26/toggle');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -33,7 +33,7 @@ class TaskToggleControllerTest extends WebTestCase
     {
         $this->logIn();
 
-        $this->client->request('GET', '/tasks/5/toggle');
+        $this->client->request('GET', '/tasks/26/toggle');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }

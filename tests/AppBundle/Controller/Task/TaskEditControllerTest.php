@@ -24,7 +24,7 @@ class TaskEditControllerTest extends WebTestCase
 
     public function testRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/tasks/edit/5');
+        $this->client->request('GET', '/tasks/edit/26');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -33,7 +33,7 @@ class TaskEditControllerTest extends WebTestCase
     {
         $this->logIn();
 
-        $crawler = $this->client->request('GET', '/tasks/edit/5');
+        $crawler = $this->client->request('GET', '/tasks/edit/26');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -46,7 +46,7 @@ class TaskEditControllerTest extends WebTestCase
     {
         $this->logIn();
 
-        $this->client->request('POST', '/tasks/edit/5');
+        $this->client->request('POST', '/tasks/edit/26');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
