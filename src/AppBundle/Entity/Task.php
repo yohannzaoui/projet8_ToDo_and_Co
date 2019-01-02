@@ -49,6 +49,7 @@ class Task
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="task")
+     * @ORM\JoinColumn(onDelete="cascade")
      */
     private $user;
 

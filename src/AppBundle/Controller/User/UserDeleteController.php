@@ -25,11 +25,18 @@ class UserDeleteController extends AbstractController
      */
     public function deleteUser(User $user)
     {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($user);
-        $em->flush();
+        if ($user != $this->getUser()) {
 
-        $this->addFlash('success', "L'utilisateur a bien été supprimée.");
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($user);
+            $em->flush();
+
+            $this->addFlash('success', "L'utilisateur a bien été supprimée.");
+
+            return $this->redirectToRoute('user_list');
+        }
+
+        $this->addFlash('success', "Impossible de supprimer votre propre compte.");
 
         return $this->redirectToRoute('user_list');
     }
