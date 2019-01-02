@@ -20,7 +20,7 @@ use AppBundle\Entity\Task;
 class TaskToggleController extends AbstractController
 {
     /**
-     * @Route(path="/tasks/{id}/toggle", name="task_toggle", methods={"GET"})
+     * @Route(path="/tasks/{id}/toggle", name="task_toggle", methods={"GET"}, requirements={"id"="\d+"})
      * @param Task $task
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Exception

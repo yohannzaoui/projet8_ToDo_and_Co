@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserDeleteController extends AbstractController
 {
     /**
-     * @Route(path="/delete/user/{id}", name="user_delete", methods={"GET"})
+     * @Route(path="/delete/user/{id}", name="user_delete", methods={"GET"}, requirements={"id"="\d+"})
      * @param User $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -27,9 +27,9 @@ class UserDeleteController extends AbstractController
     {
         if ($user != $this->getUser()) {
 
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($user);
-            $em->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($user);
+            $entityManager->flush();
 
             $this->addFlash('success', "L'utilisateur a bien été supprimée.");
 

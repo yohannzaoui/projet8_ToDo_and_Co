@@ -71,7 +71,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -119,7 +119,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getEmail()
     {
@@ -177,7 +177,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return mixed
+     * @return \DateTime
      */
     public function getCreatedAt()
     {

@@ -64,7 +64,7 @@ class Task
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -88,7 +88,7 @@ class Task
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getTitle()
     {
@@ -104,7 +104,7 @@ class Task
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getContent()
     {
@@ -136,7 +136,7 @@ class Task
     }
 
     /**
-     * @return mixed
+     * @return \DateTime
      */
     public function getDateIsDone()
     {

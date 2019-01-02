@@ -19,18 +19,18 @@ use AppBundle\Entity\Task;
 class TaskDeleteController extends AbstractController
 {
     /**
-     * @Route(path="/tasks/delete/{id}", name="task_delete", methods={"GET"})
+     * @Route(path="/tasks/delete/{id}", name="task_delete", methods={"GET"}, requirements={"id"="\d+"})
      * @param Task $task
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteTask(Task $task)
     {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($task);
-        $em->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($task);
+            $entityManager->flush();
 
-        $this->addFlash('success', "Tâche supprimée.");
+            $this->addFlash('success', "Tâche supprimée.");
 
-        return $this->redirectToRoute('task_list');
+            return $this->redirectToRoute('task_list');
     }
 }

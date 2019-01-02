@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserPasswordController extends AbstractController
 {
     /**
-     * @Route(path="/user/password/{id}", name="user_password", methods={"GET", "POST"})
+     * @Route(path="/user/password/{id}", name="user_password", methods={"GET", "POST"}, requirements={"id"="\d+"})
      * @param User $user
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
