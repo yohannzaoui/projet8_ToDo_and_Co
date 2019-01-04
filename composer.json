@@ -38,7 +38,9 @@
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^4.2",
         "symfony/browser-kit": "^4.2",
-        "symfony/css-selector": "^4.2"
+        "symfony/css-selector": "^4.2",
+        "symfony/web-server-bundle": "^4.2",
+        "symfony/maker-bundle": "^1.11"
     },
     "scripts": {
         "symfony-scripts": [

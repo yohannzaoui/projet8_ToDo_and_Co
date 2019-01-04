@@ -51,6 +51,28 @@ class UserCreateControllerTest extends WebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
+    /*public function testForm()
+    {
+        $this->logIn();
+
+        $crawler = $this->client->request('POST', '/users/create');
+
+        $form = $crawler->selectButton('ajouter')->form();
+
+        $form['user[username]'] = 'test';
+        $form['user[password][first]'] = 'password';
+        $form['user[password][second]'] = 'password';
+        $form['user[email]'] = 'email@email.com';
+        $form['user[roles]'] = 'ROLE_USER';
+
+        $crawler = $this->client->submit();
+
+        $this->client->followRedirect();
+
+        $this->assertSame(1, $crawler->filter('alert alert-dismissible alert-success')->count());
+
+    }*/
+
     private function logIn()
     {
         $session = $this->client->getContainer()->get('session');
