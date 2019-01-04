@@ -8,16 +8,15 @@
         {% else %}
             {{ tasks | length }} tâches terminées
         {% endif %}
-        <i class="fas fa-check-double"></i>
     </h3>
-    <p><a href="{{ path('task_list') }}" class="btn btn-info">Retour à la liste des tâches <i class="fas fa-list-ul"></i></a>
-        <a href="{{ path('task_create') }}" class="btn btn-primary">Créer une tâche <i class="fas fa-pencil-alt"></i></a></p>
+    <p><a href="{{ path('task_list') }}" class="btn btn-info">Retour à la liste des tâches</a>
+        <a href="{{ path('task_create') }}" class="btn btn-primary">Créer une tâche</a></p>
     <hr>
     <div class="row">
         {% for task in tasks %}
 
                 <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="post-it">
+
                             <h4 style="text-align: center"><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
                         <hr>
                             <p>{{ task.content }}</p>
@@ -28,16 +27,16 @@
                             <div class="container mt-2">
                                 <div class="row justify-content-center">
                                     <form action="{{ path('task_toggle', {'id' : task.id }) }}">
-                                        <p class="separator"><button class="btn btn-success btn-sm"><i class="far fa-check-square fa-2x"></i></button> |</p>
+                                        <p class="separator"><button class="btn btn-success btn-sm">Marquer non terminée</button> |</p>
                                     </form>
                                     <form action="{{ path('task_delete', {'id' : task.id }) }}">
-                                        <p><button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt fa-2x"></i></button></p>
+                                        <p><button class="btn btn-danger btn-sm">Supprimer</button></p>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
         {% endfor %}
 
         {% if tasks | length == 0 %}

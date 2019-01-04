@@ -17,7 +17,7 @@
         {% for task in tasks %}
 
         <div class="col-sm-4 col-lg-4 col-md-4 mb-3">
-            <div class="post-it">
+
                     <h4 style="text-align: center"><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
                 <hr>
                     <p>{{ task.content }}</p>
@@ -27,17 +27,17 @@
                 <div class="container mt-2">
                     <div class="row justify-content-center">
                     <form action="{{ path('task_toggle', {'id' : task.id }) }}">
-                        <p class="separator"><button class="btn btn-success btn-sm"><i class="fas fa-check-double fa-2x"></i></button> | </p>
+                        <p class="separator"><button class="btn btn-success btn-sm">Marquer terminée</button> | </p>
                     </form>
                     <form action="{{ path('task_edit', {'id' : task.id }) }}">
-                        <p class="separator"><button class="btn btn-warning btn-sm"><i class="fas fa-pen fa-2x"></i></button> | </p>
+                        <p class="separator"><button class="btn btn-warning btn-sm">Modifier</button> | </p>
                     </form>
                     <form action="{{ path('task_delete', {'id' : task.id }) }}">
-                        <p><button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt fa-2x"></i></button></p>
+                        <p><button class="btn btn-danger btn-sm">Supprimer</button></p>
                     </form>
                     </div>
                 </div>
-            </div>
+
         </div>
 
         {% endfor %}

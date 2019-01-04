@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #e3f2fd;">
     <div class="container">
         <a href="/"><img src="{{ asset('img/logo_OC.jpg') }}" alt="OpenClassrooms" /></a>
     <a class="navbar-brand" href="/"><strong>To Do List App</strong></a>
@@ -8,27 +8,22 @@
 
     <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                {% if app.user %}
-                    <a class="navbar-brand"><strong>Bonjour {{ app.user.username }}!</strong></a>
-                {% endif %}
-            </li>
             <li>
                 {% if app.user %}
-                    <a class="nav-link" href="{{ path('task_list') }}">Ma liste de tâches <i class="fas fa-list-ul"></i></a>
+                    <a class="nav-link" href="{{ path('task_list') }}">Ma liste de tâches</a>
                 {% endif %}
             </li>
             {% if is_granted('ROLE_ADMIN') %}
             <li>
-                <a class="nav-link" href="{{ path('user_list') }}">Gérer les utilisateurs <i class="fas fa-users"></i></a>
+                <a class="nav-link" href="{{ path('user_list') }}">Gérer les utilisateurs</a>
             </li>
             <li>
-                <a class="nav-link" href="{{ path('user_create') }}">Créer un utilisateur <i class="fas fa-user-plus"></i></a>
+                <a class="nav-link" href="{{ path('user_create') }}">Créer un utilisateur</a>
             </li>
             {% endif %}
             <li>
                 {% if app.user %}
-                    <a style="color: red" class="nav-link" href="{{ path('logout') }}">Se déconnecter <i class="fas fa-sign-out-alt"></i></a>
+                    <a style="color: red" class="nav-link" href="{{ path('logout') }}">Se déconnecter</a>
                 {% endif %}
             </li>
             <li>

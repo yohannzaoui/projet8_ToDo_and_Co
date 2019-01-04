@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>Modifier <strong>{{ user.username }}</strong></h1>
-    <p class="mb-2"><a href="{{ path('user_list')}}" class="btn btn-primary">Retour à la liste d'utilisateurs <i class="fas fa-users"></i></a></p>
+    <p class="mb-2"><a href="{{ path('user_list')}}" class="btn btn-primary">Retour à la liste d'utilisateurs</a></p>
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-12 col-sm-auto">
         {{ form_start(form, {'action' : path('user_edit', {'id' : user.id})}) }}
