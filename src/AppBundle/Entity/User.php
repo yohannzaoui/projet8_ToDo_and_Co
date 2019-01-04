@@ -56,10 +56,9 @@ class User implements UserInterface
     private $task;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Roles")
-     * @ORM\JoinColumn(name="roles_id", referencedColumnName="id")
+     * @ORM\Column(type="array")
      */
-    private $roles;
+    private $roles = [];
 
     /**
      * User constructor.
@@ -67,6 +66,7 @@ class User implements UserInterface
      */
     public function __construct()
     {
+        $this->roles = ['ROLE_USER'];
         $this->createdAt = new \DateTime();
     }
 
@@ -135,20 +135,17 @@ class User implements UserInterface
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getRoles()
     {
-        if ($this->roles) {
-            return $this->roles->getRoles();
-        }
-
+        return $this->roles;
     }
 
     /**
-     * @param mixed $roles
+     * @param $roles
      */
-    public function setRoles(Roles $roles)
+    public function setRoles($roles)
     {
         $this->roles = $roles;
     }

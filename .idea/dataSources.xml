@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="symfony@localhost" uuid="3554676e-a5bb-4706-a69d-43e47eb51e50">
+    <data-source source="LOCAL" name="symfony@localhost" uuid="d22bf7a9-4656-4cde-8989-8a49cc3f91b3">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
