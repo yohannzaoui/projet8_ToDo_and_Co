@@ -3,24 +3,24 @@
  * Created by PhpStorm.
  * User: Yohann Zaoui
  * Date: 05/01/2019
- * Time: 15:33
+ * Time: 23:37
  */
 
 namespace AppBundle\FormHandler;
 
+
 use AppBundle\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Form\FormInterface;
 
 /**
- * Class UserHandler
+ * Class CreateUserHandler
  * @package AppBundle\FormHandler
  */
-class UserHandler
+class CreateUserHandler
 {
-
     /**
      * @var ObjectManager
      */
@@ -37,7 +37,7 @@ class UserHandler
     private $messageFlash;
 
     /**
-     * UserHandler constructor.
+     * CreateUserHandler constructor.
      * @param ObjectManager $manager
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param SessionInterface $messageFlash
@@ -57,7 +57,7 @@ class UserHandler
      * @param User $user
      * @return bool
      */
-    public function createUserHandler(FormInterface $form, User $user)
+    public function handle(FormInterface $form, User $user)
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -71,48 +71,6 @@ class UserHandler
             $this->manager->flush();
 
             $this->messageFlash->getFlashBag()->add('success', "L'utilisateur a bien été ajouté.");
-
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * @param FormInterface $form
-     * @return bool
-     */
-    public function editUserHandler(FormInterface $form)
-    {
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $this->manager->getRepository('AppBundle:User');
-            $this->manager->flush();
-
-            $this->messageFlash->getFlashBag()->add('success', "L'utilisateur a bien été modifié.");
-
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * @param FormInterface $form
-     * @param User $user
-     * @return bool
-     */
-    public function editPasswordHandler(FormInterface $form, User $user)
-    {
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $password = $this->passwordEncoder
-                ->encodePassword($user, $user->getPassword());
-
-            $user->setPassword($password);
-
-            $this->manager->getRepository('AppBundle:User');
-            $this->manager->flush();
-
-            $this->messageFlash->getFlashBag()->add('success', "Le mot de passe à bien été modifié.");
 
             return true;
         }

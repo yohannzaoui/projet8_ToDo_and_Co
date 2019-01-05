@@ -9,7 +9,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Task;
-use AppBundle\FormHandler\TaskHandler;
+use AppBundle\FormHandler\CreateTaskHandler;
+use AppBundle\FormHandler\EditTaskHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,18 +23,16 @@ use AppBundle\Form\TaskType;
 class TaskController extends AbstractController
 {
 
-    /**
-     * @var TaskHandler
-     */
-    private $handler;
+    private $createTaskHandler;
 
-    /**
-     * TaskController constructor.
-     * @param TaskHandler $handler
-     */
-    public function __construct(TaskHandler $handler)
-    {
-        $this->handler = $handler;
+    private $editTaskHandler;
+
+    public function __construct(
+        CreateTaskHandler $createTaskHandler,
+        EditTaskHandler $editTaskHandler
+    ) {
+        $this->createTaskHandler = $createTaskHandler;
+        $this->editTaskHandler = $editTaskHandler;
     }
 
     /**
@@ -42,8 +41,7 @@ class TaskController extends AbstractController
      */
     public function tasksList()
     {
-        $tasks = $this->getDoctrine()
-            ->getRepository(Task::class)
+        $tasks = $this->getDoctrine()->getRepository(Task::class)
             ->findBy([
                 'user' => $this->getUser(),
                 'isDone' => false
@@ -68,7 +66,7 @@ class TaskController extends AbstractController
         $form = $this->createForm(TaskType::class, $task)
             ->handleRequest($request);
 
-        if ($this->handler->createTaskHandler($form, $task)) {
+        if ($this->createTaskHandler->handle($form, $task)) {
 
             return $this->redirectToRoute('task_list');
         }
@@ -91,7 +89,7 @@ class TaskController extends AbstractController
         $form = $this->createForm(TaskType::class, $task)
             ->handleRequest($request);
 
-        if ($this->handler->editTaskHandler($form)) {
+        if ($this->editTaskHandler->handle($form)) {
 
             return $this->redirectToRoute('task_list');
         }
@@ -110,9 +108,9 @@ class TaskController extends AbstractController
      */
     public function deleteTask(Task $task)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($task);
-        $entityManager->flush();
+        $manager = $this->getDoctrine()->getManager();
+        $manager->remove($task);
+        $manager->flush();
 
         $this->addFlash('success', "Tâche supprimée.");
 

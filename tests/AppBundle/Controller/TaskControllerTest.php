@@ -73,7 +73,7 @@ class TaskControllerTest extends WebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
-    /*public function testCreateTask()
+    /*public function testCreateTaskForm()
     {
         $this->logIn();
 
@@ -96,15 +96,15 @@ class TaskControllerTest extends WebTestCase
     {
         $this->login();
 
-        $this->client->request('GET', '/tasks/delete/0');
+        $this->client->request('GET', '/tasks/delete/50');
 
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
 
 
     public function testTaskEditRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/tasks/edit/2');
+        $this->client->request('GET', '/tasks/edit/50');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -113,7 +113,7 @@ class TaskControllerTest extends WebTestCase
     {
         $this->logIn();
 
-        $crawler = $this->client->request('GET', '/tasks/edit/2');
+        $crawler = $this->client->request('GET', '/tasks/edit/50');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 

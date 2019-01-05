@@ -10,7 +10,9 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Form\UserEditPasswordType;
-use AppBundle\FormHandler\UserHandler;
+use AppBundle\FormHandler\CreateUserHandler;
+use AppBundle\FormHandler\EditPasswordHandler;
+use AppBundle\FormHandler\EditUserHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,17 +28,34 @@ class UserController extends AbstractController
 {
 
     /**
-     * @var UserHandler
+     * @var CreateUserHandler
      */
-    private $handler;
+    private $createUserHandler;
+
+    /**
+     * @var EditUserHandler
+     */
+    private $editUserHandler;
+
+    /**
+     * @var EditPasswordHandler
+     */
+    private $editPasswordHandler;
 
     /**
      * UserController constructor.
-     * @param UserHandler $handler
+     * @param CreateUserHandler $createUserHandler
+     * @param EditUserHandler $editUserHandler
+     * @param EditPasswordHandler $editPasswordHandler
      */
-    public function __construct(UserHandler $handler)
-    {
-        $this->handler = $handler;
+    public function __construct(
+        CreateUserHandler $createUserHandler,
+        EditUserHandler $editUserHandler,
+        EditPasswordHandler $editPasswordHandler
+    ) {
+        $this->createUserHandler = $createUserHandler;
+        $this->editUserHandler = $editUserHandler;
+        $this->editPasswordHandler = $editPasswordHandler;
     }
 
     /**
@@ -52,7 +71,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user)
             ->handleRequest($request);
 
-        if ($this->handler->createUserHandler($form, $user)) {
+        if ($this->createUserHandler->handle($form, $user)) {
 
             return $this->redirectToRoute('user_list');
         }
@@ -72,9 +91,9 @@ class UserController extends AbstractController
     {
         if ($user != $this->getUser()) {
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
+            $manager = $this->getDoctrine()->getManager();
+            $manager->remove($user);
+            $manager->flush();
 
             $this->addFlash('success', "L'utilisateur a bien été supprimée.");
 
@@ -98,7 +117,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserEditType::class, $user)
             ->handleRequest($request);
 
-        if ($this->handler->editUserHandler($form)) {
+        if ($this->editUserHandler->handle($form)) {
 
             return $this->redirectToRoute('user_list');
         }
@@ -112,6 +131,7 @@ class UserController extends AbstractController
 
     /**
      * @Route(path="/users", name="user_list", methods={"GET"})
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function listUsers()
     {
@@ -135,7 +155,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserEditPasswordType::class, $user)
             ->handleRequest($request);
 
-        if ($this->handler->editPasswordHandler($form, $user)) {
+        if ($this->editPasswordHandler->handle($form, $user)) {
 
             return $this->redirectToRoute('user_list');
         }
