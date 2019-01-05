@@ -1,10 +1,5 @@
 body {
-    margin-top: 50px
-}
-
-.post-it {
-    background: #FFF490;
-    box-shadow: 5px 5px 5px silver
+    padding-top: 20px;
 }
 
 .separator {

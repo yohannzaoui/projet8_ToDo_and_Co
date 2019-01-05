@@ -2,11 +2,12 @@
 
 {% block body %}
     <h3>
-        Il y'a
         {% if tasks | length == 1  %}
-            {{ tasks | length }} tâche terminée
+            Tâche terminée
+        {% elseif tasks | length == 0 %}
+            Il n'y a pas de tâches à afficher
         {% else %}
-            {{ tasks | length }} tâches terminées
+            Tâches terminées
         {% endif %}
     </h3>
     <p><a href="{{ path('task_list') }}" class="btn btn-info">Retour à la liste des tâches</a>
@@ -39,10 +40,4 @@
 
         {% endfor %}
 
-        {% if tasks | length == 0 %}
-            <div class="container">
-                <h3>Il n'y a pas de tâches à afficher</h3>
-            </div>
-        {% endif %}
-    </div>
 {% endblock %}
