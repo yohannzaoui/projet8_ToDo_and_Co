@@ -8,13 +8,16 @@
 
 namespace AppBundle\Controller;
 
-
 use AppBundle\Entity\Task;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\TaskType;
 
+/**
+ * Class TaskController
+ * @package AppBundle\Controller
+ */
 class TaskController extends AbstractController
 {
 

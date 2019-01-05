@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Class UserType
  * @package AppBundle\Form
  */
-class UserPasswordType extends AbstractType
+class UserEditPasswordType extends AbstractType
 {
 
     /**
@@ -37,17 +37,7 @@ class UserPasswordType extends AbstractType
                 'second_options' => [
                     'label' => 'Tapez le mot de passe à nouveau'
                 ],
-            ])
-        ;
+            ]);
     }
 
-    /**
-     * @param OptionsResolver $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => User::class,
-        ]);
-    }
 }

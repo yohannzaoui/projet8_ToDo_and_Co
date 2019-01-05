@@ -9,16 +9,35 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Form\UserEditPasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 use AppBundle\Form\UserEditType;
-use AppBundle\Form\UserPasswordType;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+/**
+ * Class UserController
+ * @package AppBundle\Controller
+ */
 class UserController extends AbstractController
 {
+
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $passwordEncoder;
+
+    /**
+     * UserController constructor.
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     */
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
 
     /**
      * @Route(path="/users/create", name="user_create", methods={"GET","POST"})
@@ -37,7 +56,7 @@ class UserController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
 
-            $password = $this->get('security.password_encoder')
+            $password = $this->passwordEncoder
                 ->encodePassword($user, $user->getPassword());
 
             $user->setPassword($password);
@@ -127,14 +146,14 @@ class UserController extends AbstractController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function userPassword(User $user, Request $request)
+    public function userEditPassword(User $user, Request $request)
     {
-        $form = $this->createForm(UserPasswordType::class, $user)
+        $form = $this->createForm(UserEditPasswordType::class, $user)
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $password = $this->get('security.password_encoder')
+            $password = $this->passwordEncoder
                 ->encodePassword($user, $user->getPassword());
 
             $user->setPassword($password);

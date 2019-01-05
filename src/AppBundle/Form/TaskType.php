@@ -31,13 +31,4 @@ class TaskType extends AbstractType
         ;
     }
 
-    /**
-     * @param OptionsResolver $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => Task::class,
-        ]);
-    }
 }
