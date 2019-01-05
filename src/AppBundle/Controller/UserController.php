@@ -10,13 +10,13 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Form\UserEditPasswordType;
+use AppBundle\FormHandler\UserHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 use AppBundle\Form\UserEditType;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class UserController
@@ -26,17 +26,17 @@ class UserController extends AbstractController
 {
 
     /**
-     * @var UserPasswordEncoderInterface
+     * @var UserHandler
      */
-    private $passwordEncoder;
+    private $handler;
 
     /**
      * UserController constructor.
-     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param UserHandler $handler
      */
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserHandler $handler)
     {
-        $this->passwordEncoder = $passwordEncoder;
+        $this->handler = $handler;
     }
 
     /**
@@ -52,19 +52,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user)
             ->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $entityManager = $this->getDoctrine()->getManager();
-
-            $password = $this->passwordEncoder
-                ->encodePassword($user, $user->getPassword());
-
-            $user->setPassword($password);
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            $this->addFlash('success', "L'utilisateur a bien été ajouté.");
+        if ($this->handler->createUserHandler($form, $user)) {
 
             return $this->redirectToRoute('user_list');
         }
@@ -110,11 +98,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserEditType::class, $user)
             ->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $this->getDoctrine()->getManager()->flush();
-
-            $this->addFlash('success', "L'utilisateur a bien été modifié");
+        if ($this->handler->editUserHandler($form)) {
 
             return $this->redirectToRoute('user_list');
         }
@@ -151,16 +135,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserEditPasswordType::class, $user)
             ->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $password = $this->passwordEncoder
-                ->encodePassword($user, $user->getPassword());
-
-            $user->setPassword($password);
-
-            $this->getDoctrine()->getManager()->flush();
-
-            $this->addFlash('success', "Le mot de passe à bien été modifié");
+        if ($this->handler->editPasswordHandler($form, $user)) {
 
             return $this->redirectToRoute('user_list');
         }

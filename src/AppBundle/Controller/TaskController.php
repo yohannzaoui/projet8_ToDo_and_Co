@@ -9,6 +9,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Task;
+use AppBundle\FormHandler\TaskHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,20 @@ use AppBundle\Form\TaskType;
  */
 class TaskController extends AbstractController
 {
+
+    /**
+     * @var TaskHandler
+     */
+    private $handler;
+
+    /**
+     * TaskController constructor.
+     * @param TaskHandler $handler
+     */
+    public function __construct(TaskHandler $handler)
+    {
+        $this->handler = $handler;
+    }
 
     /**
      * @Route(path="/tasks", name="task_list", methods={"GET"})
@@ -53,16 +68,7 @@ class TaskController extends AbstractController
         $form = $this->createForm(TaskType::class, $task)
             ->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $entityManager = $this->getDoctrine()->getManager();
-
-            $task->setUser($this->getUser());
-
-            $entityManager->persist($task);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'La tâche a été bien été ajoutée.');
+        if ($this->handler->createTaskHandler($form, $task)) {
 
             return $this->redirectToRoute('task_list');
         }
@@ -85,11 +91,7 @@ class TaskController extends AbstractController
         $form = $this->createForm(TaskType::class, $task)
             ->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $this->getDoctrine()->getManager()->flush();
-
-            $this->addFlash('success', 'La tâche a bien été modifiée.');
+        if ($this->handler->editTaskHandler($form)) {
 
             return $this->redirectToRoute('task_list');
         }
