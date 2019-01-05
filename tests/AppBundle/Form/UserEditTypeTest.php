@@ -9,7 +9,6 @@
 namespace Tests\AppBundle\Form;
 
 
-use AppBundle\Entity\Roles;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserEditType;
 use Symfony\Component\Form\Test\TypeTestCase;
@@ -18,12 +17,11 @@ class UserEditTypeTest extends TypeTestCase
 {
     public function testForm()
     {
-        $roles = $this->createMock(Roles::class);
 
         $formData = [
             'username' => 'test',
             'email' => 'test@test.com',
-            'roles' => $roles
+            'roles' => 'test'
         ];
 
         $userToCompare = $this->createMock(User::class);
@@ -33,7 +31,7 @@ class UserEditTypeTest extends TypeTestCase
         $user = $this->createMock(User::class);
         $user->setUsername('test');
         $user->setEmail('test@test.com');
-        $user->setRoles($roles);
+        $user->setRoles('test');
 
         $form->submit($formData);
 

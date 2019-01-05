@@ -11,7 +11,7 @@ namespace Tests\AppBundle\Controller\Security;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class LoginControllerTest extends WebTestCase
+class SecurityControllerTest extends WebTestCase
 {
     public function testLogin()
     {
