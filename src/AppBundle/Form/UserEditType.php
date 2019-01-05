@@ -37,7 +37,7 @@ class UserEditType extends AbstractType
                     'Administrateur' => 'ROLE_ADMIN'
                 ],
                 'multiple' => true,
-                'expanded' =>true
+                'expanded' =>false
             ]);
     }
 }
