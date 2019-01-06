@@ -10,10 +10,10 @@ namespace AppBundle\FormHandler;
 
 
 use AppBundle\Entity\User;
+use AppBundle\Service\PasswordEncoderService;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class CreateUserHandler
@@ -27,7 +27,7 @@ class CreateUserHandler
     private $manager;
 
     /**
-     * @var UserPasswordEncoderInterface
+     * @var PasswordEncoderService
      */
     private $passwordEncoder;
 
@@ -39,12 +39,12 @@ class CreateUserHandler
     /**
      * CreateUserHandler constructor.
      * @param ObjectManager $manager
-     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param PasswordEncoderService $passwordEncoder
      * @param SessionInterface $messageFlash
      */
     public function __construct(
         ObjectManager $manager,
-        UserPasswordEncoderInterface $passwordEncoder,
+        PasswordEncoderService $passwordEncoder,
         SessionInterface $messageFlash
     ) {
         $this->manager = $manager;
@@ -62,7 +62,7 @@ class CreateUserHandler
         if ($form->isSubmitted() && $form->isValid()) {
 
             $password = $this->passwordEncoder
-                ->encodePassword($user, $user->getPassword());
+                ->encoder($user->getPassword());
 
             $user->setPassword($password);
 

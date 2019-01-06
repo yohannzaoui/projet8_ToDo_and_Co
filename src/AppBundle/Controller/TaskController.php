@@ -23,10 +23,21 @@ use AppBundle\Form\TaskType;
 class TaskController extends AbstractController
 {
 
+    /**
+     * @var CreateTaskHandler
+     */
     private $createTaskHandler;
 
+    /**
+     * @var EditTaskHandler
+     */
     private $editTaskHandler;
 
+    /**
+     * TaskController constructor.
+     * @param CreateTaskHandler $createTaskHandler
+     * @param EditTaskHandler $editTaskHandler
+     */
     public function __construct(
         CreateTaskHandler $createTaskHandler,
         EditTaskHandler $editTaskHandler
