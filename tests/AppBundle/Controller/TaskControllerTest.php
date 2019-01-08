@@ -170,7 +170,9 @@ class TaskControllerTest extends WebTestCase
     {
         $this->logIn();
 
-        $this->client->request('GET', '/tasks/2/toggle');
+        $idtask = 1;
+
+        $this->client->request('GET', '/tasks/$idTask/toggle');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
