@@ -9,6 +9,8 @@
 namespace Tests\AppBundle\Controller;
 
 
+use AppBundle\Entity\Task;
+use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\BrowserKit\Cookie;
@@ -77,6 +79,10 @@ class TaskControllerTest extends WebTestCase
     {
         $this->logIn();
 
+        $task = $this->createMock(Task::class);
+        $user = $this->createMock(User::class);
+
+
         $crawler = $this->client->request('GET', '/');
 
         $link = $crawler->selectLink('Créer une nouvelle tâche')->link();
@@ -87,12 +93,14 @@ class TaskControllerTest extends WebTestCase
         $form['task[title]'] = 'functional test title';
         $form['task[content]'] = 'functional test content';
 
+        $task->setUser($user);
+
         $this->client->submit($form);
         $crawler = $this->client->followRedirect();
         $this->assertSame(1, $crawler->filter('alert alert-dismissible alert-success')->count());
     }*/
 
-    public function testDeleteTaskReponseIfLogin()
+    public function testDeleteTaskResponseIfLogin()
     {
         $this->login();
 
@@ -162,7 +170,9 @@ class TaskControllerTest extends WebTestCase
     {
         $this->logIn();
 
-        $this->client->request('GET', '/tasks/2/toggle');
+        $idtask = 1;
+
+        $this->client->request('GET', '/tasks/$idTask/toggle');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }

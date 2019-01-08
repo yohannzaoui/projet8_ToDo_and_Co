@@ -8,7 +8,7 @@
 
 namespace AppBundle\FormHandler;
 
-
+use AppBundle\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -28,6 +28,7 @@ class EditUserHandler
      * @var SessionInterface
      */
     private $messageFlash;
+
 
     /**
      * EditUserHandler constructor.
@@ -51,6 +52,7 @@ class EditUserHandler
         if ($form->isSubmitted() && $form->isValid()) {
 
             $this->manager->getRepository('AppBundle:User');
+
             $this->manager->flush();
 
             $this->messageFlash->getFlashBag()->add('success', "L'utilisateur a bien été modifié.");

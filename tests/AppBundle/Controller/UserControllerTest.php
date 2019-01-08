@@ -44,13 +44,13 @@ class UserControllerTest extends WebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
-    /*public function testForm()
+    public function testForm()
     {
         $this->logIn();
 
         $crawler = $this->client->request('POST', '/users/create');
 
-        $form = $crawler->selectButton('ajouter')->form();
+        $form = $crawler->selectButton('Ajouter')->form();
 
         $form['user[username]'] = 'test';
         $form['user[password][first]'] = 'password';
@@ -58,13 +58,13 @@ class UserControllerTest extends WebTestCase
         $form['user[email]'] = 'email@email.com';
         $form['user[roles]'] = 'ROLE_USER';
 
-        $crawler = $this->client->submit();
+        $this->client->submit($form);
 
-        $this->client->followRedirect();
+        $crawler = $this->client->followRedirect();
 
-        $this->assertSame(1, $crawler->filter('alert alert-dismissible alert-success')->count());
+        $this->assertSame(1, $crawler->filter('div.alert.alert-dismissible.alert-success')->count());
 
-    }*/
+    }
 
     public function testDeleteUserIfNoLogin()
     {
