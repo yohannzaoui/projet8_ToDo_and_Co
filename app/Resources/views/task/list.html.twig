@@ -3,27 +3,35 @@
 {% block body %}
     {% block header_img %}<p><img class="slide-image" src="{{ asset('img/todolist_content.jpg') }}" alt="todo list"></p>{% endblock %}
 
-    <p><a href="{{ path('task_create') }}" class="btn btn-primary">Créer une tâche <i class="fas fa-pencil-alt"></i></a>
-    <a href="{{ path('tasks_is_done') }}" class="btn btn-info">Liste des tâches terminées <i class="fas fa-check-double"></i></a></p>
+    <p><a href="{{ path('task_create') }}" class="btn btn-primary">Créer une tâche</a>
+    <a href="{{ path('tasks_is_done') }}" class="btn btn-info">Liste des tâches terminées</a></p>
     <hr>
-    <div class="row">
+    <div class="row justify-content-lg-center">
         {% for task in tasks %}
 
-        <div class="col-sm-4 col-lg-4 col-md-4 mb-3">
+        <div style="border-style: solid; border-width: 1px; margin-left: 5px" class="col-sm-4 col-lg-3 col-md-4 mb-3">
 
-                    <h4 style="text-align: center"><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
+                    <h4 style="text-align: left">
+                        <a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a>
+                        {% if task.isDone %}
+                            <i class="fas fa-check"></i>
+                        {% else %}
+                            <i class="fas fa-times"></i>
+                        {% endif %}
+                    </h4>
 
                     <p>{{ task.content }}</p>
 
                     <p><small>Ajoutée le: {{ task.createdAt | date("d/m/Y") }} à {{ task.createdAt | date("H:i") }}</small></p>
-
                 <div class="container mt-2">
                     <div class="row justify-content-center">
                     <form action="{{ path('task_toggle', {'id' : task.id }) }}">
-                        <p class="separator"><button class="btn btn-success btn-sm">Marquer terminée</button> | </p>
-                    </form>
-                    <form action="{{ path('task_edit', {'id' : task.id }) }}">
-                        <p class="separator"><button class="btn btn-warning btn-sm">Modifier</button> | </p>
+                        <p class="separator"><button class="btn btn-success btn-sm">
+                                {% if task.isDone %}
+                                    Marquer à faire
+                                {% else %}
+                                    Marquer terminée
+                                {% endif %}</button> | </p>
                     </form>
                     <form action="{{ path('task_delete', {'id' : task.id }) }}">
                         <p><button class="btn btn-danger btn-sm">Supprimer</button></p>

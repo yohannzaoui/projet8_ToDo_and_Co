@@ -16,19 +16,19 @@
     <div class="row">
         {% for task in tasks %}
 
-                <div class="col-sm-4 col-lg-4 col-md-4">
+                <div style="border-style: solid; border-width: 1px" class="col-sm-4 col-lg-4 col-md-4">
 
                             <h4 style="text-align: center"><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
-                        <hr>
+
                             <p>{{ task.content }}</p>
-                        <hr>
+
                             <p><small>Ajoutée le: {{ task.createdAt | date("d/m/Y") }} à {{ task.createdAt | date("H:i") }}</small></p>
                             <p><small>Terminée le: {{ task.dateIsDone | date("d/m/Y") }} à {{ task.dateIsDone | date("H:i") }}</small></p>
                         <div>
                             <div class="container mt-2">
                                 <div class="row justify-content-center">
                                     <form action="{{ path('task_toggle', {'id' : task.id }) }}">
-                                        <p class="separator"><button class="btn btn-success btn-sm">Marquer non terminée</button> |</p>
+                                        <p class="separator"><button class="btn btn-success btn-sm">Marquer à faire</button> |</p>
                                     </form>
                                     <form action="{{ path('task_delete', {'id' : task.id }) }}">
                                         <p><button class="btn btn-danger btn-sm">Supprimer</button></p>
