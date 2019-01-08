@@ -24,29 +24,6 @@ class TaskController extends AbstractController
 {
 
     /**
-     * @var CreateTaskHandler
-     */
-    private $createTaskHandler;
-
-    /**
-     * @var EditTaskHandler
-     */
-    private $editTaskHandler;
-
-    /**
-     * TaskController constructor.
-     * @param CreateTaskHandler $createTaskHandler
-     * @param EditTaskHandler $editTaskHandler
-     */
-    public function __construct(
-        CreateTaskHandler $createTaskHandler,
-        EditTaskHandler $editTaskHandler
-    ) {
-        $this->createTaskHandler = $createTaskHandler;
-        $this->editTaskHandler = $editTaskHandler;
-    }
-
-    /**
      * @Route(path="/tasks", name="task_list", methods={"GET"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -54,8 +31,7 @@ class TaskController extends AbstractController
     {
         $tasks = $this->getDoctrine()->getRepository(Task::class)
             ->findBy([
-                'user' => $this->getUser(),
-                'isDone' => false
+                'user' => $this->getUser()
             ]);
 
         return $this->render('task/list.html.twig', [
@@ -67,17 +43,18 @@ class TaskController extends AbstractController
     /**
      * @Route(path="/tasks/create", name="task_create", methods={"GET","POST"})
      * @param Request $request
+     * @param CreateTaskHandler $createTaskHandler
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function createTask(Request $request)
+    public function createTask(Request $request, CreateTaskHandler $createTaskHandler)
     {
         $task = new Task();
 
         $form = $this->createForm(TaskType::class, $task)
             ->handleRequest($request);
 
-        if ($this->createTaskHandler->handle($form, $task)) {
+        if ($createTaskHandler->handle($form, $task)) {
 
             return $this->redirectToRoute('task_list');
         }
@@ -93,14 +70,15 @@ class TaskController extends AbstractController
      * @Route(path="/tasks/edit/{id}", name="task_edit", methods={"GET","POST"}, requirements={"id"="\d+"})
      * @param Task $task
      * @param Request $request
+     * @param EditTaskHandler $editTaskHandler
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editTask(Task $task, Request $request)
+    public function editTask(Task $task, Request $request, EditTaskHandler $editTaskHandler)
     {
         $form = $this->createForm(TaskType::class, $task)
             ->handleRequest($request);
 
-        if ($this->editTaskHandler->handle($form)) {
+        if ($editTaskHandler->handle($form)) {
 
             return $this->redirectToRoute('task_list');
         }

@@ -28,50 +28,20 @@ class UserController extends AbstractController
 {
 
     /**
-     * @var CreateUserHandler
-     */
-    private $createUserHandler;
-
-    /**
-     * @var EditUserHandler
-     */
-    private $editUserHandler;
-
-    /**
-     * @var EditPasswordHandler
-     */
-    private $editPasswordHandler;
-
-    /**
-     * UserController constructor.
-     * @param CreateUserHandler $createUserHandler
-     * @param EditUserHandler $editUserHandler
-     * @param EditPasswordHandler $editPasswordHandler
-     */
-    public function __construct(
-        CreateUserHandler $createUserHandler,
-        EditUserHandler $editUserHandler,
-        EditPasswordHandler $editPasswordHandler
-    ) {
-        $this->createUserHandler = $createUserHandler;
-        $this->editUserHandler = $editUserHandler;
-        $this->editPasswordHandler = $editPasswordHandler;
-    }
-
-    /**
      * @Route(path="/users/create", name="user_create", methods={"GET","POST"})
      * @param Request $request
+     * @param CreateUserHandler $createUserHandler
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function createUser(Request $request)
+    public function createUser(Request $request, CreateUserHandler $createUserHandler)
     {
         $user = new User();
 
         $form = $this->createForm(UserType::class, $user)
             ->handleRequest($request);
 
-        if ($this->createUserHandler->handle($form, $user)) {
+        if ($createUserHandler->handle($form, $user)) {
 
             return $this->redirectToRoute('user_list');
         }
@@ -110,14 +80,15 @@ class UserController extends AbstractController
      * @Route(path="/users/{id}/edit", name="user_edit", methods={"GET","POST"}, requirements={"id"="\d+"})
      * @param User $user
      * @param Request $request
+     * @param EditUserHandler $editUserHandler
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editUser(User $user, Request $request)
+    public function editUser(User $user, Request $request, EditUserHandler $editUserHandler)
     {
         $form = $this->createForm(UserEditType::class, $user)
             ->handleRequest($request);
 
-        if ($this->editUserHandler->handle($form)) {
+        if ($editUserHandler->handle($form)) {
 
             return $this->redirectToRoute('user_list');
         }
@@ -148,14 +119,15 @@ class UserController extends AbstractController
      * @Route(path="/user/password/{id}", name="user_password", methods={"GET", "POST"}, requirements={"id"="\d+"})
      * @param User $user
      * @param Request $request
+     * @param EditPasswordHandler $editPasswordHandler
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function userEditPassword(User $user, Request $request)
+    public function userEditPassword(User $user, Request $request, EditPasswordHandler $editPasswordHandler)
     {
         $form = $this->createForm(UserEditPasswordType::class, $user)
             ->handleRequest($request);
 
-        if ($this->editPasswordHandler->handle($form, $user)) {
+        if ($editPasswordHandler->handle($form, $user)) {
 
             return $this->redirectToRoute('user_list');
         }
