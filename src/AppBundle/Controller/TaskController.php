@@ -30,18 +30,45 @@ use Twig\Environment;
 class TaskController
 {
 
+    /**
+     * @var TaskRepository
+     */
     private $repository;
 
+    /**
+     * @var TokenStorageInterface
+     */
     private $tokenStorage;
 
+    /**
+     * @var Environment
+     */
     private $twig;
 
+    /**
+     * @var FormFactoryInterface
+     */
     private $formFactory;
 
+    /**
+     * @var UrlGeneratorInterface
+     */
     private $urlGenerator;
 
+    /**
+     * @var SessionInterface
+     */
     private $messageFlash;
 
+    /**
+     * TaskController constructor.
+     * @param TaskRepository $repository
+     * @param TokenStorageInterface $tokenStorage
+     * @param Environment $twig
+     * @param FormFactoryInterface $formFactory
+     * @param UrlGeneratorInterface $urlGenerator
+     * @param SessionInterface $messageFlash
+     */
     public function __construct(
         TaskRepository $repository,
         TokenStorageInterface $tokenStorage,
