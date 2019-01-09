@@ -22,6 +22,7 @@ class DefaultController
      */
     public function home(Environment $twig)
     {
-        return new Response($twig->render('default/index.html.twig'), 200);
+        return new Response($twig->render('default/index.html.twig'),
+            Response::HTTP_OK);
     }
 }

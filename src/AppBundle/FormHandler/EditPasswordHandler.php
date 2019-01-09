@@ -10,7 +10,7 @@ namespace AppBundle\FormHandler;
 
 
 use AppBundle\Entity\User;
-use Doctrine\Common\Persistence\ObjectManager;
+use AppBundle\Repository\UserRepository;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -21,10 +21,11 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class EditPasswordHandler
 {
+
     /**
-     * @var ObjectManager
+     * @var UserRepository
      */
-    private $manager;
+    private $repository;
 
     /**
      * @var UserPasswordEncoderInterface
@@ -36,18 +37,19 @@ class EditPasswordHandler
      */
     private $messageFlash;
 
+
     /**
      * EditPasswordHandler constructor.
-     * @param ObjectManager $manager
+     * @param UserRepository $repository
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param SessionInterface $messageFlash
      */
     public function __construct(
-        ObjectManager $manager,
+        UserRepository $repository,
         UserPasswordEncoderInterface $passwordEncoder,
         SessionInterface $messageFlash
     ) {
-        $this->manager = $manager;
+        $this->repository = $repository;
         $this->passwordEncoder = $passwordEncoder;
         $this->messageFlash = $messageFlash;
     }
@@ -56,6 +58,8 @@ class EditPasswordHandler
      * @param FormInterface $form
      * @param User $user
      * @return bool
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function handle(FormInterface $form, User $user)
     {
@@ -65,8 +69,7 @@ class EditPasswordHandler
 
             $user->setPassword($password);
 
-            $this->manager->getRepository('AppBundle:User');
-            $this->manager->flush();
+            $this->repository->update();
 
             $this->messageFlash->getFlashBag()->add('success', "Le mot de passe à bien été modifié.");
 

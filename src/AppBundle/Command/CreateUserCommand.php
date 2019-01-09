@@ -9,6 +9,7 @@
 namespace AppBundle\Command;
 
 use AppBundle\Entity\User;
+use AppBundle\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -29,9 +30,9 @@ class CreateUserCommand extends Command
     private $encoderFactory;
 
     /**
-     * @var ObjectManager
+     * @var UserRepository
      */
-    private $manager;
+    private $repository;
 
     /**
      * @var User
@@ -57,7 +58,7 @@ class CreateUserCommand extends Command
     /**
      * CreateAdminCommand constructor.
      * @param EncoderFactoryInterface $encoderFactory
-     * @param ObjectManager $manager
+     * @param UserRepository $repository
      * @param bool $username
      * @param bool $password
      * @param bool $email
@@ -65,14 +66,14 @@ class CreateUserCommand extends Command
      */
     public function __construct(
         EncoderFactoryInterface $encoderFactory,
-        ObjectManager $manager,
+        UserRepository $repository,
         $username = true,
         $password = true,
         $email = true
     ) {
         parent::__construct();
         $this->encoderFactory = $encoderFactory;
-        $this->manager = $manager;
+        $this->repository = $repository;
         $this->user = new User();
         $this->username = $username;
         $this->password = $password;
@@ -118,9 +119,7 @@ class CreateUserCommand extends Command
         $this->user->setEmail($input->getArgument('email'));
         $this->user->setRoles(['ROLE_USER']);
 
-        $this->manager->getRepository('AppBundle:User');
-        $this->manager->persist($this->user);
-        $this->manager->flush();
+        $this->repository->save($this->user);
 
 
         $output->writeln('User successfully created');

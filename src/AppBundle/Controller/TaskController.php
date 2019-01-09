@@ -137,6 +137,8 @@ class TaskController
      * @param Request $request
      * @param EditTaskHandler $editTaskHandler
      * @return RedirectResponse|Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
