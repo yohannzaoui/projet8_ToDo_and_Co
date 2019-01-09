@@ -11,31 +11,33 @@ namespace Tests\AppBundle\FormHandler;
 
 use AppBundle\Entity\User;
 use AppBundle\FormHandler\EditPasswordHandler;
-use AppBundle\Service\PasswordEncoderService;
+use AppBundle\Repository\UserRepository;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Tests\AppBundle\AppWebTestCase;
 
-class EditPasswordHandlerTest extends WebTestCase
+class EditPasswordHandlerTest extends AppWebTestCase
 {
 
-    private $manager;
-
     private $messageFlash;
-
     private $passwordEncoder;
+    private $repository;
 
     public function setUp()
     {
-        $this->manager = $this->createMock(ObjectManager::class);
-        $this->passwordEncoder = $this->createMock(PasswordEncoderService::class);
+        $this->passwordEncoder = $this->createMock(UserPasswordEncoderInterface::class);
         $this->messageFlash = $this->createMock(SessionInterface::class);
+        $this->repository = $this->createMock(UserRepository::class);
     }
 
     public function testConstruct()
     {
-        $editPasswordHandler = new EditPasswordHandler($this->manager, $this->passwordEncoder, $this->messageFlash);
+        $editPasswordHandler = new EditPasswordHandler(
+            $this->repository,
+            $this->passwordEncoder,
+            $this->messageFlash);
 
         static::assertInstanceOf(
             EditPasswordHandler::class,
@@ -48,7 +50,11 @@ class EditPasswordHandlerTest extends WebTestCase
         $user = $this->createMock(User::class);
         $form = $this->createMock(FormInterface::class);
 
-        $editPasswordHandler = new EditPasswordHandler($this->manager, $this->passwordEncoder, $this->messageFlash);
+        $editPasswordHandler = new EditPasswordHandler(
+            $this->repository,
+            $this->passwordEncoder,
+            $this->messageFlash
+        );
 
         static::assertTrue(true, $editPasswordHandler->handle($form, $user));
     }
@@ -58,7 +64,11 @@ class EditPasswordHandlerTest extends WebTestCase
         $user = $this->createMock(User::class);
         $form = $this->createMock(FormInterface::class);
 
-        $editPasswordHandler = new EditPasswordHandler($this->manager, $this->passwordEncoder, $this->messageFlash);
+        $editPasswordHandler = new EditPasswordHandler(
+            $this->repository,
+            $this->passwordEncoder,
+            $this->messageFlash
+        );
 
         static::assertFalse(false, $editPasswordHandler->handle($form, $user));
     }

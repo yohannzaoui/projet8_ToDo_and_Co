@@ -10,21 +10,10 @@ namespace Tests\AppBundle\Controller;
 
 
 use AppBundle\Entity\Task;
-use AppBundle\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\BrowserKit\Cookie;
+use Tests\AppBundle\AppWebTestCase;
 
-class TaskControllerTest extends WebTestCase
+class TaskControllerTest extends AppWebTestCase
 {
-
-    private $client;
-
-    public function setUp()
-    {
-        $this->client = static::createClient();
-    }
-
 
     public function testTaskListRedirectionIfNoLogin()
     {
@@ -75,13 +64,11 @@ class TaskControllerTest extends WebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
-    /*public function testCreateTaskForm()
+    public function testCreateTaskForm()
     {
         $this->logIn();
 
         $task = $this->createMock(Task::class);
-        $user = $this->createMock(User::class);
-
 
         $crawler = $this->client->request('GET', '/');
 
@@ -93,12 +80,12 @@ class TaskControllerTest extends WebTestCase
         $form['task[title]'] = 'functional test title';
         $form['task[content]'] = 'functional test content';
 
-        $task->setUser($user);
+        $task->setUser($this->user());
 
         $this->client->submit($form);
         $crawler = $this->client->followRedirect();
-        $this->assertSame(1, $crawler->filter('alert alert-dismissible alert-success')->count());
-    }*/
+        $this->assertSame(1, $crawler->filter('div.alert.alert-dismissible.alert-success')->count());
+    }
 
     public function testDeleteTaskResponseIfLogin()
     {
@@ -112,7 +99,7 @@ class TaskControllerTest extends WebTestCase
 
     public function testTaskEditRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/tasks/edit/50');
+        $this->client->request('GET', '/tasks/edit/3');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -121,7 +108,7 @@ class TaskControllerTest extends WebTestCase
     {
         $this->logIn();
 
-        $crawler = $this->client->request('GET', '/tasks/edit/50');
+        $crawler = $this->client->request('GET', '/tasks/edit/3');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -161,7 +148,7 @@ class TaskControllerTest extends WebTestCase
 
     public function testTaskToggleRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/tasks/2/toggle');
+        $this->client->request('GET', '/tasks/3/toggle');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -170,27 +157,8 @@ class TaskControllerTest extends WebTestCase
     {
         $this->logIn();
 
-        $idtask = 1;
-
-        $this->client->request('GET', '/tasks/$idTask/toggle');
+        $this->client->request('GET', '/tasks/3/toggle');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
-    }
-
-
-    private function logIn()
-    {
-        $session = $this->client->getContainer()->get('session');
-
-        $firewallName = 'main';
-
-        $firewallContext = 'main';
-
-        $token = new UsernamePasswordToken('admin', null, $firewallName, array('ROLE_ADMIN'));
-        $session->set('_security_'.$firewallContext, serialize($token));
-        $session->save();
-
-        $cookie = new Cookie($session->getName(), $session->getId());
-        $this->client->getCookieJar()->set($cookie);
     }
 }

@@ -11,31 +11,31 @@ namespace Tests\AppBundle\FormHandler;
 
 use AppBundle\Entity\User;
 use AppBundle\FormHandler\CreateUserHandler;
-use AppBundle\Service\PasswordEncoderService;
-use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use AppBundle\Repository\UserRepository;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Tests\AppBundle\AppWebTestCase;
 
-class CreateUserHandlerTest extends WebTestCase
+class CreateUserHandlerTest extends AppWebTestCase
 {
-
-    private $manager;
 
     private $messageFlash;
 
     private $passwordEncoder;
 
+    private $repository;
+
     public function setUp()
     {
-        $this->manager = $this->createMock(ObjectManager::class);
-        $this->passwordEncoder = $this->createMock(PasswordEncoderService::class);
+        $this->passwordEncoder = $this->createMock(UserPasswordEncoderInterface::class);
         $this->messageFlash = $this->createMock(SessionInterface::class);
+        $this->repository = $this->createMock(UserRepository::class);
     }
 
     public function testConstruct()
     {
-        $createUserHandler = new CreateUserHandler($this->manager, $this->passwordEncoder, $this->messageFlash);
+        $createUserHandler = new CreateUserHandler($this->repository, $this->passwordEncoder, $this->messageFlash);
 
         static::assertInstanceOf(
             CreateUserHandler::class,
@@ -48,7 +48,7 @@ class CreateUserHandlerTest extends WebTestCase
         $user = $this->createMock(User::class);
         $form = $this->createMock(FormInterface::class);
 
-        $createUserHandler = new CreateUserHandler($this->manager, $this->passwordEncoder, $this->messageFlash);
+        $createUserHandler = new CreateUserHandler($this->repository, $this->passwordEncoder, $this->messageFlash);
 
         static::assertTrue(true, $createUserHandler->handle($form, $user));
     }
@@ -58,7 +58,7 @@ class CreateUserHandlerTest extends WebTestCase
         $user = $this->createMock(User::class);
         $form = $this->createMock(FormInterface::class);
 
-        $createUserHandler = new CreateUserHandler($this->manager, $this->passwordEncoder, $this->messageFlash);
+        $createUserHandler = new CreateUserHandler($this->repository, $this->passwordEncoder, $this->messageFlash);
 
         static::assertFalse(false, $createUserHandler->handle($form, $user));
     }

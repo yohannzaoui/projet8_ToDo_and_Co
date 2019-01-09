@@ -8,19 +8,11 @@
 
 namespace Tests\AppBundle\Controller;
 
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class UserControllerTest extends WebTestCase
+use Tests\AppBundle\AppWebTestCase;
+
+class UserControllerTest extends AppWebTestCase
 {
-
-    private $client;
-
-    public function setUp()
-    {
-        $this->client = static::createClient();
-    }
 
     public function testUserCreatePageIsFound()
     {
@@ -52,23 +44,24 @@ class UserControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('Ajouter')->form();
 
-        $form['user[username]'] = 'test';
+        $string = str_shuffle('azertyuiopqsdfghjklm12345');
+
+        $form['user[username]'] = $string;
         $form['user[password][first]'] = 'password';
         $form['user[password][second]'] = 'password';
-        $form['user[email]'] = 'email@email.com';
+        $form['user[email]'] = $string.'@email.com';
         $form['user[roles]'] = 'ROLE_USER';
 
         $this->client->submit($form);
 
         $crawler = $this->client->followRedirect();
 
-        $this->assertSame(1, $crawler->filter('div.alert.alert-dismissible.alert-success')->count());
-
+        $this->assertSame(1, $crawler->filter('html:contains("L\'utilisateur a bien été ajouté.")')->count());
     }
 
     public function testDeleteUserIfNoLogin()
     {
-        $this->client->request('GET', '/delete/user/16');
+        $this->client->request('GET', '/delete/user/50');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -77,9 +70,9 @@ class UserControllerTest extends WebTestCase
     {
         $this->logIn();
 
-        $this->client->request('GET', '/delete/user/{id}');
+        $this->client->request('GET', '/delete/user/50');
 
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
     public function testUserEditRedirectionIfNoLogin()
@@ -126,7 +119,6 @@ class UserControllerTest extends WebTestCase
 
     public function testUserListRedirectionIfNoLogin()
     {
-
         $this->client->request('GET', '/users');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
@@ -134,7 +126,6 @@ class UserControllerTest extends WebTestCase
 
     public function testUserPasswordRedirectionIfNoLogin()
     {
-
         $this->client->request('GET', '/user/password/3');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
@@ -162,19 +153,4 @@ class UserControllerTest extends WebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
-    private function logIn()
-    {
-        $session = $this->client->getContainer()->get('session');
-
-        $firewallName = 'main';
-
-        $firewallContext = 'main';
-
-        $token = new UsernamePasswordToken('admin', null, $firewallName, array('ROLE_ADMIN'));
-        $session->set('_security_'.$firewallContext, serialize($token));
-        $session->save();
-
-        $cookie = new Cookie($session->getName(), $session->getId());
-        $this->client->getCookieJar()->set($cookie);
-    }
 }

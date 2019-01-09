@@ -11,26 +11,27 @@ namespace Tests\AppBundle\FormHandler;
 
 use AppBundle\Entity\Task;
 use AppBundle\FormHandler\EditTaskHandler;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use AppBundle\Repository\TaskRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Tests\AppBundle\AppWebTestCase;
 
-class EditTaskHandlerTest extends WebTestCase
+class EditTaskHandlerTest extends AppWebTestCase
 {
-    private $manager;
 
     private $messageFlash;
+    private $repository;
 
     public function setUp()
     {
-        $this->manager = $this->createMock(ObjectManager::class);
         $this->messageFlash = $this->createMock(SessionInterface::class);
+        $this->repository = $this->createMock(TaskRepository::class);
     }
 
     public function testConstruct()
     {
-        $editTaskHandler = new EditTaskHandler($this->manager, $this->messageFlash);
+        $editTaskHandler = new EditTaskHandler($this->repository, $this->messageFlash);
 
         static::assertInstanceOf(
             EditTaskHandler::class,
@@ -43,7 +44,7 @@ class EditTaskHandlerTest extends WebTestCase
         $task = $this->createMock(Task::class);
         $form = $this->createMock(FormInterface::class);
 
-        $editTaskHandler = new EditTaskHandler($this->manager, $this->messageFlash);
+        $editTaskHandler = new EditTaskHandler($this->repository, $this->messageFlash);
 
         static::assertTrue(true, $editTaskHandler->handle($form, $task));
     }
@@ -53,7 +54,7 @@ class EditTaskHandlerTest extends WebTestCase
         $task = $this->createMock(Task::class);
         $form = $this->createMock(FormInterface::class);
 
-        $editTaskHandler = new EditTaskHandler($this->manager, $this->messageFlash);
+        $editTaskHandler = new EditTaskHandler($this->repository, $this->messageFlash);
 
         static::assertFalse(false, $editTaskHandler->handle($form, $task));
     }

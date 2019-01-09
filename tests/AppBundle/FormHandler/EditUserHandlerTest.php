@@ -11,28 +11,28 @@ namespace Tests\AppBundle\FormHandler;
 
 use AppBundle\Entity\User;
 use AppBundle\FormHandler\EditUserHandler;
+use AppBundle\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Tests\AppBundle\AppWebTestCase;
 
-class EditUserHandlerTest extends WebTestCase
+class EditUserHandlerTest extends AppWebTestCase
 {
 
-    private $manager;
-
     private $messageFlash;
+    private $repository;
 
 
     public function setUp()
     {
-        $this->manager = $this->createMock(ObjectManager::class);
         $this->messageFlash = $this->createMock(SessionInterface::class);
+        $this->repository = $this->createMock(UserRepository::class);
     }
 
     public function testConstruct()
     {
-        $editUserHandler = new EditUserHandler($this->manager, $this->messageFlash);
+        $editUserHandler = new EditUserHandler($this->repository, $this->messageFlash);
 
         static::assertInstanceOf(
             EditUserHandler::class,
@@ -45,7 +45,7 @@ class EditUserHandlerTest extends WebTestCase
         $user = $this->createMock(User::class);
         $form = $this->createMock(FormInterface::class);
 
-        $editUserHandler = new EditUserHandler($this->manager, $this->messageFlash);
+        $editUserHandler = new EditUserHandler($this->repository, $this->messageFlash);
 
         static::assertTrue(true, $editUserHandler->handle($form, $user));
     }
@@ -55,7 +55,7 @@ class EditUserHandlerTest extends WebTestCase
         $user = $this->createMock(User::class);
         $form = $this->createMock(FormInterface::class);
 
-        $editUserHandler = new EditUserHandler($this->manager, $this->messageFlash);
+        $editUserHandler = new EditUserHandler($this->repository, $this->messageFlash);
 
         static::assertFalse(false, $editUserHandler->handle($form, $user));
     }

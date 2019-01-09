@@ -12,18 +12,20 @@ use AppBundle\Controller\SecurityController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use PHPUnit\Framework\TestCase;
+use Twig\Environment;
 
 class SecurityControllerUnitTest extends TestCase
 {
     public function testLoginResponse()
     {
         $authentication = $this->createMock(AuthenticationUtils::class);
+        $twig = $this->createMock(Environment::class);
 
-        $securityController = new SecurityController();
+        $controller = new SecurityController();
 
         static::assertInstanceOf(
             Response::class,
-            $securityController->login($authentication)
+            $controller->login($authentication, $twig)
         );
     }
 }
