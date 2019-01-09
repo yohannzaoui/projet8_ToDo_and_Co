@@ -10,10 +10,10 @@ namespace AppBundle\FormHandler;
 
 
 use AppBundle\Entity\User;
-use AppBundle\Service\PasswordEncoderService;
-use Doctrine\Common\Persistence\ObjectManager;
+use AppBundle\Repository\UserRepository;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class CreateUserHandler
@@ -21,13 +21,11 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  */
 class CreateUserHandler
 {
-    /**
-     * @var ObjectManager
-     */
-    private $manager;
+
+    private $repository;
 
     /**
-     * @var PasswordEncoderService
+     * @var UserPasswordEncoderInterface
      */
     private $passwordEncoder;
 
@@ -38,16 +36,16 @@ class CreateUserHandler
 
     /**
      * CreateUserHandler constructor.
-     * @param ObjectManager $manager
-     * @param PasswordEncoderService $passwordEncoder
+     * @param UserRepository $repository
+     * @param UserPasswordEncoderInterface $passwordEncoder
      * @param SessionInterface $messageFlash
      */
     public function __construct(
-        ObjectManager $manager,
-        PasswordEncoderService $passwordEncoder,
+        UserRepository $repository,
+        UserPasswordEncoderInterface $passwordEncoder,
         SessionInterface $messageFlash
     ) {
-        $this->manager = $manager;
+        $this->repository = $repository;
         $this->passwordEncoder = $passwordEncoder;
         $this->messageFlash = $messageFlash;
     }
@@ -56,19 +54,18 @@ class CreateUserHandler
      * @param FormInterface $form
      * @param User $user
      * @return bool
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function handle(FormInterface $form, User $user)
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $password = $this->passwordEncoder
-                ->encoder($user->getPassword());
+            $password = $this->passwordEncoder->encodePassword($user, $user->getPassword());
 
             $user->setPassword($password);
 
-            $this->manager->getRepository('AppBundle:User');
-            $this->manager->persist($user);
-            $this->manager->flush();
+            $this->repository->save($user);
 
             $this->messageFlash->getFlashBag()->add('success', "L'utilisateur a bien été ajouté.");
 

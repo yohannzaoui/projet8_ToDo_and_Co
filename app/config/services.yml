@@ -41,10 +41,6 @@ services:
     tags:
       - {name: 'edit.user.handler'}
 
-  AppBundle\Service\PasswordEncoderService:
-    tags:
-      - {name: 'password.encoder.service'}
-
   AppBundle\Entity\User:
     tags:
       - {name: 'user.entity'}
@@ -52,4 +48,12 @@ services:
   AppBundle\Entity\Task:
     tags:
       - {name: 'task.entity'}
+
+  AppBundle\Repository\UserRepository:
+    tags:
+      - {name: 'user.repository'}
+
+  AppBundle\Repository\TaskRepository:
+    tags:
+      - {name: 'task.repository'}
 

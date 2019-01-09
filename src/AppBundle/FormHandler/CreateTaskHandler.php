@@ -8,7 +8,7 @@
 
 namespace AppBundle\FormHandler;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use AppBundle\Repository\TaskRepository;
 use Symfony\Component\Form\FormInterface;
 use AppBundle\Entity\Task;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -21,9 +21,9 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class CreateTaskHandler
 {
     /**
-     * @var ObjectManager
+     * @var TaskRepository
      */
-    private $manager;
+    private $repository;
 
     /**
      * @var TokenStorageInterface
@@ -35,18 +35,13 @@ class CreateTaskHandler
      */
     private $messageFlash;
 
-    /**
-     * CreateTaskHandler constructor.
-     * @param ObjectManager $manager
-     * @param TokenStorageInterface $tokenStorage
-     * @param SessionInterface $messageFlash
-     */
+
     public function __construct(
-        ObjectManager $manager,
+        TaskRepository $repository,
         TokenStorageInterface $tokenStorage,
         SessionInterface $messageFlash
     ) {
-        $this->manager = $manager;
+        $this->repository = $repository;
         $this->tokenStorage = $tokenStorage;
         $this->messageFlash = $messageFlash;
     }
@@ -55,6 +50,8 @@ class CreateTaskHandler
      * @param FormInterface $form
      * @param Task $task
      * @return bool
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function handle(FormInterface $form, Task $task)
     {
@@ -62,9 +59,7 @@ class CreateTaskHandler
 
             $task->setUser($this->tokenStorage->getToken()->getUser());
 
-            $this->manager->getRepository('AppBundle:Task');
-            $this->manager->persist($task);
-            $this->manager->flush();
+            $this->repository->save($task);
 
             $this->messageFlash->getFlashBag()->add('success', 'La tâche a été bien été ajoutée.');
 

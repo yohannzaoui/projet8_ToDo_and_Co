@@ -11,32 +11,70 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Task;
 use AppBundle\FormHandler\CreateTaskHandler;
 use AppBundle\FormHandler\EditTaskHandler;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use AppBundle\Repository\TaskRepository;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\TaskType;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Twig\Environment;
 
 /**
  * Class TaskController
  * @package AppBundle\Controller
  */
-class TaskController extends AbstractController
+class TaskController
 {
+
+    private $repository;
+
+    private $tokenStorage;
+
+    private $twig;
+
+    private $formFactory;
+
+    private $urlGenerator;
+
+    private $messageFlash;
+
+    public function __construct(
+        TaskRepository $repository,
+        TokenStorageInterface $tokenStorage,
+        Environment $twig,
+        FormFactoryInterface $formFactory,
+        UrlGeneratorInterface $urlGenerator,
+        SessionInterface $messageFlash
+
+    ) {
+        $this->repository = $repository;
+        $this->tokenStorage = $tokenStorage;
+        $this->twig = $twig;
+        $this->formFactory = $formFactory;
+        $this->urlGenerator = $urlGenerator;
+        $this->messageFlash = $messageFlash;
+    }
 
     /**
      * @Route(path="/tasks", name="task_list", methods={"GET"})
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function tasksList()
     {
-        $tasks = $this->getDoctrine()->getRepository(Task::class)
-            ->findBy([
-                'user' => $this->getUser()
+        $tasks = $this->repository->findBy([
+                'user' => $this->tokenStorage->getToken()->getUser()
             ]);
 
-        return $this->render('task/list.html.twig', [
+        return new Response($this->twig->render('task/list.html.twig', [
             'tasks' => $tasks
-        ]);
+        ]), Response::HTTP_OK);
     }
 
 
@@ -51,18 +89,18 @@ class TaskController extends AbstractController
     {
         $task = new Task();
 
-        $form = $this->createForm(TaskType::class, $task)
+        $form = $this->formFactory->create(TaskType::class, $task)
             ->handleRequest($request);
 
         if ($createTaskHandler->handle($form, $task)) {
 
-            return $this->redirectToRoute('task_list');
+            return new RedirectResponse($this->urlGenerator->generate('task_list'),
+                RedirectResponse::HTTP_FOUND);
         }
 
-        return $this->render('task/create.html.twig', [
+        return new Response($this->twig->render('task/create.html.twig', [
             'form' => $form->createView()
-        ]);
-
+        ]), Response::HTTP_OK);
     }
 
 
@@ -71,56 +109,64 @@ class TaskController extends AbstractController
      * @param Task $task
      * @param Request $request
      * @param EditTaskHandler $editTaskHandler
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function editTask(Task $task, Request $request, EditTaskHandler $editTaskHandler)
     {
-        $form = $this->createForm(TaskType::class, $task)
+        $form = $this->formFactory->create(TaskType::class, $task)
             ->handleRequest($request);
 
         if ($editTaskHandler->handle($form)) {
 
-            return $this->redirectToRoute('task_list');
+            return new RedirectResponse($this->urlGenerator->generate('task_list'),
+                RedirectResponse::HTTP_FOUND);
         }
 
-        return $this->render('task/edit.html.twig', [
+        return new Response($this->twig->render('task/edit.html.twig', [
             'form' => $form->createView(),
             'task' => $task,
-        ]);
+        ]), Response::HTTP_OK);
     }
 
 
     /**
      * @Route(path="/tasks/delete/{id}", name="task_delete", methods={"GET"}, requirements={"id"="\d+"})
      * @param Task $task
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function deleteTask(Task $task)
     {
-        $manager = $this->getDoctrine()->getManager();
-        $manager->remove($task);
-        $manager->flush();
+        $this->repository->delete($task);
 
-        $this->addFlash('success', "Tâche supprimée.");
+        $this->messageFlash->getFlashBag()->add('success', "Tâche supprimée.");
 
-        return $this->redirectToRoute('task_list');
+        return new RedirectResponse($this->urlGenerator->generate('task_list'),
+            RedirectResponse::HTTP_FOUND);
     }
 
 
     /**
      * @Route(path="/tasks-Is-Done", name="tasks_is_done", methods={"GET"})
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function taskIsDone()
     {
-        $tasks = $this->getDoctrine()->getRepository('AppBundle:Task')->findBy([
-            'user' => $this->getUser(),
+        $tasks = $this->repository->findBy([
+            'user' => $this->tokenStorage->getToken()->getUser(),
             'isDone' => true
         ]);
 
-        return $this->render('task/is_done.html.twig', [
+        return new Response($this->twig->render('task/is_done.html.twig', [
             'tasks' => $tasks
-        ]);
+        ]), Response::HTTP_OK);
     }
 
 
@@ -136,18 +182,19 @@ class TaskController extends AbstractController
 
         $task->setDateIsDone(new \DateTime());
 
-        $this->getDoctrine()->getManager()->flush();
+        $this->repository->update();
 
         if ($task->isDone() == false) {
 
-            $this->addFlash('success', sprintf('La tâche %s a bien été marquée : à faire.', $task->getTitle()));
+            $this->messageFlash->getFlashBag()->add('success', sprintf('La tâche %s a bien été marquée : à faire.', $task->getTitle()));
         }
 
         if ($task->isDone() == true) {
 
-            $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme terminée.', $task->getTitle()));
+            $this->messageFlash->getFlashBag()->add('success', sprintf('La tâche %s a bien été marquée comme terminée.', $task->getTitle()));
         }
 
-        return $this->redirectToRoute('task_list');
+        return new RedirectResponse($this->urlGenerator->generate('task_list'),
+            RedirectResponse::HTTP_FOUND);
     }
 }

@@ -8,7 +8,7 @@
 
 namespace AppBundle\FormHandler;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use AppBundle\Repository\TaskRepository;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -19,9 +19,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class EditTaskHandler
 {
     /**
-     * @var ObjectManager
+     * @var TaskRepository
      */
-    private $manager;
+    private $repository;
 
     /**
      * @var SessionInterface
@@ -29,28 +29,29 @@ class EditTaskHandler
     private $messageFlash;
 
     /**
-     * CreateTaskHandler constructor.
-     * @param ObjectManager $manager
+     * EditTaskHandler constructor.
+     * @param TaskRepository $repository
      * @param SessionInterface $messageFlash
      */
     public function __construct(
-        ObjectManager $manager,
+        TaskRepository $repository,
         SessionInterface $messageFlash
     ) {
-        $this->manager = $manager;
+        $this->repository = $repository;
         $this->messageFlash = $messageFlash;
     }
 
     /**
      * @param FormInterface $form
      * @return bool
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function handle(FormInterface $form)
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->manager->getRepository('AppBundle:Task');
-            $this->manager->flush();
+            $this->repository->update();
 
             $this->messageFlash->getFlashBag()->add('success', 'La tâche a bien été modifiée.');
 
