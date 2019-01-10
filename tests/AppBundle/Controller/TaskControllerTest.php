@@ -10,6 +10,10 @@ namespace Tests\AppBundle\Controller;
 
 
 use AppBundle\Entity\Task;
+use AppBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tests\AppBundle\AppWebTestCase;
 
 class TaskControllerTest extends AppWebTestCase
@@ -68,7 +72,14 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $task = $this->createMock(Task::class);
+        $task = new Task();
+        $user = new User();
+        //$user = $this->createMock(User::class);
+        //$user = $this->createMock(TokenInterface::class);
+        //$user->method('getUser')->willReturn($user);
+
+        //$tokenStorage = $this->createMock(TokenStorageInterface::class);
+        //$tokenStorage->method('getToken')->willReturn($user);
 
         $crawler = $this->client->request('GET', '/');
 
@@ -80,8 +91,6 @@ class TaskControllerTest extends AppWebTestCase
         $form['task[title]'] = 'functional test title';
         $form['task[content]'] = 'functional test content';
 
-        $task->setUser($this->user());
-
         $this->client->submit($form);
         $crawler = $this->client->followRedirect();
         $this->assertSame(1, $crawler->filter('div.alert.alert-dismissible.alert-success')->count());
@@ -91,7 +100,9 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->login();
 
-        $this->client->request('GET', '/tasks/delete/50');
+        $request = Request::create('/tasks/delete/', 'GET', ['id'=>50]);
+
+        $this->client->request('GET', $request);
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }

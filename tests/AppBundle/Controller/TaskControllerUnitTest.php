@@ -10,56 +10,33 @@ namespace Tests\AppBundle\Controller;
 
 
 use AppBundle\Controller\TaskController;
-use AppBundle\Entity\User;
+use AppBundle\Entity\Task;
 use AppBundle\Repository\TaskRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
 use AppBundle\FormHandler\CreateTaskHandler;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Twig\Environment;
 
 class TaskControllerUnitTest extends TestCase
 {
 
-    /**
-     * @var TaskRepository
-     */
     private $repository;
-
-    /**
-     * @var TokenStorageInterface
-     */
     private $tokenStorage;
-
-    /**
-     * @var Environment
-     */
     private $twig;
-
-    /**
-     * @var FormFactoryInterface
-     */
     private $formFactory;
-
-    /**
-     * @var UrlGeneratorInterface
-     */
     private $urlGenerator;
-
-    /**
-     * @var SessionInterface
-     */
     private $messageFlash;
-
+    private $createTaskHandler;
+    private $form;
 
     public function setUp()
     {
@@ -68,61 +45,32 @@ class TaskControllerUnitTest extends TestCase
         $this->twig = $this->createMock(Environment::class);
         $this->formFactory = $this->createMock(FormFactoryInterface::class);
         $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
-        $this->messageFlash = $this->createMock(SessionInterface::class);
+        $this->messageFlash = $this->createMock(Session::class);
+        $this->createTaskHandler = $this->createMock(CreateTaskHandler::class);
+        $this->form = $this->createMock(FormInterface::class);
     }
 
-
-    public function testTaskListResponse()
+    public function testConstructor()
     {
-        $taskController = new TaskController(
+        $controller = new TaskController(
             $this->repository,
             $this->tokenStorage,
             $this->twig,
             $this->formFactory,
             $this->urlGenerator,
             $this->messageFlash
-            );
+        );
 
-
-        $user = $this->createMock(UserInterface::class);
-
-        $token = $this->createMock(TokenInterface::class);
-
-        $token
-            ->method("getUser")
-            ->willReturn($user)
-        ;
-
-        $tokenStorage = $this->createMock(TokenStorageInterface::class);
-
-        $tokenStorage
-            ->method("getToken")
-            ->willReturn($token)
-        ;
-
-        $this->assertInstanceOf(Response::class, $taskController->tasksList());
+        static::assertInstanceOf(TaskController::class, $controller);
     }
 
 
-    /**
-     * @dataProvider dataHandler
-     * @throws \Exception
-     */
-    /*public function testCreateTask($handle, $response)
+    public function testTaskListResponse()
     {
-        $createTaskHandler = $this->createMock(CreateTaskHandler::class);
-        $createTaskHandler->method('handle')->willReturn($handle);
+        $user = $this->createMock(TokenInterface::class);
+        $user->method('getUser')->willReturn($user);
 
-        $form = $this->createMock(FormInterface::class);
-        $form->method("handleRequest")->willReturn($form);
-
-        $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->method("create")->willReturn($form);
-
-        $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
-        $urlGenerator->method('generate')->willReturn('/tasks');
-
-        $request = $this->createMock(Request::class);
+        $this->tokenStorage->method('getToken')->willReturn($user);
 
         $taskController = new TaskController($this->repository,
             $this->tokenStorage,
@@ -132,25 +80,170 @@ class TaskControllerUnitTest extends TestCase
             $this->messageFlash
         );
 
-        $this->assertInstanceOf($response, $taskController->createTask($request, $createTaskHandler));
-
-    }*/
+        $this->assertInstanceOf(Response::class,
+            $taskController->tasksList());
+    }
 
     /**
-     * @return array
+     * @throws \Exception
      */
-    /*public function dataHandler()
+    public function testCreateTaskIfHandleIsFalse()
     {
-        return [
-            [
-                "handle" => false,
-                "response" => Response::class
-            ],
-            [
-                "handle" => true,
-                "response" => RedirectResponse::class
-            ],
-        ];
-    }*/
+        $this->createTaskHandler->method('handle')->willReturn(false);
 
+        $this->form->method("handleRequest")->willReturn($this->form);
+
+        $this->formFactory->method("create")->willReturn($this->form);
+
+        $request = Request::create('/tasks/create', 'GET');
+
+        $taskController = new TaskController($this->repository,
+            $this->tokenStorage,
+            $this->twig,
+            $this->formFactory,
+            $this->urlGenerator,
+            $this->messageFlash
+        );
+
+        $this->assertInstanceOf(Response::class,
+            $taskController->createTask($request, $this->createTaskHandler));
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testCreateTaskIfHandleIsTrue()
+    {
+        $this->createTaskHandler->method('handle')->willReturn(true);
+
+        $this->form->method("handleRequest")->willReturn($this->form);
+
+        $this->formFactory->method("create")->willReturn($this->form);
+
+        $this->urlGenerator->method('generate')->willReturn('task_list');
+
+        $request = Request::create('/tasks/create', 'GET');
+
+        $taskController = new TaskController($this->repository,
+            $this->tokenStorage,
+            $this->twig,
+            $this->formFactory,
+            $this->urlGenerator,
+            $this->messageFlash
+        );
+
+        $this->assertInstanceOf(RedirectResponse::class,
+            $taskController->createTask($request, $this->createTaskHandler));
+    }
+
+    public function testEditTaskIfHandleIsFalse()
+    {
+        $this->createTaskHandler->method('handle')->willReturn(false);
+
+        $this->form->method("handleRequest")->willReturn($this->form);
+
+        $this->formFactory->method("create")->willReturn($this->form);
+
+        $request = Request::create('/tasks/edit/{id}', 'GET', ['id'=>50]);
+
+        $taskController = new TaskController($this->repository,
+            $this->tokenStorage,
+            $this->twig,
+            $this->formFactory,
+            $this->urlGenerator,
+            $this->messageFlash
+        );
+
+        $this->assertInstanceOf(Response::class,
+            $taskController->createTask($request, $this->createTaskHandler));
+    }
+
+    public function testEditTaskIfHandleIsTrue()
+    {
+        $this->createTaskHandler->method('handle')->willReturn(true);
+
+        $this->form->method("handleRequest")->willReturn($this->form);
+
+        $this->formFactory->method("create")->willReturn($this->form);
+
+        $this->urlGenerator->method('generate')->willReturn('task_list');
+
+        $request = Request::create('/tasks/edit/{id}', 'GET', ['id'=>50]);
+
+        $taskController = new TaskController($this->repository,
+            $this->tokenStorage,
+            $this->twig,
+            $this->formFactory,
+            $this->urlGenerator,
+            $this->messageFlash
+        );
+
+        $this->assertInstanceOf(RedirectResponse::class,
+            $taskController->createTask($request, $this->createTaskHandler));
+    }
+
+    public function testDeleteTaskRedirection()
+    {
+        $task = $this->createMock(Task::class);
+
+        $this->urlGenerator->method('generate')->willReturn('task_list');
+
+        $addFlash = $this->createMock(FlashBagInterface::class);
+        $addFlash->method('add')->willReturn('test');
+
+        $this->messageFlash->method('getFlashBag')->willReturn($addFlash);
+
+        $taskController = new TaskController($this->repository,
+            $this->tokenStorage,
+            $this->twig,
+            $this->formFactory,
+            $this->urlGenerator,
+            $this->messageFlash
+        );
+
+        $this->assertInstanceOf(RedirectResponse::class,
+            $taskController->deleteTask($task));
+    }
+
+    public function testTaskIsDoneResponse()
+    {
+        $user = $this->createMock(TokenInterface::class);
+        $user->method('getUser')->willReturn($user);
+
+        $this->tokenStorage->method('getToken')->willReturn($user);
+
+        $taskController = new TaskController($this->repository,
+            $this->tokenStorage,
+            $this->twig,
+            $this->formFactory,
+            $this->urlGenerator,
+            $this->messageFlash
+        );
+
+        $this->assertInstanceOf(Response::class,
+            $taskController->tasksList());
+    }
+
+    public function testToggleTaskRedirection()
+    {
+        $task = $this->createMock(Task::class);
+
+        $this->urlGenerator->method('generate')->willReturn('task_list');
+
+        $addFlash = $this->createMock(FlashBagInterface::class);
+        $addFlash->method('add')->willReturn('test');
+
+        $this->messageFlash->method('getFlashBag')->willReturn($addFlash);
+
+        $taskController = new TaskController($this->repository,
+            $this->tokenStorage,
+            $this->twig,
+            $this->formFactory,
+            $this->urlGenerator,
+            $this->messageFlash
+        );
+
+        $this->assertInstanceOf(RedirectResponse::class,
+            $taskController->toggleTask($task));
+    }
 }
