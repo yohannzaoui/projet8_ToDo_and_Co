@@ -22,6 +22,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class CreateUserHandler
 {
 
+    /**
+     * @var UserRepository
+     */
     private $repository;
 
     /**
