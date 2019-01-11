@@ -16,9 +16,9 @@
     <div class="row justify-content-lg-center">
         {% for task in tasks %}
 
-                <div style="border-style: solid; border-width: 1px; margin-left: 5px" class="col-sm-4 col-lg-3 col-md-4 mb-3">
+                <div class="col-sm-4 col-lg-3 col-md-4 mb-3 task">
 
-                            <h4 style="text-align: center"><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
+                            <h4 class="center"><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
 
                             <p>{{ task.content }}</p>
 

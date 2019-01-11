@@ -2,6 +2,28 @@ body {
     padding-top: 20px;
 }
 
+.task {
+    border-style: solid;
+    border-width: 1px;
+    margin-left: 5px
+}
+
+.center {
+    text-align: center;
+}
+
+.left {
+    text-align: left;
+}
+
+.background-nav {
+    background-color: #e3f2fd;
+}
+
+.font-white {
+    color: white;
+}
+
 .separator {
     color: white;
 }
