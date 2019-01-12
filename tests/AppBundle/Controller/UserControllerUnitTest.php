@@ -25,6 +25,10 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Twig\Environment;
 
+/**
+ * Class UserControllerUnitTest
+ * @package Tests\AppBundle\Controller
+ */
 class UserControllerUnitTest extends TestCase
 {
 
@@ -35,6 +39,10 @@ class UserControllerUnitTest extends TestCase
     private $createUserHandler;
     private $form;
 
+
+    /**
+     *
+     */
     public function setUp()
     {
         $this->twig = $this->createMock(Environment::class);
@@ -45,6 +53,10 @@ class UserControllerUnitTest extends TestCase
         $this->form = $this->createMock(FormInterface::class);
     }
 
+
+    /**
+     *
+     */
     public function testConstructor()
     {
         $controller = new UserController(
@@ -58,6 +70,10 @@ class UserControllerUnitTest extends TestCase
     }
 
 
+    /**
+     * @covers \AppBundle\FormHandler\CreateUserHandler::handle
+     * @throws \Exception
+     */
     public function testCreateUserIfHandleFalse()
     {
         $this->createUserHandler->method('handle')->willReturn(false);
@@ -79,6 +95,10 @@ class UserControllerUnitTest extends TestCase
             $controller->createUser($request, $this->createUserHandler));
     }
 
+
+    /**
+     * @throws \Exception
+     */
     public function testCreateUserIfHandleTrue()
     {
 
@@ -103,6 +123,11 @@ class UserControllerUnitTest extends TestCase
             $controller->createUser($request, $this->createUserHandler));
     }
 
+
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function testDeleteUserRedirection()
     {
         $user = $this->createMock(User::class);
@@ -132,6 +157,10 @@ class UserControllerUnitTest extends TestCase
             $controller->deleteUser($user, $tokenStorage, $messageFlash));
     }
 
+
+    /**
+     * @throws \Exception
+     */
     public function testEditUserIfHandleIsFalse()
     {
         $this->createUserHandler->method('handle')->willReturn(false);
@@ -153,6 +182,10 @@ class UserControllerUnitTest extends TestCase
             $controller->createUser($request, $this->createUserHandler));
     }
 
+
+    /**
+     * @throws \Exception
+     */
     public function testEditUserIfHandleTrue()
     {
 
@@ -177,6 +210,12 @@ class UserControllerUnitTest extends TestCase
             $controller->createUser($request, $this->createUserHandler));
     }
 
+
+    /**
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function testListUsersResponse()
     {
         $controller = new UserController(
@@ -190,6 +229,10 @@ class UserControllerUnitTest extends TestCase
             $controller->listUsers());
     }
 
+
+    /**
+     * @throws \Exception
+     */
     public function testEditUserPasswordIfHandleIsFalse()
     {
         $this->createUserHandler->method('handle')->willReturn(false);
@@ -211,6 +254,10 @@ class UserControllerUnitTest extends TestCase
             $controller->createUser($request, $this->createUserHandler));
     }
 
+
+    /**
+     * @throws \Exception
+     */
     public function testEditUserPasswordIfHandleIsTrue()
     {
         $this->createUserHandler->method('handle')->willReturn(true);

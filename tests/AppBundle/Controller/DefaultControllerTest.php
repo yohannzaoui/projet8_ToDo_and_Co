@@ -5,9 +5,16 @@ namespace Tests\AppBundle\Controller;
 
 use Tests\AppBundle\AppWebTestCase;
 
+/**
+ * Class DefaultControllerTest
+ * @package Tests\AppBundle\Controller
+ */
 class DefaultControllerTest extends AppWebTestCase
 {
 
+    /**
+     *
+     */
     public function testRedirectionIfNoLogin()
     {
         $this->client->request('GET', '/');
@@ -15,6 +22,10 @@ class DefaultControllerTest extends AppWebTestCase
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
 
+
+    /**
+     *
+     */
     public function testHomeIfLogin()
     {
         $this->logIn();

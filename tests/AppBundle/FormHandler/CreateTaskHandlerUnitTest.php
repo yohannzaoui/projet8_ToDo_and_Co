@@ -17,13 +17,29 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
+/**
+ * Class CreateTaskHandlerUnitTest
+ * @package Tests\AppBundle\FormHandler
+ */
 class CreateTaskHandlerUnitTest extends TestCase
 {
 
+    /**
+     * @var
+     */
     private $repository;
+    /**
+     * @var
+     */
     private $tokenStorage;
+    /**
+     * @var
+     */
     private $messageFlash;
 
+    /**
+     *
+     */
     public function setUp()
     {
         $this->repository = $this->createMock(TaskRepository::class);
@@ -31,6 +47,9 @@ class CreateTaskHandlerUnitTest extends TestCase
         $this->messageFlash = $this->createMock(Session::class);
     }
 
+    /**
+     *
+     */
     public function testConstruct()
     {
         $handler = new CreateTaskHandler(
@@ -42,6 +61,10 @@ class CreateTaskHandlerUnitTest extends TestCase
         static::assertInstanceOf(CreateTaskHandler::class, $handler);
     }
 
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function testHandleIfReturnTrue()
     {
         $form = $this->createMock(FormInterface::class);
@@ -56,6 +79,10 @@ class CreateTaskHandlerUnitTest extends TestCase
         static::assertTrue(true, $handler->handle($form, $task));
     }
 
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function testHandleIfReturnFalse()
     {
         $form = $this->createMock(FormInterface::class);

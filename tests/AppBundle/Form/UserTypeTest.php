@@ -13,8 +13,17 @@ use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
+/**
+ * Class UserTypeTest
+ * @package Tests\AppBundle\Form
+ */
 class UserTypeTest extends TypeTestCase
 {
+
+
+    /**
+     *
+     */
     public function testForm()
     {
 

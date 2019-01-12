@@ -14,15 +14,32 @@ use AppBundle\Repository\UserRepository;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use AppBundle\Entity\User;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class EditPasswordHandlerUnitTest
+ * @package Tests\AppBundle\FormHandler
+ */
 class EditPasswordHandlerUnitTest extends TestCase
 {
+    /**
+     * @var
+     */
     private $repository;
+    /**
+     * @var
+     */
     private $passwordEncoder;
+    /**
+     * @var
+     */
     private $messageFlash;
 
+    /**
+     *
+     */
     public function setUp()
     {
         $this->repository = $this->createMock(UserRepository::class);
@@ -30,6 +47,10 @@ class EditPasswordHandlerUnitTest extends TestCase
         $this->messageFlash = $this->createMock(Session::class);
     }
 
+
+    /**
+     *
+     */
     public function testConstruct()
     {
         $handler = new EditPasswordHandler(
@@ -41,20 +62,40 @@ class EditPasswordHandlerUnitTest extends TestCase
         static::assertInstanceOf(EditPasswordHandler::class, $handler);
     }
 
+
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function testHandleIfReturnTrue()
     {
         $form = $this->createMock(FormInterface::class);
         $user = $this->createMock(User::class);
 
-        $handler = new EditPasswordHandler(
-            $this->repository,
-            $this->passwordEncoder,
-            $this->messageFlash
-        );
+        if ($form->method('isSubmitted')->willReturn(true) && $form->method('isValid')->willReturn(true)) {
 
-        static::assertTrue(true, $handler->handle($form, $user));
+            $handler = new EditPasswordHandler(
+                $this->repository,
+                $this->passwordEncoder,
+                $this->messageFlash
+            );
+
+            $addFlash = $this->createMock(FlashBagInterface::class);
+            $addFlash->method('add')->willReturn('test');
+
+            $this->messageFlash->method('getFlashBag')->willReturn($addFlash);
+
+
+
+            static::assertSame(true, $handler->handle($form, $user));
+        }
     }
 
+
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function testHandleIfReturnFalse()
     {
         $form = $this->createMock(FormInterface::class);
@@ -66,6 +107,6 @@ class EditPasswordHandlerUnitTest extends TestCase
             $this->messageFlash
         );
 
-        static::assertFalse(false, $handler->handle($form, $user));
+        static::assertSame(false, $handler->handle($form, $user));
     }
 }

@@ -26,18 +26,50 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Twig\Environment;
 
+/**
+ * Class TaskControllerUnitTest
+ * @package Tests\AppBundle\Controller
+ */
 class TaskControllerUnitTest extends TestCase
 {
 
+    /**
+     * @var
+     */
     private $repository;
+    /**
+     * @var
+     */
     private $tokenStorage;
+    /**
+     * @var
+     */
     private $twig;
+    /**
+     * @var
+     */
     private $formFactory;
+    /**
+     * @var
+     */
     private $urlGenerator;
+    /**
+     * @var
+     */
     private $messageFlash;
+    /**
+     * @var
+     */
     private $createTaskHandler;
+    /**
+     * @var
+     */
     private $form;
 
+
+    /**
+     *
+     */
     public function setUp()
     {
         $this->repository = $this->createMock(TaskRepository::class);
@@ -50,6 +82,10 @@ class TaskControllerUnitTest extends TestCase
         $this->form = $this->createMock(FormInterface::class);
     }
 
+
+    /**
+     *
+     */
     public function testConstructor()
     {
         $controller = new TaskController(
@@ -65,6 +101,11 @@ class TaskControllerUnitTest extends TestCase
     }
 
 
+    /**
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function testTaskListResponse()
     {
         $user = $this->createMock(TokenInterface::class);
@@ -136,6 +177,10 @@ class TaskControllerUnitTest extends TestCase
             $taskController->createTask($request, $this->createTaskHandler));
     }
 
+
+    /**
+     * @throws \Exception
+     */
     public function testEditTaskIfHandleIsFalse()
     {
         $this->createTaskHandler->method('handle')->willReturn(false);
@@ -158,6 +203,10 @@ class TaskControllerUnitTest extends TestCase
             $taskController->createTask($request, $this->createTaskHandler));
     }
 
+
+    /**
+     * @throws \Exception
+     */
     public function testEditTaskIfHandleIsTrue()
     {
         $this->createTaskHandler->method('handle')->willReturn(true);
@@ -182,6 +231,11 @@ class TaskControllerUnitTest extends TestCase
             $taskController->createTask($request, $this->createTaskHandler));
     }
 
+
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function testDeleteTaskRedirection()
     {
         $task = $this->createMock(Task::class);
@@ -205,6 +259,12 @@ class TaskControllerUnitTest extends TestCase
             $taskController->deleteTask($task));
     }
 
+
+    /**
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function testTaskIsDoneResponse()
     {
         $user = $this->createMock(TokenInterface::class);
@@ -224,16 +284,20 @@ class TaskControllerUnitTest extends TestCase
             $taskController->tasksList());
     }
 
+
+    /**
+     * @throws \Exception
+     */
     public function testToggleTaskRedirection()
     {
         $task = $this->createMock(Task::class);
 
         $this->urlGenerator->method('generate')->willReturn('task_list');
 
-        $addFlash = $this->createMock(FlashBagInterface::class);
-        $addFlash->method('add')->willReturn('test');
+            $addFlash = $this->createMock(FlashBagInterface::class);
+            $addFlash->method('add')->willReturn('test');
 
-        $this->messageFlash->method('getFlashBag')->willReturn($addFlash);
+            $this->messageFlash->method('getFlashBag')->willReturn($addFlash);
 
         $taskController = new TaskController($this->repository,
             $this->tokenStorage,

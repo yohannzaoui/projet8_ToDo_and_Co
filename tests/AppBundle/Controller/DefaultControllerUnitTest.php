@@ -13,9 +13,18 @@ use Twig\Environment;
 use Symfony\Component\HttpFoundation\Response;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class DefaultControllerUnitTest
+ * @package Tests\AppBundle\Controller
+ */
 class DefaultControllerUnitTest extends TestCase
 {
 
+    /**
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function testHomeResponse()
     {
         $controller = new DefaultController();

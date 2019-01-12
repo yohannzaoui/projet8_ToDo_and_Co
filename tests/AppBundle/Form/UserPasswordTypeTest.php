@@ -13,8 +13,17 @@ use AppBundle\Entity\User;
 use AppBundle\Form\UserEditPasswordType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
+/**
+ * Class UserPasswordTypeTest
+ * @package Tests\AppBundle\Form
+ */
 class UserPasswordTypeTest extends TypeTestCase
 {
+
+
+    /**
+     *
+     */
     public function testForm()
     {
         $formData = [

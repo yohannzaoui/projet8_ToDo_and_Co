@@ -16,9 +16,17 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tests\AppBundle\AppWebTestCase;
 
+/**
+ * Class TaskControllerTest
+ * @package Tests\AppBundle\Controller
+ */
 class TaskControllerTest extends AppWebTestCase
 {
 
+
+    /**
+     *
+     */
     public function testTaskListRedirectionIfNoLogin()
     {
         $this->client->request('GET', '/tasks');
@@ -26,6 +34,10 @@ class TaskControllerTest extends AppWebTestCase
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
 
+
+    /**
+     *
+     */
     public function testTasksListResponse()
     {
         $this->login();
@@ -39,6 +51,9 @@ class TaskControllerTest extends AppWebTestCase
     }
 
 
+    /**
+     *
+     */
     public function testCreateTaskRedirectionIfNoLogin()
     {
         $this->client->request('GET', '/tasks/create');
@@ -46,6 +61,10 @@ class TaskControllerTest extends AppWebTestCase
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
 
+
+    /**
+     *
+     */
     public function testCreateTaskPageIsFound()
     {
         $this->logIn();
@@ -59,6 +78,10 @@ class TaskControllerTest extends AppWebTestCase
             $crawler->filter('html:contains("Créer une tâche")')->count());
     }
 
+
+    /**
+     *
+     */
     public function testCreateTaskRedirectionIfLogin()
     {
         $this->logIn();
@@ -68,6 +91,10 @@ class TaskControllerTest extends AppWebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
+
+    /**
+     *
+     */
     public function testCreateTaskForm()
     {
         $this->logIn();
@@ -83,10 +110,35 @@ class TaskControllerTest extends AppWebTestCase
         $form['task[content]'] = 'functional test content';
 
         $this->client->submit($form);
+
+        $crawler = $this->client->followRedirect();
+
+        $this->assertSame(1, $crawler->filter('div.alert.alert-dismissible.alert-success')->count());
+    }
+
+
+    /**
+     *
+     */
+    public function testEditTaskForm()
+    {
+        $this->logIn();
+
+        $crawler = $this->client->request('GET', '/tasks/edit/2');
+
+        $form = $crawler->selectButton('Modifier')->form();
+        $form['task[title]'] = 'functional test title';
+        $form['task[content]'] = 'functional test content';
+
+        $this->client->submit($form);
         $crawler = $this->client->followRedirect();
         $this->assertSame(1, $crawler->filter('div.alert.alert-dismissible.alert-success')->count());
     }
 
+
+    /**
+     *
+     */
     public function testDeleteTaskResponseIfLogin()
     {
         $this->login();
@@ -97,6 +149,9 @@ class TaskControllerTest extends AppWebTestCase
     }
 
 
+    /**
+     *
+     */
     public function testTaskEditRedirectionIfNoLogin()
     {
         $this->client->request('GET', '/tasks/edit/2');
@@ -104,6 +159,10 @@ class TaskControllerTest extends AppWebTestCase
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
 
+
+    /**
+     *
+     */
     public function testTaskEditPageIsFound()
     {
         $this->logIn();
@@ -117,6 +176,10 @@ class TaskControllerTest extends AppWebTestCase
             $crawler->filter('html:contains("Modifier la tâche")')->count());
     }
 
+
+    /**
+     *
+     */
     public function testEditTaskRedirection()
     {
         $this->logIn();
@@ -126,6 +189,10 @@ class TaskControllerTest extends AppWebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
+
+    /**
+     *
+     */
     public function testTaskListIsDoneRedirectionIfNoLogin()
     {
         $this->client->request('GET', '/tasks-Is-Done');
@@ -133,6 +200,10 @@ class TaskControllerTest extends AppWebTestCase
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
 
+
+    /**
+     *
+     */
     public function testTaskIsDoneResponse()
     {
         $this->logIn();
@@ -146,6 +217,10 @@ class TaskControllerTest extends AppWebTestCase
             $crawler->filter('html:contains("Retour à la liste des tâches")')->count());
     }
 
+
+    /**
+     *
+     */
     public function testTaskToggleRedirectionIfNoLogin()
     {
         $this->client->request('GET', '/tasks/2/toggle');
@@ -153,6 +228,10 @@ class TaskControllerTest extends AppWebTestCase
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
 
+
+    /**
+     *
+     */
     public function testToggleTask()
     {
         $this->logIn();

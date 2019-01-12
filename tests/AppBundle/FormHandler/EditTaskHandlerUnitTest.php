@@ -15,17 +15,33 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+/**
+ * Class EditTaskHandlerUnitTest
+ * @package Tests\AppBundle\FormHandler
+ */
 class EditTaskHandlerUnitTest extends TestCase
 {
+    /**
+     * @var
+     */
     private $repository;
+    /**
+     * @var
+     */
     private $messageFlash;
 
+    /**
+     *
+     */
     public function setUp()
     {
         $this->repository = $this->createMock(TaskRepository::class);
         $this->messageFlash = $this->createMock(Session::class);
     }
 
+    /**
+     *
+     */
     public function testConstruct()
     {
         $handler = new EditTaskHandler(
@@ -36,6 +52,10 @@ class EditTaskHandlerUnitTest extends TestCase
         static::assertInstanceOf(EditTaskHandler::class, $handler);
     }
 
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function testHandlerIfReturnTrue()
     {
         $form = $this->createMock(FormInterface::class);
@@ -48,6 +68,10 @@ class EditTaskHandlerUnitTest extends TestCase
         static::assertTrue(true, $handler->handle($form));
     }
 
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function testHandlerIfReturnFalse()
     {
         $form = $this->createMock(FormInterface::class);

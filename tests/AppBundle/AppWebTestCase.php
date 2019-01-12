@@ -13,21 +13,34 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
+/**
+ * Class AppWebTestCase
+ * @package Tests\AppBundle
+ */
 class AppWebTestCase extends WebTestCase
 {
 
+    /**
+     * @var
+     */
     protected $client;
 
+    /**
+     *
+     */
     protected function setUp()
     {
         $this->client = static::createClient();
     }
 
+    /**
+     *
+     */
     protected function logIn()
     {
         $session = $this->client->getContainer()->get('session');
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
-        $user = $em->getRepository(User::class)->findOneBy(['id'=>2]);
+        $user = $em->getRepository(User::class)->findOneBy([]);
 
         $token = new UsernamePasswordToken($user, null, 'main', ['ROLE_ADMIN']);
         $session->set('_security_'.'main', serialize($token));

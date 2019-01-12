@@ -218,11 +218,6 @@ class TaskController
             $this->messageFlash->getFlashBag()->add('success', sprintf('La tâche %s a bien été marquée : à faire.', $task->getTitle()));
         }
 
-        if ($task->isDone() == true) {
-
-            $this->messageFlash->getFlashBag()->add('success', sprintf('La tâche %s a bien été marquée comme terminée.', $task->getTitle()));
-        }
-
         return new RedirectResponse($this->urlGenerator->generate('task_list'),
             RedirectResponse::HTTP_FOUND);
     }

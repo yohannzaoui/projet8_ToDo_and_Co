@@ -40,7 +40,7 @@ class SecurityController
      */
     public function loginCheck()
     {
-        // This code is never executed.
+       return null;
     }
 
     /**
@@ -48,6 +48,6 @@ class SecurityController
      */
     public function logoutCheck()
     {
-        // This code is never executed.
+        return null;
     }
 }

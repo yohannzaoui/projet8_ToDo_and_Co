@@ -34,7 +34,7 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
      */
     public function loadUserByUsername($username)
     {
-        // TODO: Implement loadUserByUsername() method.
+        return null;
     }
 
     /**

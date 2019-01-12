@@ -13,10 +13,6 @@ services:
     resource: '../../src/AppBundle/Controller'
     tags: ['controller.service_arguments']
 
-  AppBundle\Command\CreateUserCommand:
-    tags:
-      - { name: 'console.command', command: 'app:create-user' }
-
   AppBundle\Command\CreateAdminCommand:
     tags:
       - { name: 'console.command', command: 'app:create-admin' }

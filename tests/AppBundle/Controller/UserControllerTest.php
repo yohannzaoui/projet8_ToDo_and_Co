@@ -11,9 +11,17 @@ namespace Tests\AppBundle\Controller;
 
 use Tests\AppBundle\AppWebTestCase;
 
+/**
+ * Class UserControllerTest
+ * @package Tests\AppBundle\Controller
+ */
 class UserControllerTest extends AppWebTestCase
 {
 
+
+    /**
+     *
+     */
     public function testUserCreatePageIsFound()
     {
         $this->logIn();
@@ -27,6 +35,10 @@ class UserControllerTest extends AppWebTestCase
             $crawler->filter('html:contains("Créer un utilisateur")')->count());
     }
 
+
+    /**
+     *
+     */
     public function testUserCreateRedirection()
     {
         $this->logIn();
@@ -36,7 +48,11 @@ class UserControllerTest extends AppWebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
-    public function testAddUserForm()
+
+    /**
+     *
+     */
+    public function testCreateUserForm()
     {
         $this->logIn();
 
@@ -56,13 +72,16 @@ class UserControllerTest extends AppWebTestCase
 
         $crawler = $this->client->followRedirect();
 
-        $this->assertSame(1, $crawler->filter('html:contains("L\'utilisateur a bien été ajouté.")')->count());
+        $this->assertSame(1, $crawler->filter('div.alert.alert-dismissible.alert-success')->count());
     }
 
+
+    /**
+     *
+     */
     public function testEditPasswordForm()
     {
         $this->logIn();
-
 
         $crawler = $this->client->request('POST', '/user/password/3');
 
@@ -78,6 +97,35 @@ class UserControllerTest extends AppWebTestCase
         $this->assertSame(1, $crawler->filter('html:contains("Liste des utilisateurs")')->count());
     }
 
+
+    /**
+     *
+     */
+    public function testEditUserForm()
+    {
+        $this->logIn();
+
+        $crawler = $this->client->request('POST', '/users/3/edit');
+
+        $form = $crawler->selectButton('Modifier')->form();
+
+        $string = str_shuffle('azertyuiopqsdfghjklm12345');
+
+        $form['user_edit[username]'] = 'test';
+        $form['user_edit[email]'] = $string.'@email.com';
+        $form['user_edit[roles]'] = 'ROLE_USER';
+
+        $this->client->submit($form);
+
+        $crawler = $this->client->followRedirect();
+
+        $this->assertSame(1, $crawler->filter('html:contains("L\'utilisateur a bien été modifié")')->count());
+    }
+
+
+    /**
+     *
+     */
     public function testDeleteUserIfNoLogin()
     {
         $this->client->request('GET', '/delete/user/3');
@@ -85,6 +133,10 @@ class UserControllerTest extends AppWebTestCase
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
 
+
+    /**
+     *
+     */
     public function testDeleteUser()
     {
         $this->logIn();
@@ -94,6 +146,10 @@ class UserControllerTest extends AppWebTestCase
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
 
+
+    /**
+     *
+     */
     public function testUserEditRedirectionIfNoLogin()
     {
         $this->client->request('GET', '/users/3/edit');
@@ -101,6 +157,10 @@ class UserControllerTest extends AppWebTestCase
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
 
+
+    /**
+     *
+     */
     public function testUserEditPageIsFound()
     {
         $this->logIn();
@@ -114,6 +174,10 @@ class UserControllerTest extends AppWebTestCase
             $crawler->filter('html:contains("Modifier")')->count());
     }
 
+
+    /**
+     *
+     */
     public function testUserEditRedirection()
     {
         $this->logIn();
@@ -123,6 +187,10 @@ class UserControllerTest extends AppWebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
+
+    /**
+     *
+     */
     public function testListUsers()
     {
         $this->logIn();
@@ -136,6 +204,10 @@ class UserControllerTest extends AppWebTestCase
             $crawler->filter('html:contains("Liste des utilisateurs")')->count());
     }
 
+
+    /**
+     *
+     */
     public function testUserListRedirectionIfNoLogin()
     {
         $this->client->request('GET', '/users');
@@ -143,6 +215,10 @@ class UserControllerTest extends AppWebTestCase
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
 
+
+    /**
+     *
+     */
     public function testUserPasswordRedirectionIfNoLogin()
     {
         $this->client->request('GET', '/user/password/3');
@@ -150,6 +226,10 @@ class UserControllerTest extends AppWebTestCase
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
 
+
+    /**
+     *
+     */
     public function testUserPasswordPageIsFound()
     {
         $this->logIn();
@@ -163,6 +243,10 @@ class UserControllerTest extends AppWebTestCase
             $crawler->filter('html:contains("Modifier le mot de passe de")')->count());
     }
 
+
+    /**
+     *
+     */
     public function testUserPasswordRedirection()
     {
         $this->logIn();

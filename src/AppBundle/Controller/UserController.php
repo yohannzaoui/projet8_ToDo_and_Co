@@ -117,11 +117,6 @@ class UserController
             $messageFlash->getFlashBag()->add('success', "L'utilisateur a bien été supprimée.");
         }
 
-        if ($user == $tokenStorage->getToken()->getUser()) {
-
-            $messageFlash->getFlashBag()->add('success', "Impossible de supprimer votre propre compte.");
-        }
-
         return new RedirectResponse($this->urlGenerator->generate('user_list'),
             RedirectResponse::HTTP_FOUND);
     }

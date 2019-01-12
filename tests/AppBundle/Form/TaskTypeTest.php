@@ -12,9 +12,16 @@ use AppBundle\Entity\Task;
 use AppBundle\Form\TaskType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
+/**
+ * Class TaskTypeTest
+ * @package Tests\AppBundle\Form
+ */
 class TaskTypeTest extends TypeTestCase
 {
 
+    /**
+     *
+     */
     public function testForm()
     {
         $formData = [
