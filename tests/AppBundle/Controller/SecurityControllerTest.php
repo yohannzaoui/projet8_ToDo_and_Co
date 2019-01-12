@@ -16,8 +16,11 @@ class SecurityControllerTest extends AppWebTestCase
     public function testLogin()
     {
 
-        $this->client->request('GET', '/login');
+        $crawler = $this->client->request('GET', '/login');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $this->assertSame(1, $crawler->filter('html:contains("Nom d\'utilisateur :")')->count());
+        $this->assertSame(1, $crawler->filter('html:contains("Mot de passe :")')->count());
     }
 }

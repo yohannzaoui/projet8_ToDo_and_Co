@@ -8,6 +8,7 @@
 
 namespace Tests\AppBundle;
 
+use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -25,8 +26,10 @@ class AppWebTestCase extends WebTestCase
     protected function logIn()
     {
         $session = $this->client->getContainer()->get('session');
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $user = $em->getRepository(User::class)->findOneBy(['id'=>2]);
 
-        $token = new UsernamePasswordToken('admin', null, 'main', array('ROLE_ADMIN'));
+        $token = new UsernamePasswordToken($user, null, 'main', ['ROLE_ADMIN']);
         $session->set('_security_'.'main', serialize($token));
         $session->save();
 

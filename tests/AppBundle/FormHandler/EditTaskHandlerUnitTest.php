@@ -26,6 +26,16 @@ class EditTaskHandlerUnitTest extends TestCase
         $this->messageFlash = $this->createMock(Session::class);
     }
 
+    public function testConstruct()
+    {
+        $handler = new EditTaskHandler(
+            $this->repository,
+            $this->messageFlash
+        );
+
+        static::assertInstanceOf(EditTaskHandler::class, $handler);
+    }
+
     public function testHandlerIfReturnTrue()
     {
         $form = $this->createMock(FormInterface::class);

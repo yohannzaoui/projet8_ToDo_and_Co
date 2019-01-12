@@ -36,7 +36,7 @@ class UserControllerTest extends AppWebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
-    public function testForm()
+    public function testAddUserForm()
     {
         $this->logIn();
 
@@ -46,7 +46,7 @@ class UserControllerTest extends AppWebTestCase
 
         $string = str_shuffle('azertyuiopqsdfghjklm12345');
 
-        $form['user[username]'] = $string;
+        $form['user[username]'] = 'test';
         $form['user[password][first]'] = 'password';
         $form['user[password][second]'] = 'password';
         $form['user[email]'] = $string.'@email.com';
@@ -59,9 +59,28 @@ class UserControllerTest extends AppWebTestCase
         $this->assertSame(1, $crawler->filter('html:contains("L\'utilisateur a bien été ajouté.")')->count());
     }
 
+    public function testEditPasswordForm()
+    {
+        $this->logIn();
+
+
+        $crawler = $this->client->request('POST', '/user/password/3');
+
+        $form = $crawler->selectButton('Modifer')->form();
+
+        $form['user_edit_password[password][first]'] = 'password';
+        $form['user_edit_password[password][second]'] = 'password';
+
+        $this->client->submit($form);
+
+        $crawler = $this->client->followRedirect();
+
+        $this->assertSame(1, $crawler->filter('html:contains("Liste des utilisateurs")')->count());
+    }
+
     public function testDeleteUserIfNoLogin()
     {
-        $this->client->request('GET', '/delete/user/50');
+        $this->client->request('GET', '/delete/user/3');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -70,9 +89,9 @@ class UserControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $this->client->request('GET', '/delete/user/50');
+        $this->client->request('GET', '/delete/user/3');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
 
     public function testUserEditRedirectionIfNoLogin()

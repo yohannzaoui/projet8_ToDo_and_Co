@@ -31,6 +31,17 @@ class CreateTaskHandlerUnitTest extends TestCase
         $this->messageFlash = $this->createMock(Session::class);
     }
 
+    public function testConstruct()
+    {
+        $handler = new CreateTaskHandler(
+            $this->repository,
+            $this->tokenStorage,
+            $this->messageFlash
+        );
+
+        static::assertInstanceOf(CreateTaskHandler::class, $handler);
+    }
+
     public function testHandleIfReturnTrue()
     {
         $form = $this->createMock(FormInterface::class);

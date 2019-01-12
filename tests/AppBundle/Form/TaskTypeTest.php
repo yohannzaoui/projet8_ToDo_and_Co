@@ -8,18 +8,18 @@
 
 namespace Tests\AppBundle\Form;
 
-
 use AppBundle\Entity\Task;
 use AppBundle\Form\TaskType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
 class TaskTypeTest extends TypeTestCase
 {
+
     public function testForm()
     {
         $formData = [
-            'title' => 'title',
-            'content' => 'content',
+            'title' => 'test',
+            'content' => 'test'
         ];
 
         $taskToCompare = $this->createMock(Task::class);
@@ -27,8 +27,8 @@ class TaskTypeTest extends TypeTestCase
         $form = $this->factory->create(TaskType::class, $taskToCompare);
 
         $task = $this->createMock(Task::class);
-        $task->setTitle('title');
-        $task->setContent('content');
+        $task->setTitle('test');
+        $task->setContent('test');
 
         $form->submit($formData);
 

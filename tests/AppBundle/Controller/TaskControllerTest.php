@@ -72,15 +72,6 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $task = new Task();
-        $user = new User();
-        //$user = $this->createMock(User::class);
-        //$user = $this->createMock(TokenInterface::class);
-        //$user->method('getUser')->willReturn($user);
-
-        //$tokenStorage = $this->createMock(TokenStorageInterface::class);
-        //$tokenStorage->method('getToken')->willReturn($user);
-
         $crawler = $this->client->request('GET', '/');
 
         $link = $crawler->selectLink('Créer une nouvelle tâche')->link();
@@ -100,9 +91,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->login();
 
-        $request = Request::create('/tasks/delete/', 'GET', ['id'=>50]);
-
-        $this->client->request('GET', $request);
+        $this->client->request('GET', '/tasks/delete/2');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -110,7 +99,7 @@ class TaskControllerTest extends AppWebTestCase
 
     public function testTaskEditRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/tasks/edit/3');
+        $this->client->request('GET', '/tasks/edit/2');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -119,7 +108,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $crawler = $this->client->request('GET', '/tasks/edit/3');
+        $crawler = $this->client->request('GET', '/tasks/edit/2');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -159,7 +148,7 @@ class TaskControllerTest extends AppWebTestCase
 
     public function testTaskToggleRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/tasks/3/toggle');
+        $this->client->request('GET', '/tasks/2/toggle');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -168,7 +157,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $this->client->request('GET', '/tasks/3/toggle');
+        $this->client->request('GET', '/tasks/2/toggle');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }

@@ -26,6 +26,16 @@ class EditUserHandlerUnitTest extends TestCase
         $this->messageFlash = $this->createMock(Session::class);
     }
 
+    public function testConstruct()
+    {
+        $handler = new EditUserHandler(
+            $this->repository,
+            $this->messageFlash
+        );
+
+        static::assertInstanceOf(EditUserHandler::class, $handler);
+    }
+
     public function testHandlerIfReturnTrue()
     {
         $form = $this->createMock(FormInterface::class);

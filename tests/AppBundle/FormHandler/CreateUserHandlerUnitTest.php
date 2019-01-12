@@ -30,6 +30,17 @@ class CreateUserHandlerUnitTest extends TestCase
         $this->messageFlash = $this->createMock(Session::class);
     }
 
+    public function testConstruct()
+    {
+        $handler = new CreateUserHandler(
+            $this->repository,
+            $this->passwordEncoder,
+            $this->messageFlash
+        );
+
+        static::assertInstanceOf(CreateUserHandler::class, $handler);
+    }
+
     public function testHandleIfReturnTrue()
     {
         $form = $this->createMock(FormInterface::class);

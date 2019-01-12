@@ -30,6 +30,17 @@ class EditPasswordHandlerUnitTest extends TestCase
         $this->messageFlash = $this->createMock(Session::class);
     }
 
+    public function testConstruct()
+    {
+        $handler = new EditPasswordHandler(
+            $this->repository,
+            $this->passwordEncoder,
+            $this->messageFlash
+        );
+
+        static::assertInstanceOf(EditPasswordHandler::class, $handler);
+    }
+
     public function testHandleIfReturnTrue()
     {
         $form = $this->createMock(FormInterface::class);
