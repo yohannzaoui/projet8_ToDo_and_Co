@@ -12,6 +12,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use AppBundle\Entity\User;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class UserRepository
@@ -30,12 +31,13 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
 
     /**
      * @param string $username
-     * @return null|\Symfony\Component\Security\Core\User\UserInterface|void
+     * @return UserInterface|void|null
      */
     public function loadUserByUsername($username)
     {
-        return null;
+
     }
+
 
     /**
      * @param $user
