@@ -195,4 +195,5 @@ class UserController
             'user' => $user
         ]), Response::HTTP_OK);
     }
+
 }

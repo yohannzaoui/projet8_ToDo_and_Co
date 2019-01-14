@@ -25,4 +25,5 @@ class DefaultController
         return new Response($twig->render('default/index.html.twig'),
             Response::HTTP_OK);
     }
+
 }

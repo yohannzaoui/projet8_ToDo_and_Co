@@ -221,4 +221,5 @@ class TaskController
         return new RedirectResponse($this->urlGenerator->generate('task_list'),
             RedirectResponse::HTTP_FOUND);
     }
+
 }
