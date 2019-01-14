@@ -40,4 +40,5 @@ class UserEditType extends AbstractType
                 'expanded' =>false
             ]);
     }
+
 }

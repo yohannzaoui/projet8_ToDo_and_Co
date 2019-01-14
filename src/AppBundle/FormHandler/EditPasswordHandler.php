@@ -8,7 +8,6 @@
 
 namespace AppBundle\FormHandler;
 
-
 use AppBundle\Entity\User;
 use AppBundle\Repository\UserRepository;
 use Symfony\Component\Form\FormInterface;
@@ -77,4 +76,5 @@ class EditPasswordHandler
         }
         return false;
     }
+
 }

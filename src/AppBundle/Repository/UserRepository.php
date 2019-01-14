@@ -70,5 +70,4 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
         $this->_em->flush();
     }
 
-
 }

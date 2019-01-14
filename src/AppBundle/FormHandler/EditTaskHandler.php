@@ -59,4 +59,5 @@ class EditTaskHandler
         }
         return false;
     }
+
 }

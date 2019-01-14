@@ -122,4 +122,5 @@ class CreateAdminCommand extends Command
 
         $output->writeln('Admin successfully created');
     }
+
 }

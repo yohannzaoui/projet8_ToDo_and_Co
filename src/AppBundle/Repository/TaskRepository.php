@@ -8,7 +8,6 @@
 
 namespace AppBundle\Repository;
 
-
 use AppBundle\Entity\Task;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -58,6 +57,5 @@ class TaskRepository extends ServiceEntityRepository
     {
         $this->_em->flush();
     }
-
 
 }

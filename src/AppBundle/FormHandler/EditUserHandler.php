@@ -62,4 +62,5 @@ class EditUserHandler
         }
         return false;
     }
+
 }

@@ -8,7 +8,6 @@
 
 namespace AppBundle\Controller;
 
-
 use AppBundle\Form\UserEditPasswordType;
 use AppBundle\FormHandler\CreateUserHandler;
 use AppBundle\FormHandler\EditPasswordHandler;

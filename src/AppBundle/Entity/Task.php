@@ -127,7 +127,6 @@ class Task
         return $this->isDone;
     }
 
-
     /**
      * @param $flag
      */
@@ -151,7 +150,6 @@ class Task
     {
         $this->dateIsDone = $dateIsDone;
     }
-
 
     /**
      * @return mixed
