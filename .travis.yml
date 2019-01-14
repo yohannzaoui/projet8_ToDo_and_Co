@@ -1,19 +1,15 @@
-env:
-  global:
-    - CC_TEST_REPORTER_ID=ae1aead4ec11a9b5f0d78451a5818ebe0c7a71e2a2dbe761280ad2bf87094354
-
+dist: trusty
+sudo: false
 language: php
-php:
-  - '5.0'
-  - '7.0'
-  - '7.1'
-  - '7.2'
 
-before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+php:
+  - 7.2
+
+env:
+  - DB=mysql
+
 script:
-  - bundle exec rspec
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - if [[ "$DB" == "mysql" ]]; then mysql -e "CREATE DATABASE IF NOT EXISTS symfony; GRANT ALL PRIVILEGES ON ToDoList_tests.* to travis@'localhost'"; fi
+  - composer install
+  - php bin/console doctrine:schema:update --force --env=test
+  - vendor/bin/phpunit
