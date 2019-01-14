@@ -10,11 +10,20 @@ namespace Tests\AppBundle\Form;
 
 
 use AppBundle\Entity\User;
-use AppBundle\Form\UserPasswordType;
+use AppBundle\Form\UserEditPasswordType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
+/**
+ * Class UserPasswordTypeTest
+ * @package Tests\AppBundle\Form
+ */
 class UserPasswordTypeTest extends TypeTestCase
 {
+
+
+    /**
+     *
+     */
     public function testForm()
     {
         $formData = [
@@ -23,7 +32,7 @@ class UserPasswordTypeTest extends TypeTestCase
 
         $userToCompare = $this->createMock(User::class);
 
-        $form = $this->factory->create(UserPasswordType::class, $userToCompare);
+        $form = $this->factory->create(UserEditPasswordType::class, $userToCompare);
 
         $user = $this->createMock(User::class);
         $user->setPassword('pass');

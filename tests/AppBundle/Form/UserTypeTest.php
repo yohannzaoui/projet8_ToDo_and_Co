@@ -9,16 +9,23 @@
 namespace Tests\AppBundle\Form;
 
 
-use AppBundle\Entity\Roles;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
+/**
+ * Class UserTypeTest
+ * @package Tests\AppBundle\Form
+ */
 class UserTypeTest extends TypeTestCase
 {
+
+
+    /**
+     *
+     */
     public function testForm()
     {
-        $roles = $this->createMock(Roles::class);
 
         $formData = [
           'username' => 'test',
@@ -27,7 +34,7 @@ class UserTypeTest extends TypeTestCase
                 'second_option' => 'pass'
             ],
             'email' => 'test@test.com',
-            'roles' => $roles
+            'roles' => 'test'
         ];
 
         $userToCompare = $this->createMock(User::class);
@@ -38,7 +45,7 @@ class UserTypeTest extends TypeTestCase
         $user->setUsername('test');
         $user->setPassword('pass');
         $user->setEmail('test@test.com');
-        $user->setRoles($roles);
+        $user->setRoles('test');
 
         $form->submit($formData);
 

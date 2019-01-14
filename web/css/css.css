@@ -1,10 +1,27 @@
 body {
-    margin-top: 50px
+    padding-top: 20px;
 }
 
-.post-it {
-    background: #FFF490;
-    box-shadow: 5px 5px 5px silver
+.task {
+    border-style: solid;
+    border-width: 1px;
+    margin-left: 5px
+}
+
+.center {
+    text-align: center;
+}
+
+.left {
+    text-align: left;
+}
+
+.background-nav {
+    background-color: #e3f2fd;
+}
+
+.font-white {
+    color: white;
 }
 
 .separator {

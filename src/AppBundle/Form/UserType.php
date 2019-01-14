@@ -2,16 +2,13 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\User;
-use AppBundle\Entity\Roles;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class UserType
@@ -46,23 +43,16 @@ class UserType extends AbstractType
                 'label' => 'Adresse email'
             ])
 
-            ->add('roles', EntityType::class,[
-                'class' => Roles::class,
-                'choice_label' => 'name',
-                'expanded' => false,
-                'multiple' => false
+            ->add('roles', ChoiceType::class, [
+                'required' => true,
+                'choices' => [
+                    'Utilisateur' => 'ROLE_USER',
+                    'Administrateur' => 'ROLE_ADMIN'
+                ],
+                'multiple' => true,
+                'expanded' => false
             ])
 
         ;
-    }
-
-    /**
-     * @param OptionsResolver $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => User::class,
-        ]);
     }
 }

@@ -9,74 +9,116 @@
 namespace AppBundle\Controller;
 
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use AppBundle\Form\UserEditPasswordType;
+use AppBundle\FormHandler\CreateUserHandler;
+use AppBundle\FormHandler\EditPasswordHandler;
+use AppBundle\FormHandler\EditUserHandler;
+use AppBundle\Repository\UserRepository;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 use AppBundle\Form\UserEditType;
-use AppBundle\Form\UserPasswordType;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Twig\Environment;
 
-class UserController extends AbstractController
+/**
+ * Class UserController
+ * @package AppBundle\Controller
+ */
+class UserController
 {
+
+    /**
+     * @var Environment
+     */
+    private $twig;
+
+    /**
+     * @var FormFactoryInterface
+     */
+    private $formFactory;
+
+    /**
+     * @var UrlGeneratorInterface
+     */
+    private $urlGenerator;
+
+    /**
+     * @var UserRepository
+     */
+    private $repository;
+
+    /**
+     * UserController constructor.
+     * @param Environment $twig
+     * @param FormFactoryInterface $formFactory
+     * @param UrlGeneratorInterface $urlGenerator
+     * @param UserRepository $repository
+     */
+    public function __construct(
+        Environment $twig,
+        FormFactoryInterface $formFactory,
+        UrlGeneratorInterface $urlGenerator,
+        UserRepository $repository
+    ) {
+       $this->twig = $twig;
+       $this->formFactory = $formFactory;
+       $this->urlGenerator = $urlGenerator;
+       $this->repository = $repository;
+    }
 
     /**
      * @Route(path="/users/create", name="user_create", methods={"GET","POST"})
      * @param Request $request
+     * @param CreateUserHandler $createUserHandler
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function createUser(Request $request)
+    public function createUser(Request $request, CreateUserHandler $createUserHandler)
     {
         $user = new User();
 
-        $form = $this->createForm(UserType::class, $user)
+        $form = $this->formFactory->create(UserType::class, $user)
             ->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($createUserHandler->handle($form, $user)) {
 
-            $entityManager = $this->getDoctrine()->getManager();
-
-            $password = $this->get('security.password_encoder')
-                ->encodePassword($user, $user->getPassword());
-
-            $user->setPassword($password);
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            $this->addFlash('success', "L'utilisateur a bien été ajouté.");
-
-            return $this->redirectToRoute('user_list');
+            return new RedirectResponse($this->urlGenerator->generate('user_list'),
+                RedirectResponse::HTTP_FOUND);
         }
 
-        return $this->render('user/create.html.twig', [
+        return new Response($this->twig->render('user/create.html.twig', [
             'form' => $form->createView()
-        ]);
+        ]), Response::HTTP_OK);
     }
 
 
     /**
      * @Route(path="/delete/user/{id}", name="user_delete", methods={"GET"}, requirements={"id"="\d+"})
      * @param User $user
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param TokenStorageInterface $tokenStorage
+     * @param SessionInterface $messageFlash
+     * @return RedirectResponse
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function deleteUser(User $user)
+    public function deleteUser(User $user, TokenStorageInterface $tokenStorage, SessionInterface $messageFlash)
     {
-        if ($user != $this->getUser()) {
+        if ($user != $tokenStorage->getToken()->getUser()) {
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
+            $this->repository->delete($user);
 
-            $this->addFlash('success', "L'utilisateur a bien été supprimée.");
-
-            return $this->redirectToRoute('user_list');
+            $messageFlash->getFlashBag()->add('success', "L'utilisateur a bien été supprimée.");
         }
 
-        $this->addFlash('success', "Impossible de supprimer votre propre compte.");
-
-        return $this->redirectToRoute('user_list');
+        return new RedirectResponse($this->urlGenerator->generate('user_list'),
+            RedirectResponse::HTTP_FOUND);
     }
 
 
@@ -84,71 +126,74 @@ class UserController extends AbstractController
      * @Route(path="/users/{id}/edit", name="user_edit", methods={"GET","POST"}, requirements={"id"="\d+"})
      * @param User $user
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @param EditUserHandler $editUserHandler
+     * @return RedirectResponse|Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
-    public function editUser(User $user, Request $request)
+    public function editUser(User $user, Request $request, EditUserHandler $editUserHandler)
     {
-        $form = $this->createForm(UserEditType::class, $user)
+        $form = $this->formFactory->create(UserEditType::class, $user)
             ->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($editUserHandler->handle($form)) {
 
-            $this->getDoctrine()->getManager()->flush();
-
-            $this->addFlash('success', "L'utilisateur a bien été modifié");
-
-            return $this->redirectToRoute('user_list');
+            return new RedirectResponse($this->urlGenerator->generate('user_list'),
+                RedirectResponse::HTTP_FOUND);
         }
 
-        return $this->render('user/edit.html.twig', [
+        return new Response($this->twig->render('user/edit.html.twig', [
             'form' => $form->createView(),
             'user' => $user
-        ]);
+        ]), Response::HTTP_OK);
     }
-
 
     /**
      * @Route(path="/users", name="user_list", methods={"GET"})
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function listUsers()
     {
-        $users = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findAll();
+        $users = $this->repository->findAll();
 
-        return $this->render('user/list.html.twig', [
+        return new Response($this->twig->render('user/list.html.twig', [
             'users' => $users
-        ]);
+        ]), Response::HTTP_OK);
     }
 
     /**
      * @Route(path="/user/password/{id}", name="user_password", methods={"GET", "POST"}, requirements={"id"="\d+"})
      * @param User $user
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @param EditPasswordHandler $editPasswordHandler
+     * @return RedirectResponse|Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
-    public function userPassword(User $user, Request $request)
+    public function userEditPassword(User $user, Request $request, EditPasswordHandler $editPasswordHandler)
     {
-        $form = $this->createForm(UserPasswordType::class, $user)
+        $form = $this->formFactory->create(UserEditPasswordType::class, $user)
             ->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($editPasswordHandler->handle($form, $user)) {
 
-            $password = $this->get('security.password_encoder')
-                ->encodePassword($user, $user->getPassword());
-
-            $user->setPassword($password);
-
-            $this->getDoctrine()->getManager()->flush();
-
-            $this->addFlash('success', "Le mot de passe à bien été modifié");
-
-            return $this->redirectToRoute('user_list');
+            return new RedirectResponse($this->urlGenerator->generate('user_list'),
+                RedirectResponse::HTTP_FOUND);
         }
 
-        return $this->render('user/password.html.twig', [
+        return new Response($this->twig->render('user/password.html.twig', [
             'form' => $form->createView(),
             'user' => $user
-        ]);
+        ]), Response::HTTP_OK);
     }
+
 }

@@ -3,31 +3,36 @@
 namespace AppBundle\Controller;
 
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Twig\Environment;
 
 /**
  * Class SecurityController
  * @package AppBundle\Controller
  */
-class SecurityController extends AbstractController
+class SecurityController
 {
 
     /**
      * @Route(path="/login", name="login", methods={"GET"})
      * @param AuthenticationUtils $authenticationUtils
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Environment $twig
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
-    public function login(AuthenticationUtils $authenticationUtils)
+    public function login(AuthenticationUtils $authenticationUtils, Environment $twig)
     {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', [
+        return new Response($twig->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error'         => $error,
-        ]);
+        ]), Response::HTTP_OK);
     }
 
     /**
@@ -35,7 +40,7 @@ class SecurityController extends AbstractController
      */
     public function loginCheck()
     {
-        // This code is never executed.
+       return null;
     }
 
     /**
@@ -43,6 +48,7 @@ class SecurityController extends AbstractController
      */
     public function logoutCheck()
     {
-        // This code is never executed.
+        return null;
     }
+
 }

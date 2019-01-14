@@ -2,32 +2,33 @@
 
 {% block body %}
     <h3>
-        Il y'a
         {% if tasks | length == 1  %}
-            {{ tasks | length }} tâche terminée
+            Tâche terminée
+        {% elseif tasks | length == 0 %}
+            Il n'y a pas de tâches à afficher
         {% else %}
-            {{ tasks | length }} tâches terminées
+            Tâches terminées
         {% endif %}
     </h3>
     <p><a href="{{ path('task_list') }}" class="btn btn-info">Retour à la liste des tâches</a>
         <a href="{{ path('task_create') }}" class="btn btn-primary">Créer une tâche</a></p>
     <hr>
-    <div class="row">
+    <div class="row justify-content-lg-center">
         {% for task in tasks %}
 
-                <div class="col-sm-4 col-lg-4 col-md-4">
+                <div class="col-sm-4 col-lg-3 col-md-4 mb-3 task">
 
-                            <h4 style="text-align: center"><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
-                        <hr>
+                            <h4 class="center"><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
+
                             <p>{{ task.content }}</p>
-                        <hr>
+
                             <p><small>Ajoutée le: {{ task.createdAt | date("d/m/Y") }} à {{ task.createdAt | date("H:i") }}</small></p>
                             <p><small>Terminée le: {{ task.dateIsDone | date("d/m/Y") }} à {{ task.dateIsDone | date("H:i") }}</small></p>
                         <div>
                             <div class="container mt-2">
                                 <div class="row justify-content-center">
                                     <form action="{{ path('task_toggle', {'id' : task.id }) }}">
-                                        <p class="separator"><button class="btn btn-success btn-sm">Marquer non terminée</button> |</p>
+                                        <p class="separator"><button class="btn btn-success btn-sm">Marquer à faire</button> |</p>
                                     </form>
                                     <form action="{{ path('task_delete', {'id' : task.id }) }}">
                                         <p><button class="btn btn-danger btn-sm">Supprimer</button></p>
@@ -39,10 +40,4 @@
 
         {% endfor %}
 
-        {% if tasks | length == 0 %}
-            <div class="container">
-                <h3>Il n'y a pas de tâches à afficher</h3>
-            </div>
-        {% endif %}
-    </div>
 {% endblock %}

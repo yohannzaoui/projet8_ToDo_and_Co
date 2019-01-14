@@ -13,10 +13,43 @@ services:
     resource: '../../src/AppBundle/Controller'
     tags: ['controller.service_arguments']
 
-  AppBundle\Command\CreateUserCommand:
-    tags:
-      - { name: 'console.command', command: 'app:create-user' }
-
   AppBundle\Command\CreateAdminCommand:
     tags:
       - { name: 'console.command', command: 'app:create-admin' }
+
+  AppBundle\FormHandler\CreateTaskHandler:
+    tags:
+      - {name: 'create.task.handler'}
+
+  AppBundle\FormHandler\EditTaskHandler:
+    tags:
+      - {name: 'edit.task.handler'}
+
+  AppBundle\FormHandler\CreateUserHandler:
+    tags:
+      - {name: 'create.user.handler'}
+
+  AppBundle\FormHandler\EditPasswordHandler:
+    tags:
+      - {name: 'edit.password.handler'}
+
+  AppBundle\FormHandler\EditUserHandler:
+    tags:
+      - {name: 'edit.user.handler'}
+
+  AppBundle\Entity\User:
+    tags:
+      - {name: 'user.entity'}
+
+  AppBundle\Entity\Task:
+    tags:
+      - {name: 'task.entity'}
+
+  AppBundle\Repository\UserRepository:
+    tags:
+      - {name: 'user.repository'}
+
+  AppBundle\Repository\TaskRepository:
+    tags:
+      - {name: 'task.repository'}
+
