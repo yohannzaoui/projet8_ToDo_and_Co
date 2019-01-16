@@ -30,6 +30,7 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
     }
 
     /**
+     * @codeCoverageIgnore
      * @param string $username
      * @return UserInterface|void|null
      */

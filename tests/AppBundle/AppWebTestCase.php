@@ -49,4 +49,5 @@ class AppWebTestCase extends WebTestCase
         $cookie = new Cookie($session->getName(), $session->getId());
         $this->client->getCookieJar()->set($cookie);
     }
+
 }

@@ -41,4 +41,6 @@ class CreateAdminCommandTest extends KernelTestCase
         $output = $commandTester->getDisplay();
         $this->assertContains('You are about to create an admin-user.', $output);
     }
+
+
 }
