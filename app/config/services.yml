@@ -53,3 +53,6 @@ services:
     tags:
       - {name: 'task.repository'}
 
+  app.security.LoginFormAuthenticator:
+    class: AppBundle\Security\LoginFormAuthenticator
+
