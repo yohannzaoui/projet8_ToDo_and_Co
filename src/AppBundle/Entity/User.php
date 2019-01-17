@@ -72,15 +72,15 @@ class User implements UserInterface
     /**
      * @return int
      */
-    public function getId()
+    public function getId():int
     {
         return $this->id;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUsername()
+    public function getUsername(): ? string
     {
         return $this->username;
     }
@@ -96,15 +96,15 @@ class User implements UserInterface
     /**
      * @return string|null
      */
-    public function getSalt()
+    public function getSalt(): ? string
     {
         return null;
     }
 
     /**
-     * @return
+     * @return string|null
      */
-    public function getPassword()
+    public function getPassword(): ? string
     {
         return $this->password;
     }
@@ -118,9 +118,9 @@ class User implements UserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ? string
     {
         return $this->email;
     }
@@ -136,7 +136,7 @@ class User implements UserInterface
     /**
      * @return array
      */
-    public function getRoles()
+    public function getRoles(): array
     {
         return $this->roles;
     }
@@ -158,9 +158,9 @@ class User implements UserInterface
     }
 
     /**
-     * @return mixed
+     * @return Task
      */
-    public function getTask()
+    public function getTask(): Task
     {
         return $this->task;
     }
@@ -176,7 +176,7 @@ class User implements UserInterface
     /**
      * @return \DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
