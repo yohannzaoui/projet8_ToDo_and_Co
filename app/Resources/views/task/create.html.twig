@@ -4,12 +4,8 @@
     <h3>Créer une tâche</h3>
     <div class="row justify-content-lg-center">
         <div class="col-lg-6 col-md-12 col-sm-auto">
-        {{ form_start(form, {'action' : path('task_create')}) }}
-            {{ form_widget(form) }}
-
-            <button type="submit" name="add" class="btn btn-primary">Ajouter</button>
-            <button type="reset" class="btn btn-danger">Effacer</button>
-        {{ form_end(form) }}
+        {% form_theme form 'form/create_task_form.html.twig' %}
+            {{form(form)}}
         </div>
     </div>
     <p><a href="{{ path('task_list') }}" class="btn btn-primary">Retour à la liste des tâches</a></p>

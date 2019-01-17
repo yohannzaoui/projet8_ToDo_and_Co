@@ -1,0 +1,35 @@
+/*!
+ * Start Bootstrap - Shop Homepage (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body {
+    padding-top: 20px;
+}
+
+.task {
+    border-style: solid;
+    border-width: 1px;
+    margin-left: 5px
+}
+
+.center {
+    text-align: center;
+}
+
+.left {
+    text-align: left;
+}
+
+.background-nav {
+    background-color: #e3f2fd;
+}
+
+.font-white {
+    color: white;
+}
+
+.separator {
+    color: white;
+}
