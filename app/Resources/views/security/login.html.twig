@@ -12,18 +12,17 @@
         </div>
 
 <div class="row justify-content-md-center">
-    <form action="{{ path('login_check') }}" method="post">
 
+    <form action="{{ path('login_check') }}" method="post">
         <div class="form-group">
             <label for="username">Nom d'utilisateur :</label>
             <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" placeholder="Votre nom d'utilisateur">
         </div>
-
-
         <div class="form-group">
             <label for="password">Mot de passe :</label>
             <input type="password" class="form-control" id="password" name="_password" placeholder="Votre mot de passe">
         </div>
+
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         <button class="btn btn-success" type="submit">Se connecter</button>
         <button class="btn btn-danger" type="reset">Effacer</button>
