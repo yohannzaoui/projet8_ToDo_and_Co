@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "666f5e9a7bfd3ec367dc93cf3ff73bbd",
+    "content-hash": "8793464892eedbce2e81a037a7e8cf2e",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1841,30 +1841,30 @@
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "v3.2.0",
+            "version": "v3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/monolog-bundle.git",
-                "reference": "8781649349fe418d51d194f8c9d212c0b97c40dd"
+                "reference": "572e143afc03419a75ab002c80a2fd99299195ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/8781649349fe418d51d194f8c9d212c0b97c40dd",
-                "reference": "8781649349fe418d51d194f8c9d212c0b97c40dd",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/572e143afc03419a75ab002c80a2fd99299195ff",
+                "reference": "572e143afc03419a75ab002c80a2fd99299195ff",
                 "shasum": ""
             },
             "require": {
                 "monolog/monolog": "~1.22",
-                "php": ">=5.3.2",
-                "symfony/config": "~2.7|~3.0|~4.0",
-                "symfony/dependency-injection": "~2.7|~3.0|~4.0",
-                "symfony/http-kernel": "~2.7|~3.0|~4.0",
-                "symfony/monolog-bridge": "~2.7|~3.0|~4.0"
+                "php": ">=5.6",
+                "symfony/config": "~2.7|~3.3|~4.0",
+                "symfony/dependency-injection": "~2.7|~3.4.10|^4.0.10",
+                "symfony/http-kernel": "~2.7|~3.3|~4.0",
+                "symfony/monolog-bridge": "~2.7|~3.3|~4.0"
             },
             "require-dev": {
-                "symfony/console": "~2.3|~3.0|~4.0",
+                "symfony/console": "~2.7|~3.3|~4.0",
                 "symfony/phpunit-bridge": "^3.3|^4.0",
-                "symfony/yaml": "~2.3|~3.0|~4.0"
+                "symfony/yaml": "~2.7|~3.3|~4.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -1900,7 +1900,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2018-03-05T14:51:36+00:00"
+            "time": "2018-11-04T09:58:13+00:00"
         },
         {
             "name": "symfony/polyfill-apcu",
@@ -2389,16 +2389,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.4.0",
+            "version": "v3.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "0a47db379b8cc74cdd84e1e6870fafc4a4ac8351"
+                "reference": "c7a57e0bcc3c57ae697f072b3e862487b6fd0030"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/0a47db379b8cc74cdd84e1e6870fafc4a4ac8351",
-                "reference": "0a47db379b8cc74cdd84e1e6870fafc4a4ac8351",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/c7a57e0bcc3c57ae697f072b3e862487b6fd0030",
+                "reference": "c7a57e0bcc3c57ae697f072b3e862487b6fd0030",
                 "shasum": ""
             },
             "require": {
@@ -2412,16 +2412,16 @@
                 "psr/log": "~1.0",
                 "psr/simple-cache": "^1.0",
                 "symfony/polyfill-apcu": "~1.1",
+                "symfony/polyfill-ctype": "~1.8",
                 "symfony/polyfill-intl-icu": "~1.0",
                 "symfony/polyfill-mbstring": "~1.0",
                 "symfony/polyfill-php56": "~1.0",
                 "symfony/polyfill-php70": "~1.6",
-                "symfony/polyfill-util": "~1.0",
                 "twig/twig": "^1.35|^2.4.4"
             },
             "conflict": {
                 "phpdocumentor/reflection-docblock": "<3.0||>=3.2.0,<3.2.2",
-                "phpdocumentor/type-resolver": "<0.2.1",
+                "phpdocumentor/type-resolver": "<0.3.0",
                 "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0"
             },
             "provide": {
@@ -2540,20 +2540,20 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-11-30T16:56:19+00:00"
+            "time": "2019-01-06T15:54:26+00:00"
         },
         {
             "name": "twig/twig",
-            "version": "v2.6.0",
+            "version": "v2.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "a11dd39f5b6589e14f0ff3b36675d06047c589b1"
+                "reference": "7d7342c8a4059fefb9b8d07db0cc14007021f9b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/a11dd39f5b6589e14f0ff3b36675d06047c589b1",
-                "reference": "a11dd39f5b6589e14f0ff3b36675d06047c589b1",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/7d7342c8a4059fefb9b8d07db0cc14007021f9b7",
+                "reference": "7d7342c8a4059fefb9b8d07db0cc14007021f9b7",
                 "shasum": ""
             },
             "require": {
@@ -2607,7 +2607,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2018-12-16T10:36:48+00:00"
+            "time": "2019-01-14T15:00:48+00:00"
         }
     ],
     "packages-dev": [
@@ -3290,16 +3290,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.5.1",
+            "version": "7.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c23d78776ad415d5506e0679723cb461d71f488f"
+                "reference": "7c89093bd00f7d5ddf0ab81dee04f801416b4944"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c23d78776ad415d5506e0679723cb461d71f488f",
-                "reference": "c23d78776ad415d5506e0679723cb461d71f488f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7c89093bd00f7d5ddf0ab81dee04f801416b4944",
+                "reference": "7c89093bd00f7d5ddf0ab81dee04f801416b4944",
                 "shasum": ""
             },
             "require": {
@@ -3370,7 +3370,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-12-12T07:20:32+00:00"
+            "time": "2019-01-15T08:19:08+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -4087,7 +4087,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.5.9"
+        "php": ">=7.1"
     },
     "platform-dev": []
 }
