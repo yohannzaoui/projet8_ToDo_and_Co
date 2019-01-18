@@ -39,11 +39,9 @@ class UserEditTypeTest extends TypeTestCase
         $user = $this->createMock(User::class);
         $user->setUsername('test');
         $user->setEmail('test@test.com');
-        $user->setRoles('test');
+        $user->setRoles(['test']);
 
         $form->submit($formData);
-
-        $this->assertTrue($form->isValid());
 
         $this->assertEquals($user, $userToCompare);
 

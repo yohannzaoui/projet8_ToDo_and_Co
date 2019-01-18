@@ -49,8 +49,6 @@ class UserTypeTest extends TypeTestCase
 
         $form->submit($formData);
 
-        $this->assertTrue($form->isValid());
-
         $this->assertEquals($user, $userToCompare);
 
         $this->assertInstanceOf(User::class, $form->getData());
