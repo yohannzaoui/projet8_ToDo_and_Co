@@ -8,14 +8,6 @@
 
 namespace Tests\AppBundle\Controller;
 
-
-use AppBundle\Entity\Task;
-use AppBundle\Entity\User;
-use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tests\AppBundle\AppWebTestCase;
 
 /**
@@ -99,7 +91,7 @@ class TaskControllerTest extends AppWebTestCase
      */
     public function testCreateTaskForm()
     {
-        $this->logInCreateTask();
+        $this->logIn();
 
         $crawler = $this->client->request('GET', '/');
 
@@ -243,17 +235,4 @@ class TaskControllerTest extends AppWebTestCase
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
 
-    protected function logInCreateTask()
-    {
-        $session = $this->client->getContainer()->get('session');
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
-        $user = $em->getRepository(User::class)->findOneBy(['username'=>'admin']);
-
-        $token = new UsernamePasswordToken($user, null, 'main', ['ROLE_ADMIN']);
-        $session->set('_security_'.'main', serialize($token));
-        $session->save();
-
-        $cookie = new Cookie($session->getName(), $session->getId());
-        $this->client->getCookieJar()->set($cookie);
-    }
 }

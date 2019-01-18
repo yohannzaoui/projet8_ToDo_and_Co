@@ -8,7 +8,6 @@
 
 namespace Tests\AppBundle\Controller;
 
-
 use AppBundle\Controller\TaskController;
 use AppBundle\Entity\Task;
 use AppBundle\Repository\TaskRepository;
