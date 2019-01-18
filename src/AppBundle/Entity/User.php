@@ -88,7 +88,7 @@ class User implements UserInterface
     /**
      * @param $username
      */
-    public function setUsername($username)
+    public function setUsername(string $username)
     {
         $this->username = $username;
     }
@@ -112,7 +112,7 @@ class User implements UserInterface
     /**
      * @param $password
      */
-    public function setPassword($password)
+    public function setPassword(string $password)
     {
         $this->password = $password;
     }
@@ -128,7 +128,7 @@ class User implements UserInterface
     /**
      * @param $email
      */
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
     }
@@ -144,7 +144,7 @@ class User implements UserInterface
     /**
      * @param $roles
      */
-    public function setRoles($roles)
+    public function setRoles(array $roles)
     {
         $this->roles = $roles;
     }
@@ -184,7 +184,7 @@ class User implements UserInterface
     /**
      * @param mixed $createdAt
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
     }

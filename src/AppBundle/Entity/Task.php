@@ -80,9 +80,9 @@ class Task
     }
 
     /**
-     * @param $createdAt
+     * @param \DateTime $createdAt
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
     }
@@ -98,7 +98,7 @@ class Task
     /**
      * @param $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
@@ -114,7 +114,7 @@ class Task
     /**
      * @param $content
      */
-    public function setContent($content)
+    public function setContent(string $content)
     {
         $this->content = $content;
     }
@@ -130,7 +130,7 @@ class Task
     /**
      * @param $flag
      */
-    public function toggle($flag)
+    public function toggle(bool $flag)
     {
         $this->isDone = $flag;
     }
@@ -144,9 +144,9 @@ class Task
     }
 
     /**
-     * @param mixed $dateIsDone
+     * @param \DateTime $dateIsDone
      */
-    public function setDateIsDone($dateIsDone)
+    public function setDateIsDone(\DateTime $dateIsDone)
     {
         $this->dateIsDone = $dateIsDone;
     }
