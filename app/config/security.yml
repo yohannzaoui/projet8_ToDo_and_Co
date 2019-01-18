@@ -1,12 +1,28 @@
 security:
     encoders:
         AppBundle\Entity\User: bcrypt
+        Symfony\Component\Security\Core\User\User: plaintext
 
     providers:
+
+        chain_provider:
+            chain:
+                providers: [in_memory, doctrine]
+
+
+        in_memory:
+            memory:
+                users:
+                    admin1:
+                        password: passwordpassword
+                        roles: 'ROLE_ADMIN'
+
         doctrine:
             entity:
                 class: AppBundle:User
                 property: username
+
+
 
     firewalls:
         dev:

@@ -33,21 +33,24 @@ class AppWebTestCase extends WebTestCase
         $this->client = static::createClient();
     }
 
+
     /**
      *
      */
     protected function logIn()
     {
         $session = $this->client->getContainer()->get('session');
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
-        $user = $em->getRepository(User::class)->findOneBy(['username'=>'admin']);
+        //$em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        //$user = $em->getRepository(User::class)->findOneBy(['username'=>'admin']);
 
-        $token = new UsernamePasswordToken($user, null, 'main', ['ROLE_ADMIN']);
+        $token = new UsernamePasswordToken('admin1', null, 'main', ['ROLE_ADMIN']);
         $session->set('_security_'.'main', serialize($token));
         $session->save();
 
         $cookie = new Cookie($session->getName(), $session->getId());
         $this->client->getCookieJar()->set($cookie);
     }
+
+
 
 }

@@ -34,7 +34,7 @@ class UserTypeTest extends TypeTestCase
                 'second_option' => 'pass'
             ],
             'email' => 'test@test.com',
-            'roles' => 'test'
+            'roles' => ['test']
         ];
 
         $userToCompare = $this->createMock(User::class);
@@ -45,7 +45,7 @@ class UserTypeTest extends TypeTestCase
         $user->setUsername('test');
         $user->setPassword('pass');
         $user->setEmail('test@test.com');
-        $user->setRoles('test');
+        $user->setRoles(['test']);
 
         $form->submit($formData);
 

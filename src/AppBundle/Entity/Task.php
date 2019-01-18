@@ -160,9 +160,9 @@ class Task
     }
 
     /**
-     * @param mixed $user
+     * @param $user
      */
-    public function setUser(User $user)
+    public function setUser($user)
     {
         $this->user = $user;
     }
