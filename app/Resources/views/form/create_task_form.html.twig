@@ -1,8 +1,0 @@
-{% block form %}
-    {{ form_start(form, {'action' : path('task_create')}) }}
-    {{ form_widget(form) }}
-
-    <button type="submit" name="add" class="btn btn-primary">Ajouter</button>
-    <button type="reset" class="btn btn-danger">Effacer</button>
-    {{ form_end(form) }}
-{% endblock %}
