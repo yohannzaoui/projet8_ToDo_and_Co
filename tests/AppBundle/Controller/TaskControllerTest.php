@@ -44,6 +44,26 @@ class TaskControllerTest extends AppWebTestCase
             $crawler->filter('html:contains("Créer une tâche")')->count());
     }
 
+    /**
+     *
+     */
+    public function testGetTaskListPageFromHome()
+    {
+        $this->logIn();
+
+        $crawler = $this->client->request('GET', '/');
+
+        $link = $crawler->selectLink('Consulter la liste des tâches à faire')->link();
+
+        $crawler = $this->client->click($link);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $this->assertSame(
+            1,
+            $crawler->filter('html:contains("Liste des tâches terminées")')->count());
+    }
+
 
     /**
      *
@@ -192,6 +212,27 @@ class TaskControllerTest extends AppWebTestCase
         $this->client->request('GET', '/tasks-Is-Done');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+    }
+
+
+    /**
+     *
+     */
+    public function testGetDoneTaskListPageFromHome()
+    {
+        $this->logIn();
+
+        $crawler = $this->client->request('GET', '/');
+
+        $link = $crawler->selectLink('Consulter la liste des tâches terminées')->link();
+
+        $crawler = $this->client->click($link);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $this->assertSame(
+            1,
+            $crawler->filter('html:contains("Tâches terminées")')->count());
     }
 
 
