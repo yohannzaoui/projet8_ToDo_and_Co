@@ -145,18 +145,26 @@ class TaskController
      */
     public function editTask(Task $task, Request $request, EditTaskHandler $editTaskHandler)
     {
-        $form = $this->formFactory->create(TaskType::class, $task)
-            ->handleRequest($request);
 
-        if ($editTaskHandler->handle($form)) {
+        if ($task->getUser() == $this->tokenStorage->getToken()->getUser()) {
 
-            return new RedirectResponse($this->urlGenerator->generate('task_list'),
-                RedirectResponse::HTTP_FOUND);
+            $form = $this->formFactory->create(TaskType::class, $task)
+                ->handleRequest($request);
+
+            if ($editTaskHandler->handle($form)) {
+
+                return new RedirectResponse($this->urlGenerator->generate('task_list'),
+                    RedirectResponse::HTTP_FOUND);
+            }
+
+            return new Response($this->twig->render('task/edit.html.twig', [
+                'form' => $form->createView(),
+                'task' => $task,
+            ]), Response::HTTP_OK);
         }
 
-        return new Response($this->twig->render('task/edit.html.twig', [
-            'form' => $form->createView(),
-            'task' => $task,
+        return new Response($this->twig->render('error/error.html.twig', [
+            'error' => "Impossible d'éditer cette tâche."
         ]), Response::HTTP_OK);
     }
 
@@ -164,18 +172,28 @@ class TaskController
     /**
      * @Route(path="/tasks/delete/{id}", name="task_delete", methods={"GET"}, requirements={"id"="\d+"})
      * @param Task $task
-     * @return RedirectResponse
+     * @return RedirectResponse|Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function deleteTask(Task $task)
     {
-        $this->repository->delete($task);
+        if ($task->getUser() == $this->tokenStorage->getToken()->getUser()) {
 
-        $this->messageFlash->getFlashBag()->add('success', "Tâche supprimée.");
+            $this->repository->delete($task);
 
-        return new RedirectResponse($this->urlGenerator->generate('task_list'),
-            RedirectResponse::HTTP_FOUND);
+            $this->messageFlash->getFlashBag()->add('success', "Tâche supprimée.");
+
+            return new RedirectResponse($this->urlGenerator->generate('task_list'),
+                RedirectResponse::HTTP_FOUND);
+        }
+        return new Response($this->twig->render('error/error.html.twig', [
+            'error' => 'Impossible de supprimer cette tâche'
+        ]), Response::HTTP_OK);
+
     }
 
 
@@ -202,24 +220,36 @@ class TaskController
     /**
      * @Route(path="/tasks/{id}/toggle", name="task_toggle", methods={"GET"}, requirements={"id"="\d+"})
      * @param Task $task
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse|Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function toggleTask(Task $task)
     {
-        $task->toggle(!$task->isDone());
+        if ($task->getUser() == $this->tokenStorage->getToken()->getUser()) {
 
-        $task->setDateIsDone(new \DateTime());
+            $task->toggle(!$task->isDone());
 
-        $this->repository->update();
+            $task->setDateIsDone(new \DateTime());
 
-        if ($task->isDone() == false) {
+            $this->repository->update();
 
-            $this->messageFlash->getFlashBag()->add('success', sprintf('La tâche %s a bien été marquée : à faire.', $task->getTitle()));
+            if ($task->isDone() == false) {
+
+                $this->messageFlash->getFlashBag()->add('success', sprintf('La tâche %s a bien été marquée : à faire.', $task->getTitle()));
+            }
+
+            return new RedirectResponse($this->urlGenerator->generate('task_list'),
+                RedirectResponse::HTTP_FOUND);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('task_list'),
-            RedirectResponse::HTTP_FOUND);
+        return new Response($this->twig->render('error/error.html.twig', [
+            'error' => 'Impossible de marquer cette tâche.'
+        ]), Response::HTTP_OK);
+
     }
 
 }
