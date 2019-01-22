@@ -32,11 +32,29 @@ use Twig\Environment;
 class UserControllerUnitTest extends TestCase
 {
 
+    /**
+     * @var
+     */
     private $twig;
+    /**
+     * @var
+     */
     private $formFactory;
+    /**
+     * @var
+     */
     private $urlGenerator;
+    /**
+     * @var
+     */
     private $repository;
+    /**
+     * @var
+     */
     private $createUserHandler;
+    /**
+     * @var
+     */
     private $form;
 
 

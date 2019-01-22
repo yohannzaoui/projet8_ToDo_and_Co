@@ -212,89 +212,6 @@
       "value": ""
     }]
   }, {
-    "id": "0b3ad743-9df2-420b-ba43-b04fbbd3fbd9",
-    "name": "delete task",
-    "commands": [{
-      "id": "09ddcca5-5bce-4278-9544-798363b2203b",
-      "comment": "",
-      "command": "open",
-      "target": "/",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "cbf19a3a-18e2-49bf-a3ad-5665830e2998",
-      "comment": "",
-      "command": "setWindowSize",
-      "target": "1536x824",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "930ba606-f8da-4a4a-b298-37eb306e5fee",
-      "comment": "",
-      "command": "click",
-      "target": "css=a.btn.btn-info",
-      "targets": [
-        ["css=a.btn.btn-info", "css"],
-        ["css=.btn-info", "css:finder"],
-        ["xpath=//a[contains(text(),'Consulter la liste des tâches à faire')]", "xpath:link"],
-        ["xpath=(//a[contains(@href, '/tasks')])[3]", "xpath:href"],
-        ["xpath=//div[2]/a", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "758a7222-d5db-4563-afa1-7b61df9b0b6b",
-      "comment": "",
-      "command": "click",
-      "target": "css=.col-sm-4:nth-child(6) form:nth-child(3) .fas",
-      "targets": [
-        ["css=.col-sm-4:nth-child(6) form:nth-child(3) .fas", "css:finder"],
-        ["xpath=//div[6]/div/div/div/form[3]/p/button/i", "xpath:position"]
-      ],
-      "value": ""
-    }]
-  }, {
-    "id": "19a9e66e-b011-4dca-8d9d-aada94d068fb",
-    "name": "delete user",
-    "commands": [{
-      "id": "100f12e2-608f-4124-a0aa-491668b9e2a7",
-      "comment": "",
-      "command": "open",
-      "target": "/",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "1bd04f0d-7d3a-44ee-8e7a-3a3bccf66275",
-      "comment": "",
-      "command": "setWindowSize",
-      "target": "1536x824",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "c8feb3a8-06e0-4538-afcb-e2a62eef1b1c",
-      "comment": "",
-      "command": "click",
-      "target": "linkText=Gérer les utilisateurs",
-      "targets": [
-        ["linkText=Gérer les utilisateurs", "linkText"],
-        ["css=li:nth-child(3) > .nav-link", "css:finder"],
-        ["xpath=//a[contains(text(),'Gérer les utilisateurs')]", "xpath:link"],
-        ["xpath=//div[@id='navbarColor03']/ul/li[3]/a", "xpath:idRelative"],
-        ["xpath=//a[contains(@href, '/users')]", "xpath:href"],
-        ["xpath=//li[3]/a", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "39a753d9-9d71-4858-982d-f8960e169086",
-      "comment": "",
-      "command": "click",
-      "target": "css=tr:nth-child(6) .btn-danger > .fas",
-      "targets": [
-        ["css=tr:nth-child(6) .btn-danger > .fas", "css:finder"],
-        ["xpath=//tr[6]/td[4]/a[2]/i", "xpath:position"]
-      ],
-      "value": ""
-    }]
-  }, {
     "id": "92385daf-2aaf-4cb4-99e7-d761fdcb5233",
     "name": "task completed",
     "commands": [{
@@ -593,24 +510,123 @@
       "value": ""
     }]
   }, {
-    "id": "e1d59a4b-59cf-4b43-9789-9fa87775a988",
-    "name": "logout",
+    "id": "be1e8f6d-9de7-4c25-b1c7-2987140d65d1",
+    "name": "delete task",
     "commands": [{
-      "id": "2dd60662-4036-4b25-9c14-9bd0504eb2cc",
+      "id": "57dba1a3-9b82-48f3-bb8d-9f97310b5d77",
       "comment": "",
       "command": "open",
       "target": "/",
       "targets": [],
       "value": ""
     }, {
-      "id": "fdf3d388-96ec-4439-ad88-0f039ca3d63e",
+      "id": "e84f9a14-f28f-4927-ae9b-d73b4871381c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x824",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4d659126-e5f6-411e-b314-9511bf767906",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Consulter la liste des tâches à faire",
+      "targets": [
+        ["linkText=Consulter la liste des tâches à faire", "linkText"],
+        ["css=a.btn.btn-info", "css"],
+        ["css=.btn-info", "css:finder"],
+        ["xpath=//a[contains(text(),'Consulter la liste des tâches à faire')]", "xpath:link"],
+        ["xpath=(//a[contains(@href, '/tasks')])[2]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "09ce3ff8-132e-49a2-bc8d-4dd4ebd4a77e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-sm-4:nth-child(1) form:nth-child(2) .btn",
+      "targets": [
+        ["css=.col-sm-4:nth-child(1) form:nth-child(2) .btn", "css:finder"],
+        ["xpath=//form[2]/p/button", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "278882cb-524e-4361-bf32-dbadad47bac5",
+    "name": "delete user",
+    "commands": [{
+      "id": "8927b254-5db2-486d-9f4e-a339c7f7bca5",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "08a8baff-d5e9-49c2-a558-e1fb68046fcd",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x824",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f17828e3-1b6e-46cd-aa81-761eb12e5958",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Gérer les utilisateurs",
+      "targets": [
+        ["linkText=Gérer les utilisateurs", "linkText"],
+        ["css=a.nav-link", "css"],
+        ["css=li:nth-child(1) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Gérer les utilisateurs')]", "xpath:link"],
+        ["xpath=//div[@id='navbarColor03']/ul/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/users')]", "xpath:href"],
+        ["xpath=//li/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fba27e92-d224-401f-a366-53898b8dc39c",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(3) .btn-danger",
+      "targets": [
+        ["css=tr:nth-child(3) .btn-danger", "css:finder"],
+        ["xpath=(//a[contains(text(),'Supprimer')])[3]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/delete/user/58')]", "xpath:href"],
+        ["xpath=//tr[3]/td[4]/a[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a434c22e-e75f-4798-bc44-6cb8d44332f9",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=tr:nth-child(3) .btn-danger",
+      "targets": [
+        ["css=tr:nth-child(3) .btn-danger", "css:finder"],
+        ["xpath=(//a[contains(text(),'Supprimer')])[3]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/delete/user/62')]", "xpath:href"],
+        ["xpath=//tr[3]/td[4]/a[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "3e989c8e-26a2-457f-95bf-9ade1b477c36",
+    "name": "logout",
+    "commands": [{
+      "id": "ca1347da-7872-4b24-9818-411c3d6da53d",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "71be1818-6ddb-4747-b071-14451385eadc",
       "comment": "",
       "command": "setWindowSize",
       "target": "1552x840",
       "targets": [],
       "value": ""
     }, {
-      "id": "9b44fad4-7e66-47d6-82dd-9f2c47c2c41a",
+      "id": "22e486cd-f9dc-4b76-84b2-1569d4361d85",
       "comment": "",
       "command": "click",
       "target": "linkText=Se déconnecter",
@@ -624,7 +640,7 @@
       ],
       "value": ""
     }, {
-      "id": "7195846d-ec1a-43a6-8dcb-72edf4a72bcb",
+      "id": "f8957a9f-7ee9-4063-9cd6-df700f7b599b",
       "comment": "",
       "command": "type",
       "target": "id=username",
@@ -638,7 +654,7 @@
       ],
       "value": "Admin"
     }, {
-      "id": "9b807a35-af6b-4364-ba62-ea2ff57b0429",
+      "id": "1dbad663-7db8-402c-8ff4-e13f40b8f33e",
       "comment": "",
       "command": "type",
       "target": "id=password",
@@ -650,7 +666,7 @@
         ["xpath=//input[@id='password']", "xpath:attributes"],
         ["xpath=//div[2]/input", "xpath:position"]
       ],
-      "value": "azertyui"
+      "value": "1234567890"
     }]
   }],
   "suites": [{
@@ -661,6 +677,6 @@
     "timeout": 300,
     "tests": ["8241ca1a-d747-422a-a477-9f8d5fd82a72"]
   }],
-  "urls": ["https://127.0.0.1:8000/"],
+  "urls": ["https://127.0.0.1:8000/", "http://127.0.0.1:8000/"],
   "plugins": []
 }
