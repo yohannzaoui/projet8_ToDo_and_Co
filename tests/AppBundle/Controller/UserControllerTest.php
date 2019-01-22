@@ -18,6 +18,43 @@ use Tests\AppBundle\AppWebTestCase;
 class UserControllerTest extends AppWebTestCase
 {
 
+    /**
+     *
+     */
+    public function testGetListUserPageFromHomePage()
+    {
+        $this->logIn();
+
+        $crawler = $this->client->request('GET', '/');
+
+        $link = $crawler->selectLink('Gérer les utilisateurs')->link();
+
+        $crawler = $this->client->click($link);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $this->assertSame(1, $crawler->filter('html:contains("Liste des utilisateurs")')->count());
+    }
+
+
+    /**
+     *
+     */
+    public function testGetCreateUserPageFromHomePage()
+    {
+        $this->logIn();
+
+        $crawler = $this->client->request('GET', '/');
+
+        $link = $crawler->selectLink('Créer un utilisateur')->link();
+
+        $crawler = $this->client->click($link);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $this->assertSame(1, $crawler->filter('html:contains("Créer un utilisateur")')->count());
+    }
+
 
     /**
      *
@@ -31,8 +68,7 @@ class UserControllerTest extends AppWebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $this->assertSame(
-            1,
-            $crawler->filter('html:contains("Créer un utilisateur")')->count());
+            1, $crawler->filter('html:contains("Créer un utilisateur")')->count());
     }
 
 
@@ -48,9 +84,10 @@ class UserControllerTest extends AppWebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
-
-
-    /*public function testCreateUserForm()
+    /**
+     *
+     */
+    public function testCreateUserForm()
     {
         $this->logIn();
 
@@ -58,20 +95,20 @@ class UserControllerTest extends AppWebTestCase
 
         $form = $crawler->selectButton('Ajouter')->form();
 
-        //$string = str_shuffle('azertyuiopqsdfghjklm12345');
+        $string = str_shuffle('azertyuiopqsdfghjklm12345');
 
-        $form['user[username]'] = 'test';
+        $form['user[username]'] = $string;
         $form['user[password][first]'] = 'azertyui';
         $form['user[password][second]'] = 'azertyui';
-        $form['user[email]'] = 'test@email.com';
-        $form['user[roles]'] = 'ROLE_USER';
+        $form['user[email]'] = $string.'@email.com';
+        $form['user[roles]'] = ['ROLE_USER'];
 
         $this->client->submit($form);
 
         $crawler = $this->client->followRedirect();
 
         $this->assertSame(1, $crawler->filter('div.alert.alert-dismissible.alert-success')->count());
-    }*/
+    }
 
 
     /**
@@ -167,9 +204,7 @@ class UserControllerTest extends AppWebTestCase
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertSame(
-            1,
-            $crawler->filter('html:contains("Modifier")')->count());
+        $this->assertSame(1, $crawler->filter('html:contains("Modifier")')->count());
     }
 
 
@@ -197,9 +232,7 @@ class UserControllerTest extends AppWebTestCase
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertSame(
-            1,
-            $crawler->filter('html:contains("Liste des utilisateurs")')->count());
+        $this->assertSame(1, $crawler->filter('html:contains("Liste des utilisateurs")')->count());
     }
 
 
@@ -236,9 +269,7 @@ class UserControllerTest extends AppWebTestCase
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertSame(
-            1,
-            $crawler->filter('html:contains("Modifier le mot de passe de")')->count());
+        $this->assertSame(1, $crawler->filter('html:contains("Modifier le mot de passe de")')->count());
     }
 
 

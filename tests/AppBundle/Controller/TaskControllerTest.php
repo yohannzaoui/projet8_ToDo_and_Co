@@ -138,7 +138,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $crawler = $this->client->request('GET', '/tasks/edit/2');
+        $crawler = $this->client->request('GET', '/tasks/edit/4');
 
         $form = $crawler->selectButton('Modifier')->form();
         $form['task[title]'] = 'functional test title';
@@ -157,7 +157,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->login();
 
-        $this->client->request('GET', '/tasks/delete/2');
+        $this->client->request('GET', '/tasks/delete/4');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -168,7 +168,7 @@ class TaskControllerTest extends AppWebTestCase
      */
     public function testTaskEditRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/tasks/edit/2');
+        $this->client->request('GET', '/tasks/edit/4');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -181,13 +181,11 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $crawler = $this->client->request('GET', '/tasks/edit/2');
+        $crawler = $this->client->request('GET', '/tasks/edit/4');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertSame(
-            1,
-            $crawler->filter('html:contains("Modifier la tâche")')->count());
+        $this->assertSame(1, $crawler->filter('html:contains("Modifier la tâche")')->count());
     }
 
 
@@ -198,7 +196,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $this->client->request('POST', '/tasks/edit/2');
+        $this->client->request('POST', '/tasks/edit/4');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
@@ -218,7 +216,7 @@ class TaskControllerTest extends AppWebTestCase
     /**
      *
      */
-    public function testGetDoneTaskListPageFromHome()
+    public function testGetDoneTaskListPageFromHomePage()
     {
         $this->logIn();
 
@@ -230,9 +228,7 @@ class TaskControllerTest extends AppWebTestCase
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertSame(
-            1,
-            $crawler->filter('html:contains("Tâches terminées")')->count());
+        $this->assertSame(1, $crawler->filter('html:contains("Retour à la liste des tâches")')->count());
     }
 
 
@@ -247,9 +243,7 @@ class TaskControllerTest extends AppWebTestCase
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertSame(
-            1,
-            $crawler->filter('html:contains("Retour à la liste des tâches")')->count());
+        $this->assertSame(1, $crawler->filter('html:contains("Retour à la liste des tâches")')->count());
     }
 
 
@@ -271,7 +265,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $this->client->request('GET', '/tasks/2/toggle');
+        $this->client->request('GET', '/tasks/4/toggle');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
