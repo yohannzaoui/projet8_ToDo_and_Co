@@ -10,6 +10,7 @@ namespace Tests\AppBundle\Controller;
 
 use AppBundle\Controller\TaskController;
 use AppBundle\Entity\Task;
+use AppBundle\Entity\User;
 use AppBundle\Repository\TaskRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -234,9 +235,17 @@ class TaskControllerUnitTest extends TestCase
     /**
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function testDeleteTaskRedirection()
     {
+        $user = $this->createMock(TokenInterface::class);
+        $user->method('getUser')->willReturn($user);
+
+        $this->tokenStorage->method('getToken')->willReturn($user);
+
         $task = $this->createMock(Task::class);
 
         $this->urlGenerator->method('generate')->willReturn('task_list');
@@ -254,7 +263,7 @@ class TaskControllerUnitTest extends TestCase
             $this->messageFlash
         );
 
-        $this->assertInstanceOf(RedirectResponse::class,
+        $this->assertInstanceOf(Response::class,
             $taskController->deleteTask($task));
     }
 
@@ -287,16 +296,21 @@ class TaskControllerUnitTest extends TestCase
     /**
      * @throws \Exception
      */
-    public function testToggleTaskRedirection()
+    public function testToggleTaskResponse()
     {
+        $user = $this->createMock(TokenInterface::class);
+        $user->method('getUser')->willReturn($user);
+
+        $this->tokenStorage->method('getToken')->willReturn($user);
+
         $task = $this->createMock(Task::class);
 
         $this->urlGenerator->method('generate')->willReturn('task_list');
 
-            $addFlash = $this->createMock(FlashBagInterface::class);
-            $addFlash->method('add')->willReturn('test');
+            //$addFlash = $this->createMock(FlashBagInterface::class);
+            //$addFlash->method('add')->willReturn('test');
 
-            $this->messageFlash->method('getFlashBag')->willReturn($addFlash);
+            //$this->messageFlash->method('getFlashBag')->willReturn($addFlash);
 
         $taskController = new TaskController($this->repository,
             $this->tokenStorage,
@@ -306,7 +320,38 @@ class TaskControllerUnitTest extends TestCase
             $this->messageFlash
         );
 
-        $this->assertInstanceOf(RedirectResponse::class,
+        $this->assertInstanceOf(Response::class,
+            $taskController->toggleTask($task));
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testToggleTaskRedirect()
+    {
+        $task = $this->createMock(Task::class);
+
+        $user = $this->createMock(TokenInterface::class);
+        $user->method('getUser')->willReturn($user);
+
+        $this->tokenStorage->method('getToken')->willReturn($user);
+
+        $this->urlGenerator->method('generate')->willReturn('task_list');
+
+        $addFlash = $this->createMock(FlashBagInterface::class);
+        $addFlash->method('add')->willReturn('test');
+
+        $this->messageFlash->method('getFlashBag')->willReturn($addFlash);
+
+        $taskController = new TaskController($this->repository,
+            $this->tokenStorage,
+            $this->twig,
+            $this->formFactory,
+            $this->urlGenerator,
+            $this->messageFlash
+        );
+
+        $this->assertInstanceOf(Response::class,
             $taskController->toggleTask($task));
     }
 }
