@@ -31,25 +31,4 @@ class SecurityControllerTest extends AppWebTestCase
         static::assertSame(1, $crawler->filter('html:contains("Mot de passe :")')->count());
     }
 
-
-    /**
-     *
-     */
-    public function testLoginCheck()
-    {
-        $this->client->request('POST', '/login_check');
-
-        static::assertEquals(302, $this->client->getResponse()->getStatusCode());
-    }
-
-
-    /**
-     *
-     */
-    public function testLogoutCheck()
-    {
-        $this->client->request('GET', '/login');
-
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode());
-    }
 }

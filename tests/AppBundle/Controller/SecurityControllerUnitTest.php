@@ -38,32 +38,4 @@ class SecurityControllerUnitTest extends TestCase
         );
     }
 
-
-    /**
-     *
-     */
-    public function testLoginCheckResponse()
-    {
-        $controller = new SecurityController();
-
-        static::assertSame(
-            null,
-            $controller->loginCheck()
-        );
-    }
-
-
-    /**
-     *
-     */
-    public function testLogoutCheckResponse()
-    {
-        $controller = new SecurityController();
-
-        static::assertSame(
-            null,
-            $controller->logoutCheck()
-        );
-    }
-
 }
