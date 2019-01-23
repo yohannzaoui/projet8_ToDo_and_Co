@@ -16,14 +16,13 @@
         </div>
     {% else %}
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col col-lg-12 col-md-12 col-sm-12">
             <table class="table">
                 <thead>
                 <tr>
                     <th>#</th>
                     <th>Nom d'utilisateur</th>
                     <th>Adresse d'utilisateur</th>
-                    <th>Inscrit depuis le</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -33,7 +32,6 @@
                         <th scope="row">{{ loop.index }}</th>
                         <td>{{ user.username }}</td>
                         <td>{{ user.email }}</td>
-                        <td>{{ user.createdAt | date("d/m/Y")}}</td>
                         <td>
                             <a href="{{ path('user_edit', {'id' : user.id}) }}" class="btn btn-success btn-sm">Modifier</a>
                             <a href="{{ path('user_delete', {'id' : user.id}) }}" class="btn btn-danger btn-sm">Supprimer</a>
