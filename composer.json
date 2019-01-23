@@ -6,9 +6,10 @@
         "psr-4": {
             "": "src/"
         },
+
         "classmap": [
-            "app/AppKernel.php",
-            "app/AppCache.php"
+            "app/AppCache.php",
+            "app/AppKernel.php"
         ]
     },
     "autoload-dev": {
@@ -27,16 +28,15 @@
         "sensio/distribution-bundle": "^5.0.24",
         "sensio/framework-extra-bundle": "^5.0.0",
         "incenteev/composer-parameter-handler": "^2.0",
-        "symfony/profiler-pack": "^1.0",
-        "twig/twig": "^2.0",
-        "symfony/swiftmailer-bundle": "^2.6.4"
+        "twig/twig": "^2.0"
     },
 
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "dama/doctrine-test-bundle": "^5.0",
         "phpunit/phpunit": "^7.5",
-        "phpunit/php-code-coverage": "^6.1"
+        "phpunit/php-code-coverage": "^6.1",
+        "symfony/profiler-pack": "^1.0"
     },
     "scripts": {
         "symfony-scripts": [
