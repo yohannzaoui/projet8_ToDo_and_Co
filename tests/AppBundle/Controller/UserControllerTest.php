@@ -33,7 +33,7 @@ class UserControllerTest extends AppWebTestCase
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertSame(1, $crawler->filter('html:contains("Liste des utilisateurs")')->count());
+        $this->assertSame(1, $crawler->filter('html:contains("Nom d\'utilisateur")')->count());
     }
 
 
@@ -118,7 +118,7 @@ class UserControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $crawler = $this->client->request('POST', '/user/password/3');
+        $crawler = $this->client->request('POST', '/user/password/79');
 
         $form = $crawler->selectButton('Modifier')->form();
 
@@ -140,7 +140,7 @@ class UserControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $crawler = $this->client->request('POST', '/users/3/edit');
+        $crawler = $this->client->request('POST', '/users/79/edit');
 
         $form = $crawler->selectButton('Modifier')->form();
 
@@ -163,7 +163,7 @@ class UserControllerTest extends AppWebTestCase
      */
     public function testDeleteUserIfNoLogin()
     {
-        $this->client->request('GET', '/delete/user/3');
+        $this->client->request('GET', '/delete/user/79');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -176,7 +176,7 @@ class UserControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $this->client->request('GET', '/delete/user/3');
+        $this->client->request('GET', '/delete/user/79');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -187,7 +187,7 @@ class UserControllerTest extends AppWebTestCase
      */
     public function testUserEditRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/users/3/edit');
+        $this->client->request('GET', '/users/79/edit');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -200,7 +200,7 @@ class UserControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $crawler = $this->client->request('GET', '/users/3/edit');
+        $crawler = $this->client->request('GET', '/users/79/edit');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -215,7 +215,7 @@ class UserControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $this->client->request('POST', '/users/3/edit');
+        $this->client->request('POST', '/users/79/edit');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
@@ -232,7 +232,7 @@ class UserControllerTest extends AppWebTestCase
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertSame(1, $crawler->filter('html:contains("Liste des utilisateurs")')->count());
+        $this->assertSame(1, $crawler->filter('html:contains("Nom d\'utilisateur")')->count());
     }
 
 
@@ -265,7 +265,7 @@ class UserControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $crawler = $this->client->request('GET', '/user/password/3');
+        $crawler = $this->client->request('GET', '/user/password/79');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -280,7 +280,7 @@ class UserControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $this->client->request('POST', '/user/password/3');
+        $this->client->request('POST', '/user/password/79');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }

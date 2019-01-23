@@ -208,7 +208,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         if (!$this->logIn()) {
 
-            $this->client->request('POST', '/tasks/edit/10');
+            $this->client->request('POST', '/tasks/edit/18');
 
             $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         }
@@ -291,7 +291,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         if (!$this->logIn()) {
 
-            $this->client->request('GET', '/tasks/10/toggle');
+            $this->client->request('GET', '/tasks/18/toggle');
 
             $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         }

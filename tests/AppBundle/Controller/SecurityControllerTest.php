@@ -27,8 +27,8 @@ class SecurityControllerTest extends AppWebTestCase
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        static::assertSame(1, $crawler->filter('html:contains("Nom d\'utilisateur :")')->count());
-        static::assertSame(1, $crawler->filter('html:contains("Mot de passe :")')->count());
+        static::assertSame(1, $crawler->filter('html:contains("Nom d\'utilisateur")')->count());
+        static::assertSame(1, $crawler->filter('html:contains("Mot de passe")')->count());
     }
 
 }
