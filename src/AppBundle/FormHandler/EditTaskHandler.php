@@ -6,6 +6,8 @@
  * Time: 23:21
  */
 
+declare(strict_types=1);
+
 namespace AppBundle\FormHandler;
 
 use AppBundle\Repository\TaskRepository;

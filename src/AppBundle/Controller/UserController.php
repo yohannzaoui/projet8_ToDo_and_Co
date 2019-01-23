@@ -6,6 +6,8 @@
  * Time: 14:50
  */
 
+declare(strict_types=1);
+
 namespace AppBundle\Controller;
 
 use AppBundle\Form\UserEditPasswordType;

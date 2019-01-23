@@ -6,6 +6,8 @@
  * Time: 13:31
  */
 
+declare(strict_types=1);
+
 namespace AppBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;

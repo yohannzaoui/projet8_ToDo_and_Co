@@ -6,6 +6,8 @@
  * Time: 23:37
  */
 
+declare(strict_types=1);
+
 namespace AppBundle\FormHandler;
 
 use AppBundle\Entity\User;

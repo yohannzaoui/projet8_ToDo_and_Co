@@ -6,6 +6,8 @@
  * Time: 14:46
  */
 
+declare(strict_types=1);
+
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Task;

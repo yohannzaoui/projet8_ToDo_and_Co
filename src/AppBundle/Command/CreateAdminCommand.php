@@ -6,6 +6,8 @@
  * Time: 12:31
  */
 
+declare(strict_types=1);
+
 namespace AppBundle\Command;
 
 use AppBundle\Entity\User;
