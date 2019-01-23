@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-        <div class="row justify-content-md-center">
-            <p class="center"><img class="slide-image" src="{{ asset('img/todolist_homepage.jpg') }}" alt="Responsive image"></p>
+        <div class="row justify-content-center">
+            <p class="center"><img class="img-fluid" src="{{ asset('img/todolist_homepage.jpg') }}" alt="Responsive image"></p>
             {% if error %}
                 <div class="alert alert-danger" role="alert">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -11,23 +11,28 @@
             {% endif %}
         </div>
 
-<div class="row justify-content-md-center">
+<div class="row justify-content-center">
 
-    <form action="{{ path('login_check') }}" method="post">
+    <form class="form-inline" action="{{ path('login_check') }}" method="post">
+        <div class="col col-auto">
         <div class="form-group">
-            <label for="username">Nom d'utilisateur :</label>
+            <label for="username">Nom d'utilisateur </label>
             <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" placeholder="Votre nom d'utilisateur">
         </div>
+        </div>
+        <div class="col col-auto">
         <div class="form-group">
-            <label for="password">Mot de passe :</label>
+            <label for="password">Mot de passe </label>
             <input type="password" class="form-control" id="password" name="_password" placeholder="Votre mot de passe">
+        </div>
         </div>
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <div class="col col-auto">
         <button class="btn btn-success" type="submit">Se connecter</button>
         <button class="btn btn-danger" type="reset">Effacer</button>
+        </div>
     </form>
-
 </div>
 
 
