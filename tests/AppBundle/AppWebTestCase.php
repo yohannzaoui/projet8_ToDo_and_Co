@@ -28,7 +28,7 @@ class AppWebTestCase extends WebTestCase
     /**
      *
      */
-    protected function setUp()
+    public function setUp()
     {
         $this->client = static::createClient();
     }

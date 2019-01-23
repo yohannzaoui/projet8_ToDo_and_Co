@@ -53,7 +53,7 @@ class TaskControllerTest extends AppWebTestCase
 
         $crawler = $this->client->request('GET', '/');
 
-        $link = $crawler->selectLink('Consulter la liste des tâches à faire')->link();
+        $link = $crawler->selectLink('Consulter les tâches à faire')->link();
 
         $crawler = $this->client->click($link);
 
@@ -236,7 +236,7 @@ class TaskControllerTest extends AppWebTestCase
 
         $crawler = $this->client->request('GET', '/');
 
-        $link = $crawler->selectLink('Consulter la liste des tâches terminées')->link();
+        $link = $crawler->selectLink('Consulter les tâches terminées')->link();
 
         $crawler = $this->client->click($link);
 
