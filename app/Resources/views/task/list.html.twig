@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% block header_img %}<p><img class="slide-image" src="{{ asset('img/todolist_content.jpg') }}" alt="todo list"></p>{% endblock %}
+    <p><img class="slide-image" src="{{ asset('img/todolist_content.jpg') }}" alt="todo list"></p>
 
     <p><a href="{{ path('task_create') }}" class="btn btn-primary">Créer une tâche</a>
     <a href="{{ path('tasks_is_done') }}" class="btn btn-info">Liste des tâches terminées</a></p>
@@ -38,7 +38,6 @@
                     </form>
                     </div>
                 </div>
-
         </div>
 
         {% endfor %}
