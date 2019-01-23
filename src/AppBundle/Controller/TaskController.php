@@ -93,7 +93,7 @@ class TaskController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function tasksList()
+    public function tasksList(): Response
     {
         $tasks = $this->repository->findBy([
                 'user' => $this->tokenStorage->getToken()->getUser()
@@ -112,7 +112,7 @@ class TaskController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function createTask(Request $request, CreateTaskHandler $createTaskHandler)
+    public function createTask(Request $request, CreateTaskHandler $createTaskHandler): Response
     {
         $task = new Task();
 
@@ -143,7 +143,7 @@ class TaskController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function editTask(Task $task, Request $request, EditTaskHandler $editTaskHandler)
+    public function editTask(Task $task, Request $request, EditTaskHandler $editTaskHandler): Response
     {
 
         if ($task->getUser() == $this->tokenStorage->getToken()->getUser()) {
@@ -179,7 +179,7 @@ class TaskController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function deleteTask(Task $task)
+    public function deleteTask(Task $task): Response
     {
         if ($task->getUser() == $this->tokenStorage->getToken()->getUser()) {
 
@@ -204,7 +204,7 @@ class TaskController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function taskIsDone()
+    public function taskIsDone(): Response
     {
         $tasks = $this->repository->findBy([
             'user' => $this->tokenStorage->getToken()->getUser(),
@@ -227,7 +227,7 @@ class TaskController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function toggleTask(Task $task)
+    public function toggleTask(Task $task): Response
     {
         if ($task->getUser() == $this->tokenStorage->getToken()->getUser()) {
 

@@ -59,7 +59,7 @@ class CreateUserHandler
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function handle(FormInterface $form, User $user)
+    public function handle(FormInterface $form, User $user): bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
 

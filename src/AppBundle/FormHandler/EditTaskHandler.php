@@ -47,7 +47,7 @@ class EditTaskHandler
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function handle(FormInterface $form)
+    public function handle(FormInterface $form): bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
 

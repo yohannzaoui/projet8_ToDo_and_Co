@@ -53,7 +53,7 @@ class CreateTaskHandler
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function handle(FormInterface $form, Task $task)
+    public function handle(FormInterface $form, Task $task): bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
 

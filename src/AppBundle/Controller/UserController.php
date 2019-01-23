@@ -79,7 +79,7 @@ class UserController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function createUser(Request $request, CreateUserHandler $createUserHandler)
+    public function createUser(Request $request, CreateUserHandler $createUserHandler): Response
     {
         $user = new User();
 
@@ -107,7 +107,7 @@ class UserController
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function deleteUser(User $user, TokenStorageInterface $tokenStorage, SessionInterface $messageFlash)
+    public function deleteUser(User $user, TokenStorageInterface $tokenStorage, SessionInterface $messageFlash): Response
     {
         if ($user != $tokenStorage->getToken()->getUser()) {
 
@@ -133,7 +133,7 @@ class UserController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function editUser(User $user, Request $request, EditUserHandler $editUserHandler)
+    public function editUser(User $user, Request $request, EditUserHandler $editUserHandler):Response
     {
         $form = $this->formFactory->create(UserEditType::class, $user)
             ->handleRequest($request);
@@ -157,7 +157,7 @@ class UserController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function listUsers()
+    public function listUsers(): Response
     {
         $users = $this->repository->findAll();
 
@@ -178,7 +178,7 @@ class UserController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function userEditPassword(User $user, Request $request, EditPasswordHandler $editPasswordHandler)
+    public function userEditPassword(User $user, Request $request, EditPasswordHandler $editPasswordHandler): Response
     {
         $form = $this->formFactory->create(UserEditPasswordType::class, $user)
             ->handleRequest($request);

@@ -20,7 +20,7 @@ class DefaultController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function home(Environment $twig)
+    public function home(Environment $twig): Response
     {
         return new Response($twig->render('default/index.html.twig'),
             Response::HTTP_OK);
