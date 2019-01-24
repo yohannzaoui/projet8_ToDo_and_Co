@@ -5,11 +5,11 @@ ToDoList
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/96bff9fc7d6cd02562bb/maintainability)](https://codeclimate.com/github/yohannzaoui/projet8_ToDo_and_Co/maintainability)
 
-Developped with the Symfony 3.4 framework
-CSS : Bootstrap 4
-PHPUnit
+- Developped with the Symfony 3.4 framework
+- CSS : Bootstrap 4
+- PHPUnit
 
 Install application :
-Clone or download the repository into your environment. https://github.com/yohannzaoui/projet8_ToDo_and_Co.git
+- Clone or download the repository into your environment. https://github.com/yohannzaoui/projet8_ToDo_and_Co.git
 
-composer install and enter your parameters database
+- composer install and enter your parameters database
