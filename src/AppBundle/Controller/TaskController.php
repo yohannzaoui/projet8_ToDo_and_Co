@@ -166,7 +166,7 @@ class TaskController
         }
 
         return new Response($this->twig->render('error/error.html.twig', [
-            'error' => "Impossible d'éditer cette tâche."
+            'error' => "Erreur : Impossible d'éditer cette tâche."
         ]), Response::HTTP_OK);
     }
 
@@ -193,7 +193,7 @@ class TaskController
                 RedirectResponse::HTTP_FOUND);
         }
         return new Response($this->twig->render('error/error.html.twig', [
-            'error' => 'Impossible de supprimer cette tâche'
+            'error' => 'Erreur : Impossible de supprimer cette tâche'
         ]), Response::HTTP_OK);
 
     }
@@ -222,7 +222,7 @@ class TaskController
     /**
      * @Route(path="/tasks/{id}/toggle", name="task_toggle", methods={"GET"}, requirements={"id"="\d+"})
      * @param Task $task
-     * @return RedirectResponse|Response
+     * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Twig_Error_Loader
@@ -249,7 +249,7 @@ class TaskController
         }
 
         return new Response($this->twig->render('error/error.html.twig', [
-            'error' => 'Impossible de marquer cette tâche.'
+            'error' => 'Erreur : Impossible de marquer cette tâche.'
         ]), Response::HTTP_OK);
 
     }
