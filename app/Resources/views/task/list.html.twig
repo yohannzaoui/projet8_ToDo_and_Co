@@ -16,9 +16,7 @@
     <hr>
     <div class="row justify-content-lg-center">
         {% for task in tasks %}
-
         <div class="col-sm-4 col-lg-3 col-md-4 mb-3 task">
-
                     <h4 class="left">
                         <a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a>
                         {% if task.isDone %}
@@ -27,9 +25,7 @@
                             <i class="fas fa-times"></i>
                         {% endif %}
                     </h4>
-
                     <p>{{ task.content }}</p>
-
                     <p><small>Ajoutée le: {{ task.createdAt | date("d/m/Y") }} à {{ task.createdAt | date("H:i") }}</small></p>
                 <div class="container mt-2">
                     <div class="row justify-content-center">
