@@ -13,3 +13,5 @@ Install application :
 - Clone or download the repository into your environment. https://github.com/yohannzaoui/projet8_ToDo_and_Co.git
 
 - composer install and enter your parameters database
+- php bin/console doctrine:database:create
+- php bin/console doctrine:schema:update --force
