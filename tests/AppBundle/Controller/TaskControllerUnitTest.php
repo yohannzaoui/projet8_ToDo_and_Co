@@ -24,6 +24,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Twig\Environment;
 
 /**
@@ -66,6 +67,11 @@ class TaskControllerUnitTest extends TestCase
      */
     private $form;
 
+    /**
+     * @var
+     */
+    private $authorization;
+
 
     /**
      *
@@ -80,6 +86,7 @@ class TaskControllerUnitTest extends TestCase
         $this->messageFlash = $this->createMock(Session::class);
         $this->createTaskHandler = $this->createMock(CreateTaskHandler::class);
         $this->form = $this->createMock(FormInterface::class);
+        $this->authorization = $this->createMock(AuthorizationCheckerInterface::class);
     }
 
 
@@ -94,7 +101,8 @@ class TaskControllerUnitTest extends TestCase
             $this->twig,
             $this->formFactory,
             $this->urlGenerator,
-            $this->messageFlash
+            $this->messageFlash,
+            $this->authorization
         );
 
         static::assertInstanceOf(TaskController::class, $controller);
@@ -118,7 +126,8 @@ class TaskControllerUnitTest extends TestCase
             $this->twig,
             $this->formFactory,
             $this->urlGenerator,
-            $this->messageFlash
+            $this->messageFlash,
+            $this->authorization
         );
 
         $this->assertInstanceOf(Response::class,
@@ -143,7 +152,8 @@ class TaskControllerUnitTest extends TestCase
             $this->twig,
             $this->formFactory,
             $this->urlGenerator,
-            $this->messageFlash
+            $this->messageFlash,
+            $this->authorization
         );
 
         $this->assertInstanceOf(Response::class,
@@ -170,7 +180,8 @@ class TaskControllerUnitTest extends TestCase
             $this->twig,
             $this->formFactory,
             $this->urlGenerator,
-            $this->messageFlash
+            $this->messageFlash,
+            $this->authorization
         );
 
         $this->assertInstanceOf(RedirectResponse::class,
@@ -196,7 +207,8 @@ class TaskControllerUnitTest extends TestCase
             $this->twig,
             $this->formFactory,
             $this->urlGenerator,
-            $this->messageFlash
+            $this->messageFlash,
+            $this->authorization
         );
 
         $this->assertInstanceOf(Response::class,
@@ -224,7 +236,8 @@ class TaskControllerUnitTest extends TestCase
             $this->twig,
             $this->formFactory,
             $this->urlGenerator,
-            $this->messageFlash
+            $this->messageFlash,
+            $this->authorization
         );
 
         $this->assertInstanceOf(RedirectResponse::class,
@@ -260,7 +273,8 @@ class TaskControllerUnitTest extends TestCase
             $this->twig,
             $this->formFactory,
             $this->urlGenerator,
-            $this->messageFlash
+            $this->messageFlash,
+            $this->authorization
         );
 
         $this->assertInstanceOf(Response::class,
@@ -285,7 +299,8 @@ class TaskControllerUnitTest extends TestCase
             $this->twig,
             $this->formFactory,
             $this->urlGenerator,
-            $this->messageFlash
+            $this->messageFlash,
+            $this->authorization
         );
 
         $this->assertInstanceOf(Response::class,
@@ -317,7 +332,8 @@ class TaskControllerUnitTest extends TestCase
             $this->twig,
             $this->formFactory,
             $this->urlGenerator,
-            $this->messageFlash
+            $this->messageFlash,
+            $this->authorization
         );
 
         $this->assertInstanceOf(Response::class,
@@ -348,7 +364,8 @@ class TaskControllerUnitTest extends TestCase
             $this->twig,
             $this->formFactory,
             $this->urlGenerator,
-            $this->messageFlash
+            $this->messageFlash,
+            $this->authorization
         );
 
         $this->assertInstanceOf(Response::class,

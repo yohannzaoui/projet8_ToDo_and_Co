@@ -138,7 +138,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $crawler = $this->client->request('GET', '/tasks/edit/9');
+        $crawler = $this->client->request('GET', '/tasks/edit/7');
 
         $form = $crawler->selectButton('Modifier')->form();
         $form['task[title]'] = 'functional test title';
@@ -157,7 +157,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->login();
 
-        $this->client->request('GET', '/tasks/delete/9');
+        $this->client->request('GET', '/tasks/delete/7');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -168,7 +168,7 @@ class TaskControllerTest extends AppWebTestCase
      */
     public function testTaskEditRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/tasks/edit/9');
+        $this->client->request('GET', '/tasks/edit/22');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -181,7 +181,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $crawler = $this->client->request('GET', '/tasks/edit/9');
+        $crawler = $this->client->request('GET', '/tasks/edit/7');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
@@ -196,7 +196,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $this->client->request('POST', '/tasks/edit/9');
+        $this->client->request('POST', '/tasks/edit/22');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
@@ -208,7 +208,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         if (!$this->logIn()) {
 
-            $this->client->request('POST', '/tasks/edit/18');
+            $this->client->request('POST', '/tasks/edit/22');
 
             $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         }
@@ -266,7 +266,7 @@ class TaskControllerTest extends AppWebTestCase
      */
     public function testTaskToggleRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/tasks/9/toggle');
+        $this->client->request('GET', '/tasks/22/toggle');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -279,7 +279,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->logIn();
 
-        $this->client->request('GET', '/tasks/9/toggle');
+        $this->client->request('GET', '/tasks/7/toggle');
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
@@ -291,7 +291,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         if (!$this->logIn()) {
 
-            $this->client->request('GET', '/tasks/18/toggle');
+            $this->client->request('GET', '/tasks/22/toggle');
 
             $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         }

@@ -14,6 +14,8 @@ use AppBundle\Entity\Task;
 use AppBundle\FormHandler\CreateTaskHandler;
 use AppBundle\FormHandler\EditTaskHandler;
 use AppBundle\Repository\TaskRepository;
+use AppBundle\Security\TaskVoter;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\TaskType;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Twig\Environment;
 
 /**
@@ -63,6 +66,11 @@ class TaskController
     private $messageFlash;
 
     /**
+     * @var AuthorizationCheckerInterface
+     */
+    private $authorization;
+
+    /**
      * TaskController constructor.
      * @param TaskRepository $repository
      * @param TokenStorageInterface $tokenStorage
@@ -70,6 +78,7 @@ class TaskController
      * @param FormFactoryInterface $formFactory
      * @param UrlGeneratorInterface $urlGenerator
      * @param SessionInterface $messageFlash
+     * @param AuthorizationCheckerInterface $authorization
      */
     public function __construct(
         TaskRepository $repository,
@@ -77,7 +86,8 @@ class TaskController
         Environment $twig,
         FormFactoryInterface $formFactory,
         UrlGeneratorInterface $urlGenerator,
-        SessionInterface $messageFlash
+        SessionInterface $messageFlash,
+        AuthorizationCheckerInterface $authorization
 
     ) {
         $this->repository = $repository;
@@ -86,6 +96,7 @@ class TaskController
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
         $this->messageFlash = $messageFlash;
+        $this->authorization = $authorization;
     }
 
     /**
@@ -148,7 +159,7 @@ class TaskController
     public function editTask(Task $task, Request $request, EditTaskHandler $editTaskHandler): Response
     {
 
-        if ($task->getUser() == $this->tokenStorage->getToken()->getUser()) {
+        if ($this->authorization->isGranted(TaskVoter::EDIT, $task) === true) {
 
             $form = $this->formFactory->create(TaskType::class, $task)
                 ->handleRequest($request);
@@ -183,7 +194,7 @@ class TaskController
      */
     public function deleteTask(Task $task): Response
     {
-        if ($task->getUser() == $this->tokenStorage->getToken()->getUser()) {
+        if ($this->authorization->isGranted(TaskVoter::DELETE, $task) === true) {
 
             $this->repository->delete($task);
 
@@ -193,7 +204,7 @@ class TaskController
                 RedirectResponse::HTTP_FOUND);
         }
         return new Response($this->twig->render('error/error.html.twig', [
-            'error' => 'Erreur : Impossible de supprimer cette tâche'
+            'error' => 'Erreur : Impossible de supprimer cette tâche.'
         ]), Response::HTTP_OK);
 
     }
@@ -231,7 +242,7 @@ class TaskController
      */
     public function toggleTask(Task $task): Response
     {
-        if ($task->getUser() == $this->tokenStorage->getToken()->getUser()) {
+        if ($this->authorization->isGranted(TaskVoter::DONE, $task) === true) {
 
             $task->toggle(!$task->isDone());
 

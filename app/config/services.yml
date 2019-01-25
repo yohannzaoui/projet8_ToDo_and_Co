@@ -56,3 +56,6 @@ services:
   app.security.LoginFormAuthenticator:
     class: AppBundle\Security\LoginFormAuthenticator
 
+  AppBundle\Security\TaskVoter:
+    tags: ['security.voter']
+
