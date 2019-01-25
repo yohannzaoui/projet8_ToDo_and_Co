@@ -15,3 +15,5 @@ Install application :
 - composer install and enter your parameters database
 - php bin/console doctrine:database:create
 - php bin/console doctrine:schema:update --force
+
+
