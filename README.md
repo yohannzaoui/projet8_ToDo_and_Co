@@ -15,3 +15,7 @@ Install application :
 - composer install and enter your parameters database
 - php bin/console doctrine:database:create
 - php bin/console doctrine:schema:update --force
+
+[Contributing](https://github.com/yohannzaoui/projet8_ToDo_and_Co/tree/voter_for_authorization)
+
+
