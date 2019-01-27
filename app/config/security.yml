@@ -50,6 +50,7 @@ security:
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY , methods: [GET, POST]}
+        - { path: ^/users/create, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [GET, POST]}
         - { path: ^/tasks, roles: ROLE_USER, methods: [GET, POST]}
         - { path: ^/users, roles: ROLE_ADMIN, methods: [GET, POST] }
         - { path: ^/user, roles: ROLE_ADMIN, methods: [GET, POST] }

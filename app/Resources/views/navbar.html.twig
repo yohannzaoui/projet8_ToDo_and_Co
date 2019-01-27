@@ -12,15 +12,15 @@
                     <li>
                         <a style="color: darkblue" class="nav-link" href="{{ path('user_list') }}">Gérer les utilisateurs</a>
                     </li>
-                    <li>
-                        <a style="color: darkblue" class="nav-link" href="{{ path('user_create') }}">Créer un utilisateur</a>
-                    </li>
                 {% endif %}
-                <li>
-                    {% if app.user %}
+                    <li>
+                        <a style="color: white" class="nav-link btn btn-primary" href="{{ path('user_create') }}">Créer un utilisateur</a>
+                    </li>
+                    <li>
+                        {% if app.user %}
                         <a style="color: white" class="nav-link btn btn-danger" href="{{ path('logout') }}">Se déconnecter</a>
-                    {% endif %}
-                </li>
+                        {% endif %}
+                    </li>
             </ul>
         </div>
     </div>

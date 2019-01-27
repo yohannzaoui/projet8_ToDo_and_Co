@@ -26,10 +26,12 @@ class TaskVoter extends Voter
      *
      */
     const EDIT = 'edit';
+
     /**
      *
      */
     const DELETE = 'delete';
+
     /**
      *
      */
@@ -72,44 +74,25 @@ class TaskVoter extends Voter
 
         switch ($attribute) {
             case self::EDIT:
-                return $this->canEdit($task, $user);
+                return $this->canAccess($task, $user);
             case self::DELETE:
-                return $this->canDelete($task, $user);
+                return $this->canAccess($task, $user);
             case self::DONE:
-                return $this->canDone($task, $user);
+                return $this->canAccess($task, $user);
         }
 
         throw new \LogicException('This code should not be reached!');
     }
 
+
     /**
      * @param Task $task
      * @param User $user
      * @return bool
      */
-    private function canEdit(Task $task, User $user): bool
+    private function canAccess(Task $task, User $user): bool
     {
         return $user === $task->getUser();
-    }
-
-    /**
-     * @param Task $task
-     * @param User $user
-     * @return bool
-     */
-    private function canDelete(Task $task, User $user) :bool
-    {
-        return $this->canEdit($task, $user);
-    }
-
-    /**
-     * @param Task $task
-     * @param User $user
-     * @return bool
-     */
-    private function canDone(Task $task, User $user) :bool
-    {
-        return $this->canEdit($task, $user);
     }
 
 }
