@@ -1,14 +1,14 @@
 /vendor/
 /var/
-.idea/
-.idea/workspace.xml
+/.idea/
+/.idea/workspace.xml
 <<<<<<< HEAD
 =======
 .idea/dataSources/3554676e-a5bb-4706-a69d-43e47eb51e50.xml
-.idea/php.xml
+/.idea/php.xml
 .idea/projet8-TodoList.iml
 >>>>>>> 50dcac94557ba1a32f225f5530296ae7444ab13d
-.idea/workspace.xml
 UML/classes
 UML/sequence
 UML/use case
+.idea/php.xml
