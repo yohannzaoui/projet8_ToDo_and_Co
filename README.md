@@ -7,14 +7,20 @@ ToDoList
 
 - Developped with the Symfony 3.4 framework
 - CSS : Bootstrap 4
+
+Tests with:
 - PHPUnit
 - Selenium
+
+Metrics
 - PHP Metrics
+- BlackFire
+
+Cache:
 - Redis
 
 Install application :
 - Clone or download the repository into your environment. https://github.com/yohannzaoui/projet8_ToDo_and_Co.git
-
 - composer install and enter your parameters database
 - php bin/console doctrine:database:create
 - php bin/console doctrine:schema:update --force
@@ -22,7 +28,7 @@ Install application :
 - Create user
 - Create task
 
-Enjoy !!:
+Enjoy !!
 
 
 
