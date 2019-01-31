@@ -8,6 +8,8 @@ ToDoList
 - Developped with the Symfony 3.4 framework
 - CSS : Bootstrap 4
 - PHPUnit
+- Selenium
+- PHP Metrics
 - Redis
 
 Install application :
