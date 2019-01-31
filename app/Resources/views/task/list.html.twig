@@ -19,7 +19,7 @@
         <div class="col-sm-4 col-lg-3 col-md-4 mb-3 task">
                     <h4 class="left">
                         <a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a>
-                        {% if task.isDone %}
+                        {% if task.isDone == true %}
                             <i class="fas fa-check"></i>
                         {% else %}
                             <i class="fas fa-times"></i>
@@ -31,10 +31,10 @@
                     <div class="row justify-content-center">
                     <form action="{{ path('task_toggle', {'id' : task.id }) }}">
                         <p class="separator"><button class="btn btn-success btn-sm">
-                                {% if task.isDone %}
-                                    Marquer à faire
-                                {% else %}
+                                {% if task.isDone == false %}
                                     Marquer terminée
+                                {% else %}
+                                    Marquer à faire
                                 {% endif %}</button> | </p>
                     </form>
                     <form action="{{ path('task_delete', {'id' : task.id }) }}">

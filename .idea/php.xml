@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="MessDetector">
+    <phpmd_settings>
+      <MessDetectorConfiguration tool_path="$PROJECT_DIR$/vendor/bin/phpmd" />
+    </phpmd_settings>
+  </component>
   <component name="PhpCSFixer">
     <phpcsfixer_settings>
-      <PhpCSFixerConfiguration tool_path="$PROJECT_DIR$/../php cs fixer/php-cs-fixer-v2.phar" />
+      <PhpCSFixerConfiguration tool_path="D:/php cs fixer/php-cs-fixer-v2.phar" />
     </phpcsfixer_settings>
   </component>
   <component name="PhpIncludePathManager">
@@ -76,10 +81,13 @@
       <path value="$PROJECT_DIR$/vendor/dama/doctrine-test-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/phpunit-bridge" />
       <path value="$PROJECT_DIR$/vendor/symfony/maker-bundle" />
-      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
       <path value="$PROJECT_DIR$/vendor/symfony/browser-kit" />
       <path value="$PROJECT_DIR$/vendor/symfony/web-server-bundle" />
+      <path value="$PROJECT_DIR$/vendor/pdepend/pdepend" />
+      <path value="$PROJECT_DIR$/vendor/phpmd/phpmd" />
+      <path value="$PROJECT_DIR$/vendor/predis/predis" />
+      <path value="$PROJECT_DIR$/vendor/snc/redis-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
