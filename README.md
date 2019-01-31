@@ -17,6 +17,10 @@ Install application :
 - php bin/console doctrine:database:create
 - php bin/console doctrine:schema:update --force
 - Run REDIS server more informations : https://redis.io/
+- Create user
+- Create task
+
+Enjoy !!:
 
 
 
