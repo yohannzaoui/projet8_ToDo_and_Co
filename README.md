@@ -30,7 +30,7 @@ Install application :
 
 Enjoy !!
 
-[![contribute to this project](https://github.com/yohannzaoui/projet8_ToDo_and_Co/blob/master/Contributing.md)
+[contribute to this project](https://github.com/yohannzaoui/projet8_ToDo_and_Co/blob/master/Contributing.md)
 
 
 
