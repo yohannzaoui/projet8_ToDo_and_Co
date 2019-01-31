@@ -15,7 +15,6 @@ use AppBundle\FormHandler\CreateTaskHandler;
 use AppBundle\FormHandler\EditTaskHandler;
 use AppBundle\Repository\TaskRepository;
 use AppBundle\Security\TaskVoter;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -108,9 +107,7 @@ class TaskController
      */
     public function tasksList(): Response
     {
-        $tasks = $this->repository->findBy([
-                'user' => $this->tokenStorage->getToken()->getUser()
-            ]);
+        $tasks = $this->repository->taskList($this->tokenStorage->getToken()->getUser());
 
         return new Response($this->twig->render('task/list.html.twig', [
             'tasks' => $tasks

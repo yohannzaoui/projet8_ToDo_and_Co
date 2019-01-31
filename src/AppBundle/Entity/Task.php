@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity
  * @ORM\Table("task")
+ * @ORM\EntityListeners({"AppBundle\Listener\TaskListener"})
  */
 class Task
 {
