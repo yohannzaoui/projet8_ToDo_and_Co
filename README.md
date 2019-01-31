@@ -24,11 +24,13 @@ Install application :
 - composer install and enter your parameters database
 - php bin/console doctrine:database:create
 - php bin/console doctrine:schema:update --force
-- Run REDIS server more informations : https://redis.io/
+- Run REDIS server for more informations : https://redis.io/
 - Create user
 - Create task
 
 Enjoy !!
+
+[![contribute to this project](https://github.com/yohannzaoui/projet8_ToDo_and_Co/blob/master/Contributing.md)
 
 
 
