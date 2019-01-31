@@ -10,9 +10,7 @@ declare(strict_types=1);
 
 namespace AppBundle\FormHandler;
 
-use AppBundle\Entity\User;
 use AppBundle\Repository\UserRepository;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 

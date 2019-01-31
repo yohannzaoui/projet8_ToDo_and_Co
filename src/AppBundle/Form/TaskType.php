@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Task;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class TaskType

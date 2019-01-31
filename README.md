@@ -7,13 +7,30 @@ ToDoList
 
 - Developped with the Symfony 3.4 framework
 - CSS : Bootstrap 4
+
+Tests with:
 - PHPUnit
+- Selenium
+
+Metrics
+- PHP Metrics
+- BlackFire
+
+Cache:
+- Redis
 
 Install application :
 - Clone or download the repository into your environment. https://github.com/yohannzaoui/projet8_ToDo_and_Co.git
-
 - composer install and enter your parameters database
 - php bin/console doctrine:database:create
 - php bin/console doctrine:schema:update --force
+- Run REDIS server for more informations : https://redis.io/
+- Create user
+- Create task
+
+Enjoy !!
+
+[Contribute to this project](https://github.com/yohannzaoui/projet8_ToDo_and_Co/blob/master/Contributing.md)
+
 
 
