@@ -190,27 +190,4 @@ class TaskController
 
     }
 
-    
-    /**
-     * @Route(path="/tasks/{id}/toggle", name="task_toggle", methods={"GET"}, requirements={"id"="\d+"})
-     * @param Task $task
-     * @return Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function toggleTask(Task $task): Response
-    {
-        $task->toggle(!$task->isDone());
-
-        $this->repository->update();
-
-        if ($task->isDone() == false) {
-
-            $this->messageFlash->getFlashBag()->add('success', sprintf('La tâche %s a bien été marquée : à faire.', $task->getTitle()));
-        }
-
-        return new RedirectResponse($this->urlGenerator->generate('task_list'),
-            RedirectResponse::HTTP_FOUND);
-    }
-
 }

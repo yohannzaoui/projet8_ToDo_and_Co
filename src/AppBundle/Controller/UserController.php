@@ -152,21 +152,6 @@ class UserController
         ]), Response::HTTP_OK);
     }
 
-    /**
-     * @Route(path="/users", name="user_list", methods={"GET"})
-     * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    public function listUsers(): Response
-    {
-        $users = $this->repository->findAll();
-
-        return new Response($this->twig->render('user/list.html.twig', [
-            'users' => $users
-        ]), Response::HTTP_OK);
-    }
 
     /**
      * @Route(path="/user/password/{id}", name="user_password", methods={"GET", "POST"}, requirements={"id"="\d+"})
