@@ -98,22 +98,6 @@ class TaskController
         $this->authorization = $authorization;
     }
 
-    /**
-     * @Route(path="/tasks", name="task_list", methods={"GET"})
-     * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    public function tasksList(): Response
-    {
-        $tasks = $this->repository->taskList($this->tokenStorage->getToken()->getUser());
-
-        return new Response($this->twig->render('task/list.html.twig', [
-            'tasks' => $tasks
-        ]), Response::HTTP_OK);
-    }
-
 
     /**
      * @Route(path="/tasks/create", name="task_create", methods={"GET","POST"})
@@ -206,60 +190,27 @@ class TaskController
 
     }
 
-
-    /**
-     * @Route(path="/tasks-Is-Done", name="tasks_is_done", methods={"GET"})
-     * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    public function taskIsDone(): Response
-    {
-        $tasks = $this->repository->findBy([
-            'user' => $this->tokenStorage->getToken()->getUser(),
-            'isDone' => true
-        ]);
-
-        return new Response($this->twig->render('task/is_done.html.twig', [
-            'tasks' => $tasks
-        ]), Response::HTTP_OK);
-    }
-
-
+    
     /**
      * @Route(path="/tasks/{id}/toggle", name="task_toggle", methods={"GET"}, requirements={"id"="\d+"})
      * @param Task $task
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      */
     public function toggleTask(Task $task): Response
     {
-        if ($this->authorization->isGranted(TaskVoter::DONE, $task) === true) {
+        $task->toggle(!$task->isDone());
 
-            $task->toggle(!$task->isDone());
+        $this->repository->update();
 
-            $task->setDateIsDone(new \DateTime());
+        if ($task->isDone() == false) {
 
-            $this->repository->update();
-
-            if ($task->isDone() == false) {
-
-                $this->messageFlash->getFlashBag()->add('success', sprintf('La tâche %s a bien été marquée : à faire.', $task->getTitle()));
-            }
-
-            return new RedirectResponse($this->urlGenerator->generate('task_list'),
-                RedirectResponse::HTTP_FOUND);
+            $this->messageFlash->getFlashBag()->add('success', sprintf('La tâche %s a bien été marquée : à faire.', $task->getTitle()));
         }
 
-        return new Response($this->twig->render('error/error.html.twig', [
-            'error' => 'Erreur : Impossible de marquer cette tâche.'
-        ]), Response::HTTP_OK);
-
+        return new RedirectResponse($this->urlGenerator->generate('task_list'),
+            RedirectResponse::HTTP_FOUND);
     }
 
 }
