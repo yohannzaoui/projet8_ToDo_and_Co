@@ -49,7 +49,7 @@
 <div class="page">
     <div class="content">
         <div class="report-details">
-            Created at 2019-01-30 21:03:27        , with PHPMetrics v2.4.1 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2019-02-01 15:54:15        , with PHPMetrics v2.4.1 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
 
@@ -80,22 +80,6 @@
                     <th class="js-sort-number">Comment Weight</th>
                 </tr>
                 </thead>
-                                    <tr>
-                        <td>AppCache</td>
-                        <td>4</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr>
-                                    <tr>
-                        <td>AppKernel</td>
-                        <td>33</td>
-                        <td>0</td>
-                        <td>156.1</td>
-                        <td>33.94</td>
-                        <td>0</td>
-                    </tr>
                                     <tr>
                         <td>AppBundle\AppBundle</td>
                         <td>4</td>
@@ -130,11 +114,27 @@
                     </tr>
                                     <tr>
                         <td>AppBundle\Controller\TaskController</td>
-                        <td>73</td>
-                        <td>88</td>
-                        <td>722.42</td>
-                        <td>76.88</td>
-                        <td>45.54</td>
+                        <td>59</td>
+                        <td>71</td>
+                        <td>533.62</td>
+                        <td>57.76</td>
+                        <td>45.53</td>
+                    </tr>
+                                    <tr>
+                        <td>AppBundle\Controller\TaskDoneController</td>
+                        <td>9</td>
+                        <td>13</td>
+                        <td>30.88</td>
+                        <td>17.16</td>
+                        <td>46.43</td>
+                    </tr>
+                                    <tr>
+                        <td>AppBundle\Controller\TaskListController</td>
+                        <td>9</td>
+                        <td>13</td>
+                        <td>25.85</td>
+                        <td>12.92</td>
+                        <td>46.43</td>
                     </tr>
                                     <tr>
                         <td>AppBundle\Controller\UserController</td>
@@ -147,10 +147,10 @@
                                     <tr>
                         <td>AppBundle\Entity\Task</td>
                         <td>68</td>
-                        <td>75</td>
+                        <td>76</td>
                         <td>133.14</td>
                         <td>34.52</td>
-                        <td>45.05</td>
+                        <td>45.12</td>
                     </tr>
                                     <tr>
                         <td>AppBundle\Entity\User</td>
@@ -159,6 +159,14 @@
                         <td>133.14</td>
                         <td>35.84</td>
                         <td>45.27</td>
+                    </tr>
+                                    <tr>
+                        <td>AppBundle\Fixtures\TaskFixtures</td>
+                        <td>14</td>
+                        <td>8</td>
+                        <td>69.19</td>
+                        <td>16.14</td>
+                        <td>40.21</td>
                     </tr>
                                     <tr>
                         <td>AppBundle\Form\TaskType</td>
@@ -233,11 +241,19 @@
                         <td>44.76</td>
                     </tr>
                                     <tr>
+                        <td>AppBundle\Listener\TaskListener</td>
+                        <td>21</td>
+                        <td>23</td>
+                        <td>53.34</td>
+                        <td>35.56</td>
+                        <td>45.01</td>
+                    </tr>
+                                    <tr>
                         <td>AppBundle\Repository\TaskRepository</td>
-                        <td>22</td>
-                        <td>22</td>
-                        <td>17.43</td>
-                        <td>9.51</td>
+                        <td>26</td>
+                        <td>26</td>
+                        <td>57.06</td>
+                        <td>53.7</td>
                         <td>44.46</td>
                     </tr>
                                     <tr>
@@ -258,43 +274,11 @@
                     </tr>
                                     <tr>
                         <td>AppBundle\Security\TaskVoter</td>
-                        <td>38</td>
-                        <td>30</td>
-                        <td>175.81</td>
-                        <td>23.44</td>
-                        <td>42.84</td>
-                    </tr>
-                                    <tr>
-                        <td>Requirement</td>
-                        <td>37</td>
-                        <td>62</td>
-                        <td>131.46</td>
-                        <td>25.97</td>
-                        <td>47.06</td>
-                    </tr>
-                                    <tr>
-                        <td>PhpIniRequirement</td>
-                        <td>23</td>
-                        <td>19</td>
-                        <td>279.68</td>
-                        <td>39.03</td>
-                        <td>43.17</td>
-                    </tr>
-                                    <tr>
-                        <td>RequirementCollection</td>
-                        <td>90</td>
-                        <td>100</td>
-                        <td>470.06</td>
-                        <td>34.72</td>
-                        <td>45.09</td>
-                    </tr>
-                                    <tr>
-                        <td>SymfonyRequirements</td>
-                        <td>151</td>
-                        <td>28</td>
-                        <td>3672.8</td>
-                        <td>292.91</td>
-                        <td>28.9</td>
+                        <td>41</td>
+                        <td>32</td>
+                        <td>220.72</td>
+                        <td>19.11</td>
+                        <td>42.75</td>
                     </tr>
                             </table>
         </div>
@@ -331,7 +315,7 @@
                             <path d="M0 0h24v24H0z" fill="none"/>
                             <path d="M20 8h-2.81c-.45-.78-1.07-1.45-1.82-1.96L17 4.41 15.59 3l-2.17 2.17C12.96 5.06 12.49 5 12 5c-.49 0-.96.06-1.41.17L8.41 3 7 4.41l1.62 1.63C7.88 6.55 7.26 7.22 6.81 8H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20V8zm-6 8h-4v-2h4v2zm0-4h-4v-2h4v2z"/>
                         </svg>
-                        Violations (7)
+                        Violations (2)
                     </a>
                 </li>
                                 <li>
@@ -506,47 +490,47 @@
 
     data = [
     {
-        "lloc": 23,
+        "lloc": 20,
         "percentile": 50
     },
     {
-        "lloc": 24,
+        "lloc": 21,
         "percentile": 55
     },
     {
-        "lloc": 25,
+        "lloc": 23,
         "percentile": 60
     },
     {
-        "lloc": 33,
+        "lloc": 24,
         "percentile": 65
     },
     {
-        "lloc": 37,
+        "lloc": 25,
         "percentile": 70
     },
     {
-        "lloc": 39,
+        "lloc": 26,
         "percentile": 75
     },
     {
-        "lloc": 53,
+        "lloc": 39,
         "percentile": 80
     },
     {
-        "lloc": 53,
+        "lloc": 41,
         "percentile": 85
     },
     {
-        "lloc": 68,
+        "lloc": 53,
         "percentile": 90
     },
     {
-        "lloc": 75,
+        "lloc": 59,
         "percentile": 95
     },
     {
-        "lloc": 90,
+        "lloc": 68,
         "percentile": 100
     }
 ];

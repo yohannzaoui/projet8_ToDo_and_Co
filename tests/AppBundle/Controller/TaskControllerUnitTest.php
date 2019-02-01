@@ -110,31 +110,6 @@ class TaskControllerUnitTest extends TestCase
 
 
     /**
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    public function testTaskListResponse()
-    {
-        $user = $this->createMock(TokenInterface::class);
-        $user->method('getUser')->willReturn($user);
-
-        $this->tokenStorage->method('getToken')->willReturn($user);
-
-        $taskController = new TaskController($this->repository,
-            $this->tokenStorage,
-            $this->twig,
-            $this->formFactory,
-            $this->urlGenerator,
-            $this->messageFlash,
-            $this->authorization
-        );
-
-        $this->assertInstanceOf(Response::class,
-            $taskController->tasksList());
-    }
-
-    /**
      * @throws \Exception
      */
     public function testCreateTaskIfHandleIsFalse()
@@ -283,32 +258,6 @@ class TaskControllerUnitTest extends TestCase
 
 
     /**
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    public function testTaskIsDoneResponse()
-    {
-        $user = $this->createMock(TokenInterface::class);
-        $user->method('getUser')->willReturn($user);
-
-        $this->tokenStorage->method('getToken')->willReturn($user);
-
-        $taskController = new TaskController($this->repository,
-            $this->tokenStorage,
-            $this->twig,
-            $this->formFactory,
-            $this->urlGenerator,
-            $this->messageFlash,
-            $this->authorization
-        );
-
-        $this->assertInstanceOf(Response::class,
-            $taskController->tasksList());
-    }
-
-
-    /**
      * @throws \Exception
      */
     public function testToggleTaskResponse()
@@ -322,10 +271,10 @@ class TaskControllerUnitTest extends TestCase
 
         $this->urlGenerator->method('generate')->willReturn('task_list');
 
-            //$addFlash = $this->createMock(FlashBagInterface::class);
-            //$addFlash->method('add')->willReturn('test');
+        $addFlash = $this->createMock(FlashBagInterface::class);
+        $addFlash->method('add')->willReturn('test');
 
-            //$this->messageFlash->method('getFlashBag')->willReturn($addFlash);
+        $this->messageFlash->method('getFlashBag')->willReturn($addFlash);
 
         $taskController = new TaskController($this->repository,
             $this->tokenStorage,

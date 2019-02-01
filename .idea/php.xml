@@ -7,7 +7,7 @@
   </component>
   <component name="PhpCSFixer">
     <phpcsfixer_settings>
-      <PhpCSFixerConfiguration tool_path="D:/php cs fixer/php-cs-fixer-v2.phar" />
+      <PhpCSFixerConfiguration tool_path="$PROJECT_DIR$/../php cs fixer/php-cs-fixer-v2.phar" />
     </phpcsfixer_settings>
   </component>
   <component name="PhpIncludePathManager">
@@ -88,6 +88,8 @@
       <path value="$PROJECT_DIR$/vendor/phpmd/phpmd" />
       <path value="$PROJECT_DIR$/vendor/predis/predis" />
       <path value="$PROJECT_DIR$/vendor/snc/redis-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

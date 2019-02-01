@@ -49,7 +49,7 @@
 <div class="page">
     <div class="content">
         <div class="report-details">
-            Created at 2019-01-30 21:03:27        , with PHPMetrics v2.4.1 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2019-02-01 15:54:15        , with PHPMetrics v2.4.1 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
 
@@ -92,7 +92,7 @@
                             <path d="M0 0h24v24H0z" fill="none"/>
                             <path d="M20 8h-2.81c-.45-.78-1.07-1.45-1.82-1.96L17 4.41 15.59 3l-2.17 2.17C12.96 5.06 12.49 5 12 5c-.49 0-.96.06-1.41.17L8.41 3 7 4.41l1.62 1.63C7.88 6.55 7.26 7.22 6.81 8H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20V8zm-6 8h-4v-2h4v2zm0-4h-4v-2h4v2z"/>
                         </svg>
-                        Violations (7)
+                        Violations (2)
                     </a>
                 </li>
                                 <li>
@@ -239,120 +239,11 @@
 
     var relations = [
     {
-        "name": "\\AppCache",
-        "size": 3000,
-        "relations": [
-            "\\Symfony\\Bundle\\FrameworkBundle\\HttpCache\\HttpCache"
-        ]
-    },
-    {
-        "name": "\\Symfony\\Bundle\\FrameworkBundle\\HttpCache\\HttpCache",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\AppKernel",
-        "size": 3000,
-        "relations": [
-            "\\Symfony\\Component\\HttpKernel\\Kernel",
-            "\\Symfony\\Bundle\\FrameworkBundle\\FrameworkBundle",
-            "\\Symfony\\Bundle\\SecurityBundle\\SecurityBundle",
-            "\\Symfony\\Bundle\\TwigBundle\\TwigBundle",
-            "\\Symfony\\Bundle\\MonologBundle\\MonologBundle",
-            "\\Doctrine\\Bundle\\DoctrineBundle\\DoctrineBundle",
-            "\\Doctrine\\Bundle\\DoctrineCacheBundle\\DoctrineCacheBundle",
-            "\\Sensio\\Bundle\\FrameworkExtraBundle\\SensioFrameworkExtraBundle",
-            "\\AppBundle\\AppBundle",
-            "\\Symfony\\Bundle\\DebugBundle\\DebugBundle",
-            "\\Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle",
-            "\\Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle",
-            "\\Sensio\\Bundle\\GeneratorBundle\\SensioGeneratorBundle",
-            "\\Symfony\\Bundle\\WebServerBundle\\WebServerBundle",
-            "\\DAMA\\DoctrineTestBundle\\DAMADoctrineTestBundle",
-            "\\Symfony\\Component\\Config\\Loader\\LoaderInterface"
-        ]
-    },
-    {
-        "name": "\\Symfony\\Component\\HttpKernel\\Kernel",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Symfony\\Bundle\\FrameworkBundle\\FrameworkBundle",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Symfony\\Bundle\\SecurityBundle\\SecurityBundle",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Symfony\\Bundle\\TwigBundle\\TwigBundle",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Symfony\\Bundle\\MonologBundle\\MonologBundle",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Doctrine\\Bundle\\DoctrineBundle\\DoctrineBundle",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Doctrine\\Bundle\\DoctrineCacheBundle\\DoctrineCacheBundle",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Sensio\\Bundle\\FrameworkExtraBundle\\SensioFrameworkExtraBundle",
-        "size": 3000,
-        "relations": []
-    },
-    {
         "name": "\\AppBundle\\AppBundle",
         "size": 3000,
         "relations": [
             "\\Symfony\\Component\\HttpKernel\\Bundle\\Bundle"
         ]
-    },
-    {
-        "name": "\\Symfony\\Bundle\\DebugBundle\\DebugBundle",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Sensio\\Bundle\\GeneratorBundle\\SensioGeneratorBundle",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Symfony\\Bundle\\WebServerBundle\\WebServerBundle",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\DAMA\\DoctrineTestBundle\\DAMADoctrineTestBundle",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Symfony\\Component\\Config\\Loader\\LoaderInterface",
-        "size": 3000,
-        "relations": []
     },
     {
         "name": "\\Symfony\\Component\\HttpKernel\\Bundle\\Bundle",
@@ -463,13 +354,12 @@
             "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
             "\\Symfony\\Component\\Security\\Core\\Authorization\\AuthorizationCheckerInterface",
             "\\Symfony\\Component\\HttpFoundation\\Response",
-            "\\Symfony\\Component\\Routing\\Annotation\\Route",
             "\\Symfony\\Component\\HttpFoundation\\Request",
             "\\AppBundle\\FormHandler\\CreateTaskHandler",
             "\\AppBundle\\Entity\\Task",
             "\\Symfony\\Component\\HttpFoundation\\RedirectResponse",
-            "\\AppBundle\\FormHandler\\EditTaskHandler",
-            "\\DateTime"
+            "\\Symfony\\Component\\Routing\\Annotation\\Route",
+            "\\AppBundle\\FormHandler\\EditTaskHandler"
         ]
     },
     {
@@ -542,9 +432,24 @@
         ]
     },
     {
-        "name": "\\DateTime",
+        "name": "\\AppBundle\\Controller\\TaskDoneController",
         "size": 3000,
-        "relations": []
+        "relations": [
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\AppBundle\\Repository\\TaskRepository",
+            "\\Twig\\Environment",
+            "\\Symfony\\Component\\Routing\\Annotation\\Route"
+        ]
+    },
+    {
+        "name": "\\AppBundle\\Controller\\TaskListController",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\AppBundle\\Repository\\TaskRepository",
+            "\\Twig\\Environment",
+            "\\Symfony\\Component\\Routing\\Annotation\\Route"
+        ]
     },
     {
         "name": "\\AppBundle\\Controller\\UserController",
@@ -603,7 +508,31 @@
         "relations": []
     },
     {
+        "name": "\\DateTime",
+        "size": 3000,
+        "relations": []
+    },
+    {
         "name": "\\Symfony\\Component\\Security\\Core\\User\\UserInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\AppBundle\\Fixtures\\TaskFixtures",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\Bundle\\FixturesBundle\\Fixture",
+            "\\Doctrine\\Common\\Persistence\\ObjectManager",
+            "\\AppBundle\\Entity\\Task"
+        ]
+    },
+    {
+        "name": "\\Doctrine\\Bundle\\FixturesBundle\\Fixture",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Doctrine\\Common\\Persistence\\ObjectManager",
         "size": 3000,
         "relations": []
     },
@@ -656,6 +585,19 @@
     },
     {
         "name": "\\Symfony\\Component\\Security\\Core\\Encoder\\UserPasswordEncoderInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\AppBundle\\Listener\\TaskListener",
+        "size": 3000,
+        "relations": [
+            "\\AppBundle\\Entity\\Task",
+            "\\Doctrine\\ORM\\Event\\LifecycleEventArgs"
+        ]
+    },
+    {
+        "name": "\\Doctrine\\ORM\\Event\\LifecycleEventArgs",
         "size": 3000,
         "relations": []
     },
@@ -756,79 +698,6 @@
     },
     {
         "name": "\\LogicException",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Requirement",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\PhpIniRequirement",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\InvalidArgumentException",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\RequirementCollection",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\IteratorAggregate",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\ArrayIterator",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\SymfonyRequirements",
-        "size": 3000,
-        "relations": [
-            "\\RequirementCollection",
-            "\\DateTimeZone",
-            "\\ReflectionClass",
-            "\\Collator",
-            "\\ReflectionExtension",
-            "\\Symfony\\Component\\Intl\\Intl",
-            "\\PDO"
-        ]
-    },
-    {
-        "name": "\\DateTimeZone",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\ReflectionClass",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Collator",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\ReflectionExtension",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\Symfony\\Component\\Intl\\Intl",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\PDO",
         "size": 3000,
         "relations": []
     }

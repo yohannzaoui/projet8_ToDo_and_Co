@@ -2,7 +2,7 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Dashboard for D:\projet8\src\AppBundle\Command</title>
+  <title>Dashboard for D:\projet8\src\AppBundle\Listener</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../.css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="../.css/nv.d3.min.css" rel="stylesheet" type="text/css">
@@ -17,7 +17,7 @@
       <nav aria-label="breadcrumb">
        <ol class="breadcrumb">
          <li class="breadcrumb-item"><a href="../index.html">D:\projet8\src\AppBundle</a></li>
-         <li class="breadcrumb-item"><a href="index.html">Command</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Listener</a></li>
          <li class="breadcrumb-item active">(Dashboard)</li>
 
        </ol>
@@ -173,7 +173,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#methodCoverageDistribution svg')
-      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,3], "Method Coverage"))
+      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,4], "Method Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -223,7 +223,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[100,3,"<a href=\"CreateAdminCommand.php.html#25\">AppBundle\\Command\\CreateAdminCommand<\/a>"]], 'Class Complexity'))
+      .datum(getComplexityData([[100,4,"<a href=\"TaskListener.php.html#18\">AppBundle\\Listener\\TaskListener<\/a>"]], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -247,7 +247,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[100,1,"<a href=\"CreateAdminCommand.php.html#68\">AppBundle\\Command\\CreateAdminCommand::__construct<\/a>"],[100,1,"<a href=\"CreateAdminCommand.php.html#88\">AppBundle\\Command\\CreateAdminCommand::configure<\/a>"],[100,1,"<a href=\"CreateAdminCommand.php.html#107\">AppBundle\\Command\\CreateAdminCommand::execute<\/a>"]], 'Method Complexity'))
+      .datum(getComplexityData([[100,1,"<a href=\"TaskListener.php.html#29\">AppBundle\\Listener\\TaskListener::__construct<\/a>"],[100,1,"<a href=\"TaskListener.php.html#38\">AppBundle\\Listener\\TaskListener::postPersist<\/a>"],[100,1,"<a href=\"TaskListener.php.html#47\">AppBundle\\Listener\\TaskListener::postUpdate<\/a>"],[100,1,"<a href=\"TaskListener.php.html#56\">AppBundle\\Listener\\TaskListener::postRemove<\/a>"]], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);
