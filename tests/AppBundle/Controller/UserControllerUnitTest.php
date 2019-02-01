@@ -230,25 +230,6 @@ class UserControllerUnitTest extends TestCase
 
 
     /**
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    public function testListUsersResponse()
-    {
-        $controller = new UserController(
-            $this->twig,
-            $this->formFactory,
-            $this->urlGenerator,
-            $this->repository
-        );
-
-        $this->assertInstanceOf(Response::class,
-            $controller->listUsers());
-    }
-
-
-    /**
      * @throws \Exception
      */
     public function testEditUserPasswordIfHandleIsFalse()

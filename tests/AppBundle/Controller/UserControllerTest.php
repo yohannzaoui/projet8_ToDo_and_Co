@@ -224,32 +224,6 @@ class UserControllerTest extends AppWebTestCase
     /**
      *
      */
-    public function testListUsers()
-    {
-        $this->logIn();
-
-        $crawler = $this->client->request('GET', '/users');
-
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-
-        $this->assertSame(1, $crawler->filter('html:contains("Nom d\'utilisateur")')->count());
-    }
-
-
-    /**
-     *
-     */
-    public function testUserListRedirectionIfNoLogin()
-    {
-        $this->client->request('GET', '/users');
-
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
-    }
-
-
-    /**
-     *
-     */
     public function testUserPasswordRedirectionIfNoLogin()
     {
         $this->client->request('GET', '/user/password/3');
