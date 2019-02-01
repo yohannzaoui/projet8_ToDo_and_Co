@@ -33,18 +33,13 @@ class TaskVoter extends Voter
     const DELETE = 'delete';
 
     /**
-     *
-     */
-    const DONE = 'done';
-
-    /**
      * @param string $attribute
      * @param mixed $subject
      * @return bool
      */
     protected function supports($attribute, $subject): bool
     {
-        if (!in_array($attribute, [self::EDIT, self::DELETE, self::DONE])) {
+        if (!in_array($attribute, [self::EDIT, self::DELETE])) {
             return false;
         }
 
@@ -76,9 +71,7 @@ class TaskVoter extends Voter
             case self::EDIT:
                 return $this->canAccess($task, $user);
             case self::DELETE:
-                return $this->canAccess($task, $user);
-            case self::DONE:
-                return $this->canAccess($task, $user);
+                return $this->canDelete($task, $user);
         }
 
         throw new \LogicException('This code should not be reached!');
@@ -93,6 +86,18 @@ class TaskVoter extends Voter
     private function canAccess(Task $task, User $user): bool
     {
         return $user === $task->getUser();
+    }
+
+    /**
+     * @param Task $task
+     * @param User $user
+     * @return bool
+     */
+    private function canDelete(Task $task, User $user)
+    {
+        if ($task->getUser() === null & $user->getRoles() === ['ROLE_ADMIN'] or $user === $task->getUser()) {
+            return true;
+        }
     }
 
 }
