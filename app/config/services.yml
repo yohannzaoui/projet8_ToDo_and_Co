@@ -13,6 +13,10 @@ services:
     resource: '../../src/AppBundle/Controller'
     tags: ['controller.service_arguments']
 
+  AppBundle\Fixtures\TaskFixtures:
+    tags:
+      - {name: 'doctrine.fixture.orm'}
+
   AppBundle\Command\CreateAdminCommand:
     tags:
       - { name: 'console.command', command: 'app:create-admin' }
