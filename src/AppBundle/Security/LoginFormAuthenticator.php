@@ -1,9 +1,15 @@
 <?php
+
 /**
+ *
+ * @category
+ * @package
+ * @author   Yohann Zaoui <yohannzaoui@gmail.com>
+ * @license
+ * @link
  * Created by PhpStorm.
- * User: Yohann Zaoui
- * Date: 15/01/2019
- * Time: 16:05
+ * Date: 01/02/2019
+ * Time: 23:14
  */
 
 declare(strict_types=1);

@@ -1,9 +1,15 @@
 <?php
+
 /**
+ *
+ * @category
+ * @package
+ * @author   Yohann Zaoui <yohannzaoui@gmail.com>
+ * @license
+ * @link
  * Created by PhpStorm.
- * User: Yohann Zaoui
- * Date: 09/01/2019
- * Time: 14:40
+ * Date: 01/02/2019
+ * Time: 23:14
  */
 
 declare(strict_types=1);
@@ -16,12 +22,14 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * Class TaskRepository
+ *
  * @package AppBundle\Repository
  */
 class TaskRepository extends ServiceEntityRepository
 {
     /**
      * TaskRepository constructor.
+     *
      * @param RegistryInterface $registry
      */
     public function __construct(RegistryInterface $registry)
@@ -30,7 +38,7 @@ class TaskRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $task
+     * @param  $task
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -41,7 +49,7 @@ class TaskRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $task
+     * @param  $task
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -61,13 +69,12 @@ class TaskRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $user
      * @return mixed
      */
     public function taskList()
     {
         return $this->createQueryBuilder('t')
-            ->orderBy('t.createdAt','DESC')
+            ->orderBy('t.createdAt', 'DESC')
             ->getQuery()
             ->useResultCache(true)
             ->setQueryCacheLifetime(60)

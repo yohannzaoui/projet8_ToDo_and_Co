@@ -1,5 +1,17 @@
 <?php
 
+/**
+ *
+ * @category
+ * @package
+ * @author   Yohann Zaoui <yohannzaoui@gmail.com>
+ * @license
+ * @link
+ * Created by PhpStorm.
+ * Date: 01/02/2019
+ * Time: 23:14
+ */
+
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -56,6 +68,7 @@ class Task
 
     /**
      * Task constructor.
+     *
      * @throws \Exception
      */
     public function __construct()

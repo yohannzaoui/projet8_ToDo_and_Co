@@ -1,9 +1,15 @@
 <?php
+
 /**
+ *
+ * @category
+ * @package
+ * @author   Yohann Zaoui <yohannzaoui@gmail.com>
+ * @license
+ * @link
  * Created by PhpStorm.
- * User: Yohann Zaoui
- * Date: 09/01/2019
- * Time: 13:31
+ * Date: 01/02/2019
+ * Time: 23:14
  */
 
 declare(strict_types=1);
@@ -18,12 +24,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class UserRepository
+ *
  * @package AppBundle\Repository
  */
 class UserRepository extends ServiceEntityRepository implements UserLoaderInterface
 {
     /**
      * UserRepository constructor.
+     *
      * @param RegistryInterface $registry
      */
     public function __construct(RegistryInterface $registry)
@@ -33,8 +41,8 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
 
     /**
      * @codeCoverageIgnore
-     * @param string $username
-     * @return UserInterface|void|null
+     * @param              string $username
+     * @return             UserInterface|void|null
      */
     public function loadUserByUsername($username)
     {
@@ -43,7 +51,7 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
 
 
     /**
-     * @param $user
+     * @param  $user
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -63,7 +71,7 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
     }
 
     /**
-     * @param $user
+     * @param  $user
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

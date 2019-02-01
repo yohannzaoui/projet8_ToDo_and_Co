@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Yohann Zaoui
- * Date: 01/02/2019
- * Time: 14:43
- */
 
 namespace AppBundle\Fixtures;
 

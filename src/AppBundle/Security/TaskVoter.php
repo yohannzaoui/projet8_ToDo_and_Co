@@ -1,9 +1,15 @@
 <?php
+
 /**
+ *
+ * @category
+ * @package
+ * @author   Yohann Zaoui <yohannzaoui@gmail.com>
+ * @license
+ * @link
  * Created by PhpStorm.
- * User: Yohann Zaoui
- * Date: 25/01/2019
- * Time: 14:55
+ * Date: 01/02/2019
+ * Time: 23:14
  */
 
 declare(strict_types=1);
@@ -18,7 +24,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 /**
  * @codeCoverageIgnore
  * Class TaskVoter
- * @package AppBundle\Security
+ * @package            AppBundle\Security
  */
 class TaskVoter extends Voter
 {
@@ -33,8 +39,8 @@ class TaskVoter extends Voter
     const DELETE = 'delete';
 
     /**
-     * @param string $attribute
-     * @param mixed $subject
+     * @param  string $attribute
+     * @param  mixed  $subject
      * @return bool
      */
     protected function supports($attribute, $subject): bool
@@ -52,9 +58,9 @@ class TaskVoter extends Voter
     }
 
     /**
-     * @param string $attribute
-     * @param mixed $subject
-     * @param TokenInterface $token
+     * @param  string         $attribute
+     * @param  mixed          $subject
+     * @param  TokenInterface $token
      * @return bool
      */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
@@ -68,10 +74,10 @@ class TaskVoter extends Voter
         $task = $subject;
 
         switch ($attribute) {
-            case self::EDIT:
-                return $this->canEdit($task, $user);
-            case self::DELETE:
-                return $this->canDelete($task, $user);
+        case self::EDIT:
+            return $this->canEdit($task, $user);
+        case self::DELETE:
+            return $this->canDelete($task, $user);
         }
 
         throw new \LogicException('This code should not be reached!');
@@ -79,8 +85,8 @@ class TaskVoter extends Voter
 
 
     /**
-     * @param Task $task
-     * @param User $user
+     * @param  Task $task
+     * @param  User $user
      * @return bool
      */
     private function canEdit(Task $task, User $user): bool
@@ -89,8 +95,8 @@ class TaskVoter extends Voter
     }
 
     /**
-     * @param Task $task
-     * @param User $user
+     * @param  Task $task
+     * @param  User $user
      * @return bool
      */
     private function canDelete(Task $task, User $user)

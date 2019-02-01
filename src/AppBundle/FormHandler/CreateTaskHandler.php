@@ -1,9 +1,15 @@
 <?php
+
 /**
+ *
+ * @category
+ * @package
+ * @author   Yohann Zaoui <yohannzaoui@gmail.com>
+ * @license
+ * @link
  * Created by PhpStorm.
- * User: Yohann Zaoui
- * Date: 05/01/2019
- * Time: 23:13
+ * Date: 01/02/2019
+ * Time: 23:14
  */
 
 declare(strict_types=1);
@@ -18,6 +24,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 /**
  * Class CreateTaskHandler
+ *
  * @package AppBundle\FormHandler
  */
 class CreateTaskHandler
@@ -25,17 +32,17 @@ class CreateTaskHandler
     /**
      * @var TaskRepository
      */
-    private $repository;
+    private $_repository;
 
     /**
      * @var TokenStorageInterface
      */
-    private $tokenStorage;
+    private $_tokenStorage;
 
     /**
      * @var SessionInterface
      */
-    private $messageFlash;
+    private $_messageFlash;
 
 
     public function __construct(
@@ -43,27 +50,27 @@ class CreateTaskHandler
         TokenStorageInterface $tokenStorage,
         SessionInterface $messageFlash
     ) {
-        $this->repository = $repository;
-        $this->tokenStorage = $tokenStorage;
-        $this->messageFlash = $messageFlash;
+        $this->_repository = $repository;
+        $this->_tokenStorage = $tokenStorage;
+        $this->_messageFlash = $messageFlash;
     }
 
     /**
-     * @param FormInterface $form
-     * @param Task $task
+     * @param  FormInterface $form
+     * @param  Task          $task
      * @return bool
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function handle(FormInterface $form, Task $task): bool
+    public function handle(FormInterface $form, Task $task)
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $task->setUser($this->tokenStorage->getToken()->getUser());
+            $task->setUser($this->_tokenStorage->getToken()->getUser());
 
-            $this->repository->save($task);
+            $this->_repository->save($task);
 
-            $this->messageFlash->getFlashBag()->add('success', 'La tâche a bien été ajoutée.');
+            $this->_messageFlash->getFlashBag()->add('success', 'La tâche a bien été ajoutée.');
 
             return true;
         }

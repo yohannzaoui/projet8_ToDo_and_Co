@@ -1,9 +1,15 @@
 <?php
+
 /**
+ *
+ * @category
+ * @package
+ * @author   Yohann Zaoui <yohannzaoui@gmail.com>
+ * @license
+ * @link
  * Created by PhpStorm.
- * User: Yohann Zaoui
- * Date: 05/01/2019
- * Time: 23:50
+ * Date: 01/02/2019
+ * Time: 23:14
  */
 
 declare(strict_types=1);
@@ -18,6 +24,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class EditPasswordHandler
+ *
  * @package AppBundle\FormHandler
  */
 class EditPasswordHandler
@@ -26,53 +33,54 @@ class EditPasswordHandler
     /**
      * @var UserRepository
      */
-    private $repository;
+    private $_repository;
 
     /**
      * @var UserPasswordEncoderInterface
      */
-    private $passwordEncoder;
+    private $_passwordEncoder;
 
     /**
      * @var SessionInterface
      */
-    private $messageFlash;
+    private $_messageFlash;
 
 
     /**
      * EditPasswordHandler constructor.
-     * @param UserRepository $repository
+     *
+     * @param UserRepository               $repository
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param SessionInterface $messageFlash
+     * @param SessionInterface             $messageFlash
      */
     public function __construct(
         UserRepository $repository,
         UserPasswordEncoderInterface $passwordEncoder,
         SessionInterface $messageFlash
     ) {
-        $this->repository = $repository;
-        $this->passwordEncoder = $passwordEncoder;
-        $this->messageFlash = $messageFlash;
+        $this->_repository = $repository;
+        $this->_passwordEncoder = $passwordEncoder;
+        $this->_messageFlash = $messageFlash;
     }
 
     /**
-     * @param FormInterface $form
-     * @param User $user
+     * @param  FormInterface $form
+     * @param  User          $user
      * @return bool
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function handle(FormInterface $form, User $user): bool
+    public function handle(FormInterface $form, User $user)
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $password = $this->passwordEncoder->encodePassword($user, $user->getPassword());
+            $password = $this->_passwordEncoder->encodePassword($user, $user->getPassword());
 
             $user->setPassword($password);
 
-            $this->repository->update();
+            $this->_repository->update();
 
-            $this->messageFlash->getFlashBag()->add('success', "Le mot de passe à bien été modifié.");
+            $this->_messageFlash->getFlashBag()->add('success', "Le mot de passe à bien été modifié.");
 
             return true;
         }

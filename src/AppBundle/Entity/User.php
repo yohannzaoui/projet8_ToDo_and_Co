@@ -1,5 +1,16 @@
 <?php
 
+/**
+ *
+ * @category
+ * @package
+ * @author   Yohann Zaoui <yohannzaoui@gmail.com>
+ * @license
+ * @link
+ * Created by PhpStorm.
+ * Date: 01/02/2019
+ * Time: 23:14
+ */
 
 namespace AppBundle\Entity;
 
@@ -23,7 +34,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @ORM\Column(type="string",     length=25, unique=true)
      * @Assert\NotBlank(message="Vous devez saisir un nom d'utilisateur.")
      */
     private $username;
@@ -40,9 +51,9 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=60, unique=true)
+     * @ORM\Column(type="string",     length=60, unique=true)
      * @Assert\NotBlank(message="Vous devez saisir une adresse email.")
-     * @Assert\Email(message="Le format de l'adresse n'est pas correcte.")
+     * @Assert\Email(message="Le      format de l'adresse n'est pas correcte.")
      */
     private $email;
 
@@ -63,6 +74,7 @@ class User implements UserInterface
 
     /**
      * User constructor.
+     *
      * @throws \Exception
      */
     public function __construct()

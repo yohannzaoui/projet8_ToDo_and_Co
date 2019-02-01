@@ -1,10 +1,18 @@
 <?php
+
 /**
+ *
+ * @category
+ * @package
+ * @author   Yohann Zaoui <yohannzaoui@gmail.com>
+ * @license
+ * @link
  * Created by PhpStorm.
- * User: Yohann Zaoui
  * Date: 01/02/2019
- * Time: 16:01
+ * Time: 23:14
  */
+
+declare(strict_types=1);
 
 namespace AppBundle\Controller;
 
@@ -15,25 +23,30 @@ use Twig\Environment;
 
 /**
  * Class TaskListController
+ *
  * @package AppBundle\Controller
  */
 class TaskListController
 {
     /**
      * @Route(path="/tasks", name="task_list", methods={"GET"})
-     * @param TaskRepository $repository
-     * @param Environment $twig
-     * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @param                TaskRepository $repository
+     * @param                Environment    $twig
+     * @return               Response
+     * @throws               \Twig_Error_Loader
+     * @throws               \Twig_Error_Runtime
+     * @throws               \Twig_Error_Syntax
      */
-    public function tasksList(TaskRepository $repository, Environment $twig): Response
+    public function tasksList(TaskRepository $repository, Environment $twig)
     {
         $tasks = $repository->taskList();
 
-        return new Response($twig->render('task/list.html.twig', [
-            'tasks' => $tasks
-        ]), Response::HTTP_OK);
+        return new Response(
+            $twig->render(
+                'task/list.html.twig', [
+                'tasks' => $tasks
+                ]
+            ), Response::HTTP_OK
+        );
     }
 }

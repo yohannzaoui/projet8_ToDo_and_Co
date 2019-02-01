@@ -1,9 +1,15 @@
 <?php
+
 /**
+ *
+ * @category
+ * @package
+ * @author   Yohann Zaoui <yohannzaoui@gmail.com>
+ * @license
+ * @link
  * Created by PhpStorm.
- * User: Yohann Zaoui
- * Date: 18/11/2018
- * Time: 12:31
+ * Date: 01/02/2019
+ * Time: 23:14
  */
 
 declare(strict_types=1);
@@ -20,6 +26,7 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 /**
  * Class CreateAdminCommand
+ *
  * @package App\Command
  */
 class CreateAdminCommand extends Command
@@ -58,11 +65,12 @@ class CreateAdminCommand extends Command
 
     /**
      * CreateAdminCommand constructor.
-     * @param EncoderFactoryInterface $encoderFactory
-     * @param UserRepository $repository
-     * @param bool $username
-     * @param bool $password
-     * @param bool $email
+     *
+     * @param  EncoderFactoryInterface $encoderFactory
+     * @param  UserRepository          $repository
+     * @param  bool                    $username
+     * @param  bool                    $password
+     * @param  bool                    $email
      * @throws \Exception
      */
     public function __construct(
@@ -93,13 +101,12 @@ class CreateAdminCommand extends Command
             ->setHelp("Cette commande vous assiste pour la création d'un compte administrateur")
             ->addArgument('username', InputArgument::REQUIRED, 'Username of the admin')
             ->addArgument('password', InputArgument::REQUIRED, 'password admin')
-            ->addArgument('email', InputArgument::REQUIRED, 'Email admin')
-        ;
+            ->addArgument('email', InputArgument::REQUIRED, 'Email admin');
     }
 
     /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
+     * @param  InputInterface  $input
+     * @param  OutputInterface $output
      * @return int|null|void
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException

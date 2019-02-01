@@ -1,9 +1,15 @@
 <?php
+
 /**
+ *
+ * @category
+ * @package
+ * @author   Yohann Zaoui <yohannzaoui@gmail.com>
+ * @license
+ * @link
  * Created by PhpStorm.
- * User: Yohann Zaoui
- * Date: 05/01/2019
- * Time: 23:21
+ * Date: 01/02/2019
+ * Time: 23:14
  */
 
 declare(strict_types=1);
@@ -16,6 +22,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Class EditTaskHandler
+ *
  * @package AppBundle\FormHandler
  */
 class EditTaskHandler
@@ -23,39 +30,40 @@ class EditTaskHandler
     /**
      * @var TaskRepository
      */
-    private $repository;
+    private $_repository;
 
     /**
      * @var SessionInterface
      */
-    private $messageFlash;
+    private $_messageFlash;
 
     /**
      * EditTaskHandler constructor.
-     * @param TaskRepository $repository
+     *
+     * @param TaskRepository   $repository
      * @param SessionInterface $messageFlash
      */
     public function __construct(
         TaskRepository $repository,
         SessionInterface $messageFlash
     ) {
-        $this->repository = $repository;
-        $this->messageFlash = $messageFlash;
+        $this->_repository = $repository;
+        $this->_messageFlash = $messageFlash;
     }
 
     /**
-     * @param FormInterface $form
+     * @param  FormInterface $form
      * @return bool
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function handle(FormInterface $form): bool
+    public function handle(FormInterface $form)
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->repository->update();
+            $this->_repository->update();
 
-            $this->messageFlash->getFlashBag()->add('success', 'La tâche a bien été modifiée.');
+            $this->_messageFlash->getFlashBag()->add('success', 'La tâche a bien été modifiée.');
 
             return true;
         }
