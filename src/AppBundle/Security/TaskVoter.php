@@ -69,7 +69,7 @@ class TaskVoter extends Voter
 
         switch ($attribute) {
             case self::EDIT:
-                return $this->canAccess($task, $user);
+                return $this->canEdit($task, $user);
             case self::DELETE:
                 return $this->canDelete($task, $user);
         }
@@ -83,7 +83,7 @@ class TaskVoter extends Voter
      * @param User $user
      * @return bool
      */
-    private function canAccess(Task $task, User $user): bool
+    private function canEdit(Task $task, User $user): bool
     {
         return $user === $task->getUser();
     }
