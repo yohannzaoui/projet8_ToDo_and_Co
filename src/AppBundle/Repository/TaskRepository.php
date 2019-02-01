@@ -64,12 +64,10 @@ class TaskRepository extends ServiceEntityRepository
      * @param $user
      * @return mixed
      */
-    public function taskList($user)
+    public function taskList()
     {
         return $this->createQueryBuilder('t')
             ->orderBy('t.createdAt','DESC')
-            ->where('t.user=:user')
-            ->setParameter('user', $user)
             ->getQuery()
             ->useResultCache(true)
             ->setQueryCacheLifetime(60)
