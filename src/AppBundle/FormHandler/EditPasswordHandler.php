@@ -33,17 +33,17 @@ class EditPasswordHandler
     /**
      * @var UserRepository
      */
-    private $_repository;
+    private $repository;
 
     /**
      * @var UserPasswordEncoderInterface
      */
-    private $_passwordEncoder;
+    private $passwordEncoder;
 
     /**
      * @var SessionInterface
      */
-    private $_messageFlash;
+    private $messageFlash;
 
 
     /**
@@ -58,9 +58,9 @@ class EditPasswordHandler
         UserPasswordEncoderInterface $passwordEncoder,
         SessionInterface $messageFlash
     ) {
-        $this->_repository = $repository;
-        $this->_passwordEncoder = $passwordEncoder;
-        $this->_messageFlash = $messageFlash;
+        $this->repository = $repository;
+        $this->passwordEncoder = $passwordEncoder;
+        $this->messageFlash = $messageFlash;
     }
 
     /**
@@ -74,13 +74,13 @@ class EditPasswordHandler
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $password = $this->_passwordEncoder->encodePassword($user, $user->getPassword());
+            $password = $this->passwordEncoder->encodePassword($user, $user->getPassword());
 
             $user->setPassword($password);
 
-            $this->_repository->update();
+            $this->repository->update();
 
-            $this->_messageFlash->getFlashBag()->add('success', "Le mot de passe à bien été modifié.");
+            $this->messageFlash->getFlashBag()->add('success', "Le mot de passe à bien été modifié.");
 
             return true;
         }

@@ -30,12 +30,12 @@ class EditUserHandler
     /**
      * @var UserRepository
      */
-    private $_repository;
+    private $repository;
 
     /**
      * @var SessionInterface
      */
-    private $_messageFlash;
+    private $messageFlash;
 
 
     /**
@@ -48,8 +48,8 @@ class EditUserHandler
         UserRepository $repository,
         SessionInterface $messageFlash
     ) {
-        $this->_repository = $repository;
-        $this->_messageFlash = $messageFlash;
+        $this->repository = $repository;
+        $this->messageFlash = $messageFlash;
     }
 
     /**
@@ -62,9 +62,9 @@ class EditUserHandler
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->_repository->update();
+            $this->repository->update();
 
-            $this->_messageFlash->getFlashBag()->add('success', "L'utilisateur a bien été modifié.");
+            $this->messageFlash->getFlashBag()->add('success', "L'utilisateur a bien été modifié.");
 
             return true;
         }

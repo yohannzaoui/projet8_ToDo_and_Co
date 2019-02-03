@@ -32,17 +32,17 @@ class CreateTaskHandler
     /**
      * @var TaskRepository
      */
-    private $_repository;
+    private $repository;
 
     /**
      * @var TokenStorageInterface
      */
-    private $_tokenStorage;
+    private $tokenStorage;
 
     /**
      * @var SessionInterface
      */
-    private $_messageFlash;
+    private $messageFlash;
 
 
     public function __construct(
@@ -50,9 +50,9 @@ class CreateTaskHandler
         TokenStorageInterface $tokenStorage,
         SessionInterface $messageFlash
     ) {
-        $this->_repository = $repository;
-        $this->_tokenStorage = $tokenStorage;
-        $this->_messageFlash = $messageFlash;
+        $this->repository = $repository;
+        $this->tokenStorage = $tokenStorage;
+        $this->messageFlash = $messageFlash;
     }
 
     /**
@@ -66,11 +66,11 @@ class CreateTaskHandler
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $task->setUser($this->_tokenStorage->getToken()->getUser());
+            $task->setUser($this->tokenStorage->getToken()->getUser());
 
-            $this->_repository->save($task);
+            $this->repository->save($task);
 
-            $this->_messageFlash->getFlashBag()->add('success', 'La tâche a bien été ajoutée.');
+            $this->messageFlash->getFlashBag()->add('success', 'La tâche a bien été ajoutée.');
 
             return true;
         }

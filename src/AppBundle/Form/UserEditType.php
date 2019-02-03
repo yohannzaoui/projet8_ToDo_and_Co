@@ -24,6 +24,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
  * Class UserType
+ *
  * @package AppBundle\Form
  */
 class UserEditType extends AbstractType
@@ -31,20 +32,25 @@ class UserEditType extends AbstractType
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class, [
+            ->add(
+                'username', TextType::class, [
                 'label' => "Nom d'utilisateur"
-            ])
+                ]
+            )
 
-            ->add('email', EmailType::class, [
+            ->add(
+                'email', EmailType::class, [
                 'label' => 'Adresse email'
-            ])
+                ]
+            )
 
-            ->add('roles', ChoiceType::class, [
+            ->add(
+                'roles', ChoiceType::class, [
                 'required' => true,
                 'choices' => [
                     'Utilisateur' => 'ROLE_USER',
@@ -52,7 +58,8 @@ class UserEditType extends AbstractType
                 ],
                 'multiple' => true,
                 'expanded' =>false
-            ]);
+                ]
+            );
     }
 
 }

@@ -81,18 +81,4 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
         $this->_em->flush();
     }
 
-    /**
-     * @return mixed
-     */
-    public function userList()
-    {
-        return $this->createQueryBuilder('u')
-            ->orderBy('u.createdAt', 'DESC')
-            ->getQuery()
-            ->useResultCache(true)
-            ->setQueryCacheLifetime(60)
-            ->setResultCacheId('users')
-            ->getResult();
-    }
-
 }

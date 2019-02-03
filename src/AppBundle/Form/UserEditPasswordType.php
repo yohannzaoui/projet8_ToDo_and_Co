@@ -23,6 +23,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 /**
  * Class UserType
+ *
  * @package AppBundle\Form
  */
 class UserEditPasswordType extends AbstractType
@@ -30,13 +31,14 @@ class UserEditPasswordType extends AbstractType
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
 
-            ->add('password', RepeatedType::class, [
+            ->add(
+                'password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'required' => true,
                 'first_options'  => [
@@ -45,7 +47,8 @@ class UserEditPasswordType extends AbstractType
                 'second_options' => [
                     'label' => 'Tapez le mot de passe à nouveau'
                 ],
-            ]);
+                ]
+            );
     }
 
 }

@@ -37,9 +37,9 @@ class UserListController
      * @throws               \Twig_Error_Runtime
      * @throws               \Twig_Error_Syntax
      */
-    public function listUsers(UserRepository $repository, Environment $twig)
+    public function usersList(UserRepository $repository, Environment $twig)
     {
-        $users = $repository->userList();
+        $users = $repository->findAll();
 
         return new Response(
             $twig->render(

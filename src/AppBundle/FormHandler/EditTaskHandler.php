@@ -30,12 +30,12 @@ class EditTaskHandler
     /**
      * @var TaskRepository
      */
-    private $_repository;
+    private $repository;
 
     /**
      * @var SessionInterface
      */
-    private $_messageFlash;
+    private $messageFlash;
 
     /**
      * EditTaskHandler constructor.
@@ -47,8 +47,8 @@ class EditTaskHandler
         TaskRepository $repository,
         SessionInterface $messageFlash
     ) {
-        $this->_repository = $repository;
-        $this->_messageFlash = $messageFlash;
+        $this->repository = $repository;
+        $this->messageFlash = $messageFlash;
     }
 
     /**
@@ -61,9 +61,9 @@ class EditTaskHandler
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->_repository->update();
+            $this->repository->update();
 
-            $this->_messageFlash->getFlashBag()->add('success', 'La tâche a bien été modifiée.');
+            $this->messageFlash->getFlashBag()->add('success', 'La tâche a bien été modifiée.');
 
             return true;
         }

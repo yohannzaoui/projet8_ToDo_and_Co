@@ -9,13 +9,15 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * @codeCoverageIgnore
+ *
  * Class TaskFixtures
+ *                    
  * @package AppBundle\Fixtures
  */
 class TaskFixtures extends Fixture
 {
     /**
-     * @param ObjectManager $manager
+     * @param  ObjectManager $manager
      * @throws \Exception
      */
     public function load(ObjectManager $manager)

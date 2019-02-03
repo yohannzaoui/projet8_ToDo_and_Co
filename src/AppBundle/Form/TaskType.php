@@ -23,24 +23,28 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 /**
  * Class TaskType
+ *
  * @package AppBundle\Form
  */
 class TaskType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, [
+            ->add(
+                'title', TextType::class, [
                 'label' => 'Titre'
-            ])
-            ->add('content', TextareaType::class, [
+                ]
+            )
+            ->add(
+                'content', TextareaType::class, [
                 'label' => 'Contenu'
-            ])
-        ;
+                ]
+            );
     }
 
 }

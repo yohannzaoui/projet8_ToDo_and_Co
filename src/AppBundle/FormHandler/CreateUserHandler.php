@@ -33,17 +33,17 @@ class CreateUserHandler
     /**
      * @var UserRepository
      */
-    private $_repository;
+    private $repository;
 
     /**
      * @var UserPasswordEncoderInterface
      */
-    private $_passwordEncoder;
+    private $passwordEncoder;
 
     /**
      * @var SessionInterface
      */
-    private $_messageFlash;
+    private $messageFlash;
 
     /**
      * CreateUserHandler constructor.
@@ -57,9 +57,9 @@ class CreateUserHandler
         UserPasswordEncoderInterface $passwordEncoder,
         SessionInterface $messageFlash
     ) {
-        $this->_repository = $repository;
-        $this->_passwordEncoder = $passwordEncoder;
-        $this->_messageFlash = $messageFlash;
+        $this->repository = $repository;
+        $this->passwordEncoder = $passwordEncoder;
+        $this->messageFlash = $messageFlash;
     }
 
     /**
@@ -73,13 +73,13 @@ class CreateUserHandler
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $password = $this->_passwordEncoder->encodePassword($user, $user->getPassword());
+            $password = $this->passwordEncoder->encodePassword($user, $user->getPassword());
 
             $user->setPassword($password);
 
-            $this->_repository->save($user);
+            $this->repository->save($user);
 
-            $this->_messageFlash->getFlashBag()->add('success', "L'utilisateur a bien été ajouté.");
+            $this->messageFlash->getFlashBag()->add('success', "L'utilisateur a bien été ajouté.");
 
             return true;
         }
