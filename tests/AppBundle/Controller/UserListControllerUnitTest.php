@@ -34,6 +34,6 @@ class UserListControllerUnitTest extends TestCase
         $controller = new UserListController();
 
         $this->assertInstanceOf(Response::class,
-            $controller->listUsers($repository, $twig));
+            $controller->usersList($repository, $twig));
     }
 }
