@@ -45,22 +45,22 @@ class UserController
     /**
      * @var Environment
      */
-    private $_twig;
+    private $twig;
 
     /**
      * @var FormFactoryInterface
      */
-    private $_formFactory;
+    private $formFactory;
 
     /**
      * @var UrlGeneratorInterface
      */
-    private $_urlGenerator;
+    private $urlGenerator;
 
     /**
      * @var UserRepository
      */
-    private $_repository;
+    private $repository;
 
     /**
      * UserController constructor.
@@ -76,10 +76,10 @@ class UserController
         UrlGeneratorInterface $urlGenerator,
         UserRepository $repository
     ) {
-        $this->_twig = $twig;
-        $this->_formFactory = $formFactory;
-        $this->_urlGenerator = $urlGenerator;
-        $this->_repository = $repository;
+        $this->twig = $twig;
+        $this->formFactory = $formFactory;
+        $this->urlGenerator = $urlGenerator;
+        $this->repository = $repository;
     }
 
     /**
@@ -93,19 +93,19 @@ class UserController
     {
         $user = new User();
 
-        $form = $this->_formFactory->create(UserType::class, $user)
+        $form = $this->formFactory->create(UserType::class, $user)
             ->handleRequest($request);
 
         if ($createUserHandler->handle($form, $user)) {
 
             return new RedirectResponse(
-                $this->_urlGenerator->generate('user_list'),
+                $this->urlGenerator->generate('user_list'),
                 RedirectResponse::HTTP_FOUND
             );
         }
 
         return new Response(
-            $this->_twig->render(
+            $this->twig->render(
                 'user/create.html.twig', [
                 'form' => $form->createView()
                 ]
@@ -130,13 +130,13 @@ class UserController
     ) {
         if ($user != $tokenStorage->getToken()->getUser()) {
 
-            $this->_repository->delete($user);
+            $this->repository->delete($user);
 
             $messageFlash->getFlashBag()->add('success', "L'utilisateur a bien été supprimée.");
         }
 
         return new RedirectResponse(
-            $this->_urlGenerator->generate('user_list'),
+            $this->urlGenerator->generate('user_list'),
             RedirectResponse::HTTP_FOUND
         );
     }
@@ -159,19 +159,19 @@ class UserController
         Request $request,
         EditUserHandler $editUserHandler
     ) {
-        $form = $this->_formFactory->create(UserEditType::class, $user)
+        $form = $this->formFactory->create(UserEditType::class, $user)
             ->handleRequest($request);
 
         if ($editUserHandler->handle($form)) {
 
             return new RedirectResponse(
-                $this->_urlGenerator->generate('user_list'),
+                $this->urlGenerator->generate('user_list'),
                 RedirectResponse::HTTP_FOUND
             );
         }
 
         return new Response(
-            $this->_twig->render(
+            $this->twig->render(
                 'user/edit.html.twig', [
                 'form' => $form->createView(),
                 'user' => $user
@@ -198,19 +198,19 @@ class UserController
         Request $request,
         EditPasswordHandler $editPasswordHandler
     ) {
-        $form = $this->_formFactory->create(UserEditPasswordType::class, $user)
+        $form = $this->formFactory->create(UserEditPasswordType::class, $user)
             ->handleRequest($request);
 
         if ($editPasswordHandler->handle($form, $user)) {
 
             return new RedirectResponse(
-                $this->_urlGenerator->generate('user_list'),
+                $this->urlGenerator->generate('user_list'),
                 RedirectResponse::HTTP_FOUND
             );
         }
 
         return new Response(
-            $this->_twig->render(
+            $this->twig->render(
                 'user/password.html.twig', [
                 'form' => $form->createView(),
                 'user' => $user

@@ -44,37 +44,37 @@ class TaskController
     /**
      * @var TaskRepository
      */
-    private $_repository;
+    private $repository;
 
     /**
      * @var TokenStorageInterface
      */
-    private $_tokenStorage;
+    private $tokenStorage;
 
     /**
      * @var Environment
      */
-    private $_twig;
+    private $twig;
 
     /**
      * @var FormFactoryInterface
      */
-    private $_formFactory;
+    private $formFactory;
 
     /**
      * @var UrlGeneratorInterface
      */
-    private $_urlGenerator;
+    private $urlGenerator;
 
     /**
      * @var SessionInterface
      */
-    private $_messageFlash;
+    private $messageFlash;
 
     /**
      * @var AuthorizationCheckerInterface
      */
-    private $_authorization;
+    private $authorization;
 
     /**
      * TaskController constructor.
@@ -96,13 +96,13 @@ class TaskController
         SessionInterface $messageFlash,
         AuthorizationCheckerInterface $authorization
     ) {
-        $this->_repository = $repository;
-        $this->_tokenStorage = $tokenStorage;
-        $this->_twig = $twig;
-        $this->_formFactory = $formFactory;
-        $this->_urlGenerator = $urlGenerator;
-        $this->_messageFlash = $messageFlash;
-        $this->_authorization = $authorization;
+        $this->repository = $repository;
+        $this->tokenStorage = $tokenStorage;
+        $this->twig = $twig;
+        $this->formFactory = $formFactory;
+        $this->urlGenerator = $urlGenerator;
+        $this->messageFlash = $messageFlash;
+        $this->authorization = $authorization;
     }
 
 
@@ -119,19 +119,19 @@ class TaskController
     ) {
         $task = new Task();
 
-        $form = $this->_formFactory->create(TaskType::class, $task)
+        $form = $this->formFactory->create(TaskType::class, $task)
             ->handleRequest($request);
 
         if ($createTaskHandler->handle($form, $task)) {
 
             return new RedirectResponse(
-                $this->_urlGenerator->generate('task_list'),
+                $this->urlGenerator->generate('task_list'),
                 RedirectResponse::HTTP_FOUND
             );
         }
 
         return new Response(
-            $this->_twig->render(
+            $this->twig->render(
                 'task/create.html.twig', [
                 'form' => $form->createView()
                 ]
@@ -158,21 +158,21 @@ class TaskController
         EditTaskHandler $editTaskHandler
     ) {
 
-        if ($this->_authorization->isGranted(TaskVoter::EDIT, $task) === true) {
+        if ($this->authorization->isGranted(TaskVoter::EDIT, $task) === true) {
 
-            $form = $this->_formFactory->create(TaskType::class, $task)
+            $form = $this->formFactory->create(TaskType::class, $task)
                 ->handleRequest($request);
 
             if ($editTaskHandler->handle($form)) {
 
                 return new RedirectResponse(
-                    $this->_urlGenerator->generate('task_list'),
+                    $this->urlGenerator->generate('task_list'),
                     RedirectResponse::HTTP_FOUND
                 );
             }
 
             return new Response(
-                $this->_twig->render(
+                $this->twig->render(
                     'task/edit.html.twig', [
                     'form' => $form->createView(),
                     'task' => $task,
@@ -182,7 +182,7 @@ class TaskController
         }
 
         return new Response(
-            $this->_twig->render(
+            $this->twig->render(
                 'error/error.html.twig', [
                 'error' => "Erreur : Impossible d'éditer cette tâche."
                 ]
@@ -203,19 +203,19 @@ class TaskController
      */
     public function deleteTask(Task $task)
     {
-        if ($this->_authorization->isGranted(TaskVoter::DELETE, $task) === true) {
+        if ($this->authorization->isGranted(TaskVoter::DELETE, $task) === true) {
 
-            $this->_repository->delete($task);
+            $this->repository->delete($task);
 
-            $this->_messageFlash->getFlashBag()->add('success', "Tâche supprimée.");
+            $this->messageFlash->getFlashBag()->add('success', "Tâche supprimée.");
 
             return new RedirectResponse(
-                $this->_urlGenerator->generate('task_list'),
+                $this->urlGenerator->generate('task_list'),
                 RedirectResponse::HTTP_FOUND
             );
         }
         return new Response(
-            $this->_twig->render(
+            $this->twig->render(
                 'error/error.html.twig', [
                 'error' => 'Erreur : Impossible de supprimer cette tâche.'
                 ]
