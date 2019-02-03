@@ -39,7 +39,7 @@ class UserListController
      */
     public function listUsers(UserRepository $repository, Environment $twig)
     {
-        $users = $repository->findAll();
+        $users = $repository->userList();
 
         return new Response(
             $twig->render(
