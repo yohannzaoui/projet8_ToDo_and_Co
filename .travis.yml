@@ -9,6 +9,9 @@ services:
   - redis-server
   - mysql
 
+before_install:
+  - mysql -e 'CREATE DATABASE myapp_test;'
+
 script:
   - composer install
   - php bin/console doctrine:schema:update --force --env=test
