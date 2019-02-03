@@ -49,7 +49,7 @@
 <div class="page">
     <div class="content">
         <div class="report-details">
-            Created at 2019-02-01 18:23:29        , with PHPMetrics v2.4.1 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2019-02-03 09:53:20        , with PHPMetrics v2.4.1 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
 
@@ -307,18 +307,18 @@
         "name": "\\AppBundle\\Controller\\DefaultController",
         "size": 3000,
         "relations": [
-            "\\Symfony\\Component\\HttpFoundation\\Response",
             "\\Twig\\Environment",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
             "\\Symfony\\Component\\Routing\\Annotation\\Route"
         ]
     },
     {
-        "name": "\\Symfony\\Component\\HttpFoundation\\Response",
+        "name": "\\Twig\\Environment",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "\\Twig\\Environment",
+        "name": "\\Symfony\\Component\\HttpFoundation\\Response",
         "size": 3000,
         "relations": []
     },
@@ -331,9 +331,9 @@
         "name": "\\AppBundle\\Controller\\SecurityController",
         "size": 3000,
         "relations": [
-            "\\Symfony\\Component\\HttpFoundation\\Response",
             "\\Symfony\\Component\\Security\\Http\\Authentication\\AuthenticationUtils",
             "\\Twig\\Environment",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
             "\\Symfony\\Component\\Routing\\Annotation\\Route"
         ]
     },
@@ -353,11 +353,11 @@
             "\\Symfony\\Component\\Routing\\Generator\\UrlGeneratorInterface",
             "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
             "\\Symfony\\Component\\Security\\Core\\Authorization\\AuthorizationCheckerInterface",
-            "\\Symfony\\Component\\HttpFoundation\\Response",
             "\\Symfony\\Component\\HttpFoundation\\Request",
             "\\AppBundle\\FormHandler\\CreateTaskHandler",
             "\\AppBundle\\Entity\\Task",
             "\\Symfony\\Component\\HttpFoundation\\RedirectResponse",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
             "\\Symfony\\Component\\Routing\\Annotation\\Route",
             "\\AppBundle\\FormHandler\\EditTaskHandler"
         ]
@@ -435,9 +435,9 @@
         "name": "\\AppBundle\\Controller\\TaskDoneController",
         "size": 3000,
         "relations": [
-            "\\Symfony\\Component\\HttpFoundation\\Response",
             "\\AppBundle\\Repository\\TaskRepository",
             "\\Twig\\Environment",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
             "\\Symfony\\Component\\Routing\\Annotation\\Route"
         ]
     },
@@ -445,9 +445,9 @@
         "name": "\\AppBundle\\Controller\\TaskListController",
         "size": 3000,
         "relations": [
-            "\\Symfony\\Component\\HttpFoundation\\Response",
             "\\AppBundle\\Repository\\TaskRepository",
             "\\Twig\\Environment",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
             "\\Symfony\\Component\\Routing\\Annotation\\Route"
         ]
     },
@@ -471,11 +471,11 @@
             "\\Symfony\\Component\\Form\\FormFactoryInterface",
             "\\Symfony\\Component\\Routing\\Generator\\UrlGeneratorInterface",
             "\\AppBundle\\Repository\\UserRepository",
-            "\\Symfony\\Component\\HttpFoundation\\Response",
             "\\Symfony\\Component\\HttpFoundation\\Request",
             "\\AppBundle\\FormHandler\\CreateUserHandler",
             "\\AppBundle\\Entity\\User",
             "\\Symfony\\Component\\HttpFoundation\\RedirectResponse",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
             "\\Symfony\\Component\\Routing\\Annotation\\Route",
             "\\Symfony\\Component\\Security\\Core\\Authentication\\Token\\Storage\\TokenStorageInterface",
             "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
@@ -518,9 +518,9 @@
         "name": "\\AppBundle\\Controller\\UserListController",
         "size": 3000,
         "relations": [
-            "\\Symfony\\Component\\HttpFoundation\\Response",
             "\\AppBundle\\Repository\\UserRepository",
             "\\Twig\\Environment",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
             "\\Symfony\\Component\\Routing\\Annotation\\Route"
         ]
     },

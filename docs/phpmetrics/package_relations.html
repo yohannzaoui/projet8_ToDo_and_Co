@@ -49,7 +49,7 @@
 <div class="page">
     <div class="content">
         <div class="report-details">
-            Created at 2019-02-01 18:23:29        , with PHPMetrics v2.4.1 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2019-02-03 09:53:20        , with PHPMetrics v2.4.1 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
 
@@ -251,12 +251,12 @@
         "relations": []
     },
     {
-        "name": "App\\Command\r",
+        "name": "App\\Command",
         "size": 3000,
         "relations": [
             "Symfony\\Component\\Console\\Command",
             "Symfony\\Component\\Security\\Core\\Encoder",
-            "AppBundle\\Repository\r",
+            "AppBundle\\Repository",
             "global",
             "AppBundle\\Entity",
             "Symfony\\Component\\Console\\Input",
@@ -274,7 +274,7 @@
         "relations": []
     },
     {
-        "name": "AppBundle\\Repository\r",
+        "name": "AppBundle\\Repository",
         "size": 3000,
         "relations": [
             "Doctrine\\Bundle\\DoctrineBundle\\Repository",
@@ -307,30 +307,30 @@
         "relations": []
     },
     {
-        "name": "AppBundle\\Controller\r",
+        "name": "AppBundle\\Controller",
         "size": 3000,
         "relations": [
-            "Symfony\\Component\\HttpFoundation",
             "Twig",
+            "Symfony\\Component\\HttpFoundation",
             "Symfony\\Component\\Routing\\Annotation",
             "Symfony\\Component\\Security\\Http\\Authentication",
-            "AppBundle\\Repository\r",
+            "AppBundle\\Repository",
             "Symfony\\Component\\Security\\Core\\Authentication\\Token\\Storage",
             "Symfony\\Component\\Form",
             "Symfony\\Component\\Routing\\Generator",
             "Symfony\\Component\\HttpFoundation\\Session",
             "Symfony\\Component\\Security\\Core\\Authorization",
-            "AppBundle\\FormHandler\r",
+            "AppBundle\\FormHandler",
             "AppBundle\\Entity"
         ]
     },
     {
-        "name": "Symfony\\Component\\HttpFoundation",
+        "name": "Twig",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "Twig",
+        "name": "Symfony\\Component\\HttpFoundation",
         "size": 3000,
         "relations": []
     },
@@ -370,10 +370,10 @@
         "relations": []
     },
     {
-        "name": "AppBundle\\FormHandler\r",
+        "name": "AppBundle\\FormHandler",
         "size": 3000,
         "relations": [
-            "AppBundle\\Repository\r",
+            "AppBundle\\Repository",
             "Symfony\\Component\\Security\\Core\\Authentication\\Token\\Storage",
             "Symfony\\Component\\HttpFoundation\\Session",
             "Symfony\\Component\\Form",
@@ -452,10 +452,7 @@
             "Symfony\\Component\\HttpFoundation",
             "Symfony\\Component\\Security\\Core\\User",
             "Symfony\\Component\\Security\\Core\\Exception",
-            "Symfony\\Component\\Security\\Core\\Authentication\\Token",
-            "Symfony\\Component\\Security\\Core\\Authorization\\Voter",
-            "global",
-            "AppBundle\\Entity"
+            "Symfony\\Component\\Security\\Core\\Authentication\\Token"
         ]
     },
     {
@@ -487,6 +484,16 @@
         "name": "Symfony\\Component\\Security\\Core\\Authentication\\Token",
         "size": 3000,
         "relations": []
+    },
+    {
+        "name": "           AppBundle\\Security",
+        "size": 3000,
+        "relations": [
+            "Symfony\\Component\\Security\\Core\\Authorization\\Voter",
+            "Symfony\\Component\\Security\\Core\\Authentication\\Token",
+            "global",
+            "AppBundle\\Entity"
+        ]
     },
     {
         "name": "Symfony\\Component\\Security\\Core\\Authorization\\Voter",
