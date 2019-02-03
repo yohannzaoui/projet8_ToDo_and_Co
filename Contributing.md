@@ -27,7 +27,7 @@ Being respectful of differing viewpoints and experiences
 Accepting constructive criticism  
 
 
-We respect some PSR rules, please respect PSR-1, PSR-2 and PSR-4. You can use `vendor/bin/phpcs` to check it.  
+We respect some PSR rules, please respect PSR-1, PSR-2 and PSR-4. Please use PHPCS/PHPCBF` to check it.  
 This application is developped with Symfony framework 3.4, please check the [Best Practises](https://symfony.com/doc/3.4/best_practices/index.html)
 
 Thank you and good code
