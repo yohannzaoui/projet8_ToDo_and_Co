@@ -40,8 +40,9 @@ class AppWebTestCase extends WebTestCase
     protected function logIn()
     {
         $session = $this->client->getContainer()->get('session');
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
-        $user = $em->getRepository(User::class)->findOneBy(['username'=>'admin']);
+        //$em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        //$user = $em->getRepository(User::class)->findOneBy(['username'=>'admin']);
+        $user = 'admin';
 
         $token = new UsernamePasswordToken($user, null, 'main', ['ROLE_ADMIN']);
         $session->set('_security_'.'main', serialize($token));
