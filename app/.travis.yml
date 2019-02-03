@@ -1,0 +1,16 @@
+dist: trusty
+sudo: false
+language: php
+
+php:
+  - 7.2
+
+services:
+  - redis-server
+  - mysql
+
+script:
+  - composer install
+  - php bin/console doctrine:schema:update --force --env=test
+  - php bin/console doctrine:fixtures:load
+  - vendor/bin/phpunit
