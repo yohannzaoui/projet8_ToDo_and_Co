@@ -33,7 +33,7 @@ class TaskControllerTest extends AppWebTestCase
      */
     public function testCreateTaskPageIsFound()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $crawler = $this->client->request('GET', '/tasks/create');
 
@@ -50,7 +50,7 @@ class TaskControllerTest extends AppWebTestCase
      */
     public function testCreateTaskRedirectionIfLogin()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $this->client->request('POST', '/tasks/create');
 
@@ -146,7 +146,7 @@ class TaskControllerTest extends AppWebTestCase
      */
     public function testEditTaskRedirection()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $this->client->request('POST', '/tasks/edit/77');
 
@@ -158,7 +158,7 @@ class TaskControllerTest extends AppWebTestCase
      */
     public function testEditTaskIfError()
     {
-        if (!$this->logIn()) {
+        if (!$this->logInUser()) {
 
             $this->client->request('POST', '/tasks/edit/77');
 

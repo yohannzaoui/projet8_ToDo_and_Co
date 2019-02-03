@@ -29,7 +29,7 @@ class TaskToggleControllerTest extends AppWebTestCase
      */
     public function testToggleTask()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $this->client->request('GET', '/tasks/79/toggle');
 

@@ -23,7 +23,7 @@ class UserControllerTest extends AppWebTestCase
      */
     public function testGetListUserPageFromHomePage()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $crawler = $this->client->request('GET', '/');
 
@@ -42,7 +42,7 @@ class UserControllerTest extends AppWebTestCase
      */
     public function testGetCreateUserPageFromHomePage()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $crawler = $this->client->request('GET', '/');
 
@@ -61,7 +61,7 @@ class UserControllerTest extends AppWebTestCase
      */
     public function testUserCreatePageIsFound()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $crawler = $this->client->request('GET', '/users/create');
 
@@ -77,7 +77,7 @@ class UserControllerTest extends AppWebTestCase
      */
     public function testUserCreateRedirection()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $this->client->request('POST', '/users/create');
 
@@ -89,7 +89,7 @@ class UserControllerTest extends AppWebTestCase
      */
     public function testCreateUserForm()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $crawler = $this->client->request('POST', '/users/create');
 
@@ -116,7 +116,7 @@ class UserControllerTest extends AppWebTestCase
      */
     public function testEditPasswordForm()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $crawler = $this->client->request('POST', '/user/password/98');
 
@@ -138,7 +138,7 @@ class UserControllerTest extends AppWebTestCase
      */
     public function testEditUserForm()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $crawler = $this->client->request('POST', '/users/98/edit');
 
@@ -174,7 +174,7 @@ class UserControllerTest extends AppWebTestCase
      */
     public function testDeleteUser()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $this->client->request('GET', '/delete/user/98');
 
@@ -198,7 +198,7 @@ class UserControllerTest extends AppWebTestCase
      */
     public function testUserEditPageIsFound()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $crawler = $this->client->request('GET', '/users/98/edit');
 
@@ -213,7 +213,7 @@ class UserControllerTest extends AppWebTestCase
      */
     public function testUserEditRedirection()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $this->client->request('POST', '/users/98/edit');
 
@@ -237,7 +237,7 @@ class UserControllerTest extends AppWebTestCase
      */
     public function testUserPasswordPageIsFound()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $crawler = $this->client->request('GET', '/user/password/98');
 
@@ -252,7 +252,7 @@ class UserControllerTest extends AppWebTestCase
      */
     public function testUserPasswordRedirection()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $this->client->request('POST', '/user/password/98');
 

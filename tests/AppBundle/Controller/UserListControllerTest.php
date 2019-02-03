@@ -18,7 +18,7 @@ class UserListControllerTest extends AppWebTestCase
      */
     public function testListUsers()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $crawler = $this->client->request('GET', '/users');
 

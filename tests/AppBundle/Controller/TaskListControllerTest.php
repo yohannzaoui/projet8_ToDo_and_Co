@@ -33,7 +33,7 @@ class TaskListControllerTest extends AppWebTestCase
      */
     public function testTasksListResponse()
     {
-        $this->login();
+        $this->loginUser();
 
         $crawler = $this->client->request('GET', '/tasks');
 

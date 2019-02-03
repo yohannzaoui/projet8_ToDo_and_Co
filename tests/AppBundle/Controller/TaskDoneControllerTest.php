@@ -33,7 +33,7 @@ class TaskDoneControllerTest extends AppWebTestCase
      */
     public function testGetDoneTaskListPageFromHomePage()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $crawler = $this->client->request('GET', '/');
 
@@ -52,7 +52,7 @@ class TaskDoneControllerTest extends AppWebTestCase
      */
     public function testTaskIsDoneResponse()
     {
-        $this->logIn();
+        $this->logInUser();
 
         $crawler = $this->client->request('GET', '/tasks-Is-Done');
 
