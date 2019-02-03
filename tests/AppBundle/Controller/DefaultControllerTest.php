@@ -3,14 +3,52 @@
 namespace Tests\AppBundle\Controller;
 
 
-use Tests\AppBundle\AppWebTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+//use Tests\AppBundle\AppWebTestCase;
+use AppBundle\Entity\User;
+use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
  * Class DefaultControllerTest
  * @package Tests\AppBundle\Controller
  */
-class DefaultControllerTest extends AppWebTestCase
+class DefaultControllerTest extends WebTestCase
 {
+
+    /**
+     * @var
+     */
+    private $client;
+
+    /**
+     *
+     */
+    public function setUp()
+    {
+        $this->client = static::createClient();
+    }
+
+
+    /**
+     *
+     */
+    private function logIn()
+    {
+        $session = $this->client->getContainer()->get('session');
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $user = $em->getRepository(User::class)->findOneBy(['username'=>'admin']);
+
+        $token = new UsernamePasswordToken($user, null, 'main', ['ROLE_ADMIN']);
+        $session->set('_security_'.'main', serialize($token));
+        $session->save();
+
+        $cookie = new Cookie($session->getName(), $session->getId());
+        $this->client->getCookieJar()->set($cookie);
+    }
+
+
+
 
     /**
      *

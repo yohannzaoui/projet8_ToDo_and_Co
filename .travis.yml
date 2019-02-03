@@ -6,7 +6,7 @@ php:
   - 7.2
 
 env:
-  - SYMFONY_VERSION="3.0.*" DB=mysql
+  - SYMFONY_VERSION="3.4.*" DB=mysql
 
 services:
   - redis-server
