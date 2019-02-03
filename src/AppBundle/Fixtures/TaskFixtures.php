@@ -8,6 +8,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
+ * @codeCoverageIgnore
  * Class TaskFixtures
  * @package AppBundle\Fixtures
  */
