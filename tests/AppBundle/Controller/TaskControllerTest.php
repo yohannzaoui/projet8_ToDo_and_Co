@@ -88,16 +88,19 @@ class TaskControllerTest extends AppWebTestCase
      */
     public function testEditTaskForm()
     {
-        $this->logIn();
+        $client = static::createClient([], [
+            'PHP_AUTH_USER' => 'root',
+            'PHP_AUTH_PW'   => 'root',
+        ]);
 
-        $crawler = $this->client->request('GET', '/tasks/edit/79');
+        $crawler = $client->request('GET', '/tasks/edit/79');
 
         $form = $crawler->selectButton('Modifier')->form();
         $form['task[title]'] = 'functional test title';
         $form['task[content]'] = 'functional test content';
 
-        $this->client->submit($form);
-        $crawler = $this->client->followRedirect();
+        $client->submit($form);
+        $crawler = $client->followRedirect();
         $this->assertSame(1, $crawler->filter('div.alert.alert-dismissible.alert-success')->count());
     }
 
@@ -148,7 +151,7 @@ class TaskControllerTest extends AppWebTestCase
     {
         $this->logInUser();
 
-        $this->client->request('POST', '/tasks/edit/77');
+        $this->client->request('POST', "/tasks/edit/77");
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
