@@ -33,7 +33,7 @@ class UserFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 1; $i++) {
             $task = new User();
             $task->setUsername('admin ');
             $task->setRoles(['ROLE_ADMIN']);
