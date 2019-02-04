@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <p><img class="img-fluid" src="{{ asset('img/todolist_content.jpg') }}" alt="todo list"></p>
+    <p style="text-align: center"><img class="img-fluid" src="{{ asset('img/todolist_content.jpg') }}" alt="todo list"></p>
     <h3>
         {% if tasks | length == 1  %}
             Tâche terminée
