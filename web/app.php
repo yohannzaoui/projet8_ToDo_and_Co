@@ -10,7 +10,7 @@ include_once __DIR__.'/../var/bootstrap.php.cache';
 $loader = new ApcClassLoader('sf', $loader);
 $loader->register(true);
 
-$kernel = new AppKernel('prod', false);
+$kernel = new AppKernel('prod', true);
 //$kernel->loadClassCache();
 //$kernel = new AppCache($kernel);
 
