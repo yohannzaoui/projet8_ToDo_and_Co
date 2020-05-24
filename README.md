@@ -5,8 +5,6 @@ ToDoList App Your Task Application
 ==================================
 ### *Project 8 OpenClassRooms*
 
-![symfony](https://d1pwix07io15pr.cloudfront.net/vd3200fdf32/images/logos/header-logo.svg)
-
 * Developped with the Symfony 3.4 framework
 * CSS : Bootstrap 4
 
